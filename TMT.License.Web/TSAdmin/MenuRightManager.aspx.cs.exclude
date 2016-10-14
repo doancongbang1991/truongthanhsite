@@ -1,0 +1,146 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using DataLayer;
+using Entities;
+using Ext.Net;
+using System.Text;
+
+public partial class MenuRightManager : System.Web.UI.Page
+{
+
+protected void Page_Load(object sender, EventArgs e)
+{
+if (!X.IsAjaxRequest)
+LoadPage();
+}
+
+private void FormatWebControl()
+{
+
+}
+private void LoadPage()
+{
+bool bRight = WebPermission.ViewPermission(WebPermission.ADMIN_MEMU);
+if (!bRight)
+{
+UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
+Response.Redirect(UserCommon.Web_ErrorPage, true);
+}
+ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+FormatWebControl();
+btAdd.Disabled = !WebPermission.AddPermission(WebPermission.ADMIN_MEMU);
+btEdit.Disabled = !WebPermission.EditPermission(WebPermission.ADMIN_MEMU);
+btDel.Disabled = !WebPermission.DeletePermission(WebPermission.ADMIN_MEMU);
+LoadcbbUGRPID(true);
+LoadcbbMID(true);
+string[] sKeyword = UserCommon.GetValueParam_KeyWord();
+if (sKeyword != null)
+{
+UserCommon.SetValueControl(this.cbbMID, sKeyword[0]);
+UserCommon.SetValueControl(this.cbbUGRPID, sKeyword[1]);
+this.txtKeyword.Text = sKeyword[2];
+}
+LoadGrid_MenuRight();
+
+}
+protected void btAdd_Click(object sender, DirectEventArgs e)
+{
+  Response.Redirect(UserCommon.TSAdmin_MenuListDetails, true);
+}
+protected void btEdit_Click(object sender, DirectEventArgs e)
+{
+object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grMenuRight, true);
+if (oRecordID == null)
+UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+else
+{
+int MID = UserCommon.ToInt(this.cbbMID.SelectedItem.Value);
+int UGRPID = UserCommon.ToInt(this.cbbUGRPID.SelectedItem.Value);
+
+string Keyword = UserCommon.FormatKeyword(new object[] { UGRPID, MID, this.txtKeyword.Text.Trim() });
+string RedirectPage = UserCommon.FormatDetailsPage(UserCommon.TSAdmin_MenuListDetails, oRecordID[0].ToString(), Keyword);
+Response.Redirect(RedirectPage, true);
+}
+}
+protected void btDel_Click(object sender, DirectEventArgs e)
+{
+object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grMenuRight, true);
+if (oRecordID == null)
+UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+else
+{
+bool bResult = false;
+for (int i = 0; i < oRecordID.Length; i++)
+{
+bResult = new MenuRightData().Delete(oRecordID[i].ToString());
+if (!bResult)
+break;
+}
+LoadGrid_MenuRight();
+if (!bResult)
+UserCommon.MsbShow(Message.MSE_WCNoDelete, UserCommon.ERROR);
+}
+}
+protected void btRefresh_Click(object sender, DirectEventArgs e)
+{
+    Response.Redirect(UserCommon.TSAdmin_MenuListManager, true);
+//int MLID = UserCommon.ToInt(this.hiID.Value);
+//if (MLID > 0)
+//    Response.Redirect(UserCommon.FormatPageWithParameter(UserCommon.TSAdmin_MenuListDetails));
+//else
+//    Response.Redirect(UserCommon.TSAdmin_MenuListDetails);
+}
+
+private void LoadcbbUGRPID(bool IsAllData)
+{
+
+DataTable dt = new UserGroupData().GetDataBy("True");
+this.cbbUGRPID.SelectedItems.Clear();
+this.stUGRPID.DataSource = dt;
+this.stUGRPID.DataBind();
+UserCommon.AddItemFilterInCombobox(this.cbbUGRPID, this.stUGRPID);
+UserCommon.SetValueControl(this.cbbUGRPID, "0");
+}
+protected void cbbUGRPID_Select(object sender, DirectEventArgs e)
+{
+LoadGrid_MenuRight();
+}
+private void LoadcbbMID(bool IsAllData)
+{
+    DataTable dt = new MenuData().GetDataBy();
+this.cbbMID.SelectedItems.Clear();
+this.stMID.DataSource = dt;
+this.stMID.DataBind();
+UserCommon.AddItemFilterInCombobox(this.cbbMID, this.stMID);
+UserCommon.SetValueControl(this.cbbMID, "0");
+
+}
+protected void cbbMID_Select(object sender, DirectEventArgs e)
+{
+LoadGrid_MenuRight();
+}
+private void LoadGrid_MenuRight()
+{
+this.RowSelectionModelMenuRight.ClearSelection();
+this.grMenuRight.Call("clearMemory");
+string Keyword = txtKeyword.Text.ToLower();
+int UGRPID = UserCommon.ToInt(this.cbbUGRPID.SelectedItem.Value);
+int MID = UserCommon.ToInt(this.cbbMID.SelectedItem.Value);
+object[] Datas = new object[] { UGRPID, MID };
+DataTable dt = new MenuRightData().Search(Datas, Keyword);
+this.stMenuRight.DataSource = dt;
+this.stMenuRight.DataBind();
+}
+[DirectMethod(Namespace = "CompanyX")]
+public void Filter()
+{
+LoadGrid_MenuRight();
+
+}
+
+}

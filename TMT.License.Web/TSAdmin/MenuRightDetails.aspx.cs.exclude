@@ -1,0 +1,163 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using DataLayer;
+
+using Ext.Net;
+using Entities;
+using System.Configuration;
+
+public partial class MenuRightDetails : System.Web.UI.Page
+{
+#region >- Page -<
+
+private static string _Exception;
+protected void Page_Load(object sender, EventArgs e)
+{
+if (!X.IsAjaxRequest)
+LoadPage();
+}
+private void LoadPage()
+{
+    bool bRight = WebPermission.ViewPermission(WebPermission.ADMIN_MEMU);
+if (!bRight)
+{
+UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
+Response.Redirect(UserCommon.Web_ErrorPage, true);
+}
+ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+btAdd.Disabled = !WebPermission.AddPermission(WebPermission.ADMIN_MEMU);
+LoadcbbUGRPID(true);
+LoadcbbMID(true);
+string MRID = UserCommon.GetValueParam_ID();
+if (MRID.Length > 0)
+{
+ShowDetails_MenuRight(MRID);
+}
+else
+{
+ClearAllFields_MenuRight();
+}
+}
+protected void btBack_Click(object sender, DirectEventArgs e)
+{
+Response.Redirect(UserCommon.FormatPageWithParameter(UserCommon.TSAdmin_MenuListManager ));
+}
+protected void btRefresh_Click(object sender, DirectEventArgs e)
+{
+int MRID = UserCommon.ToInt(this.hiID.Value);
+if(MRID>0)
+Response.Redirect(UserCommon.FormatPageWithParameter(UserCommon.TSAdmin_MenuListDetails ));
+else
+    Response.Redirect(UserCommon.TSAdmin_MenuListDetails);
+
+}
+#endregion
+
+#region >- MenuRight -<
+protected void btAdd_Click(object sender, DirectEventArgs e)
+{
+ClearAllFields_MenuRight();
+}
+protected void btSave_Click(object sender, DirectEventArgs e)
+{
+bool Insert = true;
+bool bResult = false;
+MenuRightEntities objMenuRight = new MenuRightEntities();
+objMenuRight = GetMenuRight(ref Insert, ref _Exception);
+if (objMenuRight == null)
+{
+UserCommon.MsbShow(_Exception, UserCommon.ERROR);
+return;
+}
+if (Insert)
+{
+bResult = new MenuRightData().Insert(ref objMenuRight);
+if (bResult)
+ClearAllFields_MenuRight();
+else
+UserCommon.MsbShow(Message.MSE_SQLADD, UserCommon.ERROR);
+
+}
+else
+{
+bResult = new MenuRightData().Update(objMenuRight);
+if (bResult)
+UserCommon.MsbShow(Message.MSI_WCSave("User"), UserCommon.INFORMATION);
+else
+UserCommon.MsbShow(Message.MSE_SQLEDIT, UserCommon.ERROR);
+
+}
+}
+
+private void ClearAllFields_MenuRight()
+{
+LoadcbbUGRPID(false);
+LoadcbbMID(false);
+this.hiID.Value = "";
+UserCommon.SetValueControl(this.cbbUGRPID, "0");
+UserCommon.SetValueControl(this.cbbMID, "0");
+chbMRView.Checked = false;
+chbMRActive.Checked = true;
+}
+private void ShowDetails_MenuRight(string MRID)
+{
+LoadcbbUGRPID(true);
+LoadcbbMID(true);
+DataTable dt = new MenuRightData().GetDataByID(MRID);
+int i = 0;
+this.hiID.Value = dt.Rows[i][MenuRightData.TBC_MRID].ToString();
+UserCommon.SetValueControl(this.cbbUGRPID, dt.Rows[i][MenuRightData.TBC_UGRPID].ToString());
+UserCommon.SetValueControl(this.cbbMID, dt.Rows[i][MenuRightData.TBC_MID].ToString());
+this.chbMRView.Checked = UserCommon.ToBoolean(dt.Rows[i][MenuRightData.TBC_MRView]);
+this.chbMRActive.Checked = UserCommon.ToBoolean(dt.Rows[i][MenuRightData.TBC_MRActive]);
+}
+
+private void LoadcbbUGRPID(bool IsAllData)
+{
+
+    DataTable dt = new UserGroupData().GetDataBy("True");
+    this.cbbUGRPID.SelectedItems.Clear();
+    this.stUGRPID.DataSource = dt;
+    this.stUGRPID.DataBind();
+    UserCommon.AddItemFilterInCombobox(this.cbbUGRPID, this.stUGRPID);
+    UserCommon.SetValueControl(this.cbbUGRPID, "0");
+}
+private void LoadcbbMID(bool IsAllData)
+{
+    DataTable dt = new MenuData().GetDataBy();
+    this.cbbMID.SelectedItems.Clear();
+    this.stMID.DataSource = dt;
+    this.stMID.DataBind();
+    UserCommon.AddItemFilterInCombobox(this.cbbMID, this.stMID);
+    UserCommon.SetValueControl(this.cbbMID, "0");
+
+}
+
+private MenuRightEntities GetMenuRight(ref bool Insert, ref string Exception)
+{
+MenuRightEntities res = new MenuRightEntities();
+int MRID = UserCommon.ToInt(this.hiID.Value);
+Insert = !UserCommon.ToBoolean(MRID);
+
+int CookieID = UserCommon.ToInt(UserCommon.GetCookie_UID());
+res.MRID = MRID;
+res.UGRPID = UserCommon.ToInt(this.cbbUGRPID.SelectedItem.Value);
+res.MID = UserCommon.ToInt(this.cbbMID.SelectedItem.Value);
+res.MRView = UserCommon.ToInt(chbMRView.Checked);
+    res.MRActive = UserCommon.ToInt(chbMRActive.Checked);
+//res.MRCreatedBy = CookieID;
+//res.MRCreatedD = UserCommon.GetDateTime();
+//res.MRLastUpdatedBy = CookieID;
+//res.MRLastUpdatedD = UserCommon.GetDateTime();
+return res;
+}
+
+#endregion
+
+
+}

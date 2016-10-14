@@ -1,0 +1,139 @@
+using System;
+using System.Data;
+using System.Web.UI;
+using DataLayer;
+using Ext.Net;
+
+public partial class FunctionsRightManager : Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!ExtNet.IsAjaxRequest)
+            LoadPage();
+    }
+
+    private void FormatWebControl()
+    {
+    }
+
+    private void LoadPage()
+    {
+        bool bRight = WebPermission.ViewPermission(WebPermission.ADMIN_FUNCTION);
+        if (!bRight)
+        {
+            UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
+            Response.Redirect(UserCommon.Web_ErrorPage, true);
+        }
+        ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+        FormatWebControl();
+        btAdd.Disabled = !WebPermission.AddPermission(WebPermission.ADMIN_FUNCTION);
+        btEdit.Disabled = !WebPermission.EditPermission(WebPermission.ADMIN_FUNCTION);
+        btDel.Disabled = !WebPermission.DeletePermission(WebPermission.ADMIN_FUNCTION);
+        LoadcbbUGRPID(true);
+        LoadcbbFID(true);
+
+        string[] sKeyword = UserCommon.GetValueParam_KeyWord();
+        if (sKeyword != null)
+        {
+            UserCommon.SetValueControl(cbbFID, sKeyword[0]);
+            UserCommon.SetValueControl(cbbUGRPID, sKeyword[1]);
+            txtKeyword.Text = sKeyword[2];
+        }
+        LoadGrid_FunctionsRight();
+    }
+
+    protected void btAdd_Click(object sender, DirectEventArgs e)
+    {
+        Response.Redirect(UserCommon.TSAdmin_FunctionListDetails, true);
+    }
+
+    protected void btEdit_Click(object sender, DirectEventArgs e)
+    {
+        object[] oRecordID = UserCommon.GetRecordIDInGridPanel(grFunctionsRight, true);
+        if (oRecordID == null)
+            UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+        else
+        {
+            int UGRPID = UserCommon.ToInt(cbbUGRPID.SelectedItem.Value);
+            string FID = cbbFID.SelectedItem.Value;
+            string Keyword = UserCommon.FormatKeyword(new object[] {UGRPID, FID, txtKeyword.Text.Trim()});
+            string RedirectPage = UserCommon.FormatDetailsPage(UserCommon.TSAdmin_FunctionListDetails,
+                oRecordID[0].ToString(), Keyword);
+            Response.Redirect(RedirectPage, true);
+        }
+    }
+
+    protected void btDel_Click(object sender, DirectEventArgs e)
+    {
+        object[] oRecordID = UserCommon.GetRecordIDInGridPanel(grFunctionsRight, true);
+        if (oRecordID == null)
+            UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+        else
+        {
+            bool bResult = false;
+            for (int i = 0; i < oRecordID.Length; i++)
+            {
+                bResult = new FunctionsRightData().Delete(oRecordID[i].ToString());
+                if (!bResult)
+                    break;
+            }
+            LoadGrid_FunctionsRight();
+            if (!bResult)
+                UserCommon.MsbShow(Message.MSE_WCNoDelete, UserCommon.ERROR);
+        }
+    }
+
+    protected void btRefresh_Click(object sender, DirectEventArgs e)
+    {
+        Response.Redirect(UserCommon.TSAdmin_FunctionListManager, true);
+    }
+
+    private void LoadcbbUGRPID(bool IsAllData)
+    {
+        DataTable dt = new UserGroupData().GetDataBy("True");
+        cbbUGRPID.SelectedItems.Clear();
+        stUGRPID.DataSource = dt;
+        stUGRPID.DataBind();
+        UserCommon.AddItemFilterInCombobox(cbbUGRPID, stUGRPID);
+        UserCommon.SetValueControl(cbbUGRPID, "0");
+    }
+
+    protected void cbbUGRPID_Select(object sender, DirectEventArgs e)
+    {
+        LoadGrid_FunctionsRight();
+    }
+
+    private void LoadcbbFID(bool IsAllData)
+    {
+        DataTable dt = new FunctionsData().GetDataBy("True");
+        cbbFID.SelectedItems.Clear();
+        stFID.DataSource = dt;
+        stFID.DataBind();
+        UserCommon.AddItemFilterInCombobox(cbbFID, stFID);
+        UserCommon.SetValueControl(cbbFID, "0");
+    }
+
+    protected void cbbFID_Select(object sender, DirectEventArgs e)
+    {
+        LoadGrid_FunctionsRight();
+    }
+
+    private void LoadGrid_FunctionsRight()
+    {
+        RowSelectionModelFunctionsRight.ClearSelection();
+        grFunctionsRight.Call("clearMemory");
+        string Keyword = txtKeyword.Text.ToLower();
+        int UGRPID = UserCommon.ToInt(cbbUGRPID.SelectedItem.Value);
+        int FID = UserCommon.ToInt(cbbFID.SelectedItem.Value);
+        object[] Datas = {UGRPID, FID};
+        DataTable dt = new FunctionsRightData().Search(Datas, Keyword);
+        stFunctionsRight.DataSource = dt;
+        stFunctionsRight.DataBind();
+    }
+
+    [DirectMethod(Namespace = "CompanyX")]
+    public void Filter()
+    {
+        LoadGrid_FunctionsRight();
+    }
+}

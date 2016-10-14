@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Deployment\License</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="App_Readme/Ext.NET.Utilities/BREAKING_CHANGES.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Ext.NET.Utilities/LICENSE.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Ext.NET.Utilities/README.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Ext.NET/BREAKING_CHANGES.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Ext.NET/CHANGELOG.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Ext.NET/LICENSE.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Ext.NET/README.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Ext.NET/Sample.Web.config">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Transformer.NET/LICENSE.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="App_Readme/Transformer.NET/README.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/DataLayer.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/Entities.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/Ext.Net.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/Ext.Net.Utilities.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/SqlLibrary.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/TMT.License.Core.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/TMT.License.Web.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/Transformer.NET.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="ErrorPage.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Ext.NET.Default.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/bg-404.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/iconmain.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/loadingtime.gif">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/Login.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/Logo.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/Logo1.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/ReportLogo.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/ReportLogo1.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/Task.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/TimeLoad.gif">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/TimeLoading.gif">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/titlebar-bg.jpg">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/Top-Bar.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="images/user-32.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="License/LicenseDetails.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="License/LicenseManager.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="MainPage.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="scripts/date.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="scripts/jquery.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="styles/StyleCustomize.css">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/FunctionsRightDetails.aspx.cs.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/FunctionsRightDetails.aspx.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/FunctionsRightManager.aspx.cs.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/FunctionsRightManager.aspx.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MatterListDetails.aspx.cs.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MatterListDetails.aspx.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MatterListManager.aspx.cs.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MatterListManager.aspx.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MenuRightDetails.aspx.cs.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MenuRightDetails.aspx.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MenuRightManager.aspx.cs.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/MenuRightManager.aspx.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/TimeSheetSummary.aspx.cs.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSAdmin/TimeSheetSummary.aspx.exclude">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSSystem/UserGroupDetails.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSSystem/UserGroupManager.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSSystem/UserInfoDetails.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSSystem/UserInfoManager.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="TSSystem/UserProfile.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

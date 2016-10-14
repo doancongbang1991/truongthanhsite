@@ -1,0 +1,153 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using DataLayer;
+using Entities;
+using Ext.Net;
+using System.Text;
+
+public partial class MatterListManager : System.Web.UI.Page
+{
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!X.IsAjaxRequest)
+            LoadPage();
+    }
+
+    private void FormatWebControl()
+    {
+        this.colMLCreatedD.Format = UserCommon.DateTimeFormat;
+        this.colMLLastUpdatedD.Format = UserCommon.DateTimeFormat;
+    }
+    private void LoadPage()
+    {
+        bool bRight = WebPermission.ViewPermission(WebPermission.ADMIN_MASTERLIST);
+        if (!bRight)
+        {
+            UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
+            Response.Redirect(UserCommon.Web_ErrorPage, true);
+        }
+        ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+        FormatWebControl();
+        btAdd.Disabled = !WebPermission.AddPermission(WebPermission.ADMIN_MASTERLIST);
+        bool rEdit = WebPermission.EditPermission(WebPermission.ADMIN_MASTERLIST);
+        if (rEdit)
+            this.btEdit.Text = "Edit";
+        else
+            this.btEdit.Text = "Details";
+        btDel.Disabled = !WebPermission.DeletePermission(WebPermission.ADMIN_MASTERLIST);
+        LoadcbbSID(true);
+        LoadcbbMTID(true);
+        string[] sKeyword = UserCommon.GetValueParam_KeyWord();
+        if (sKeyword != null)
+        {
+            UserCommon.SetValueControl(this.cbbSID, sKeyword[0]);
+            UserCommon.SetValueControl(this.cbbMTID, sKeyword[1]);
+            this.txtKeyword.Text = sKeyword[2];
+        }
+
+        LoadGrid_MatterList();
+
+    }
+    protected void btAdd_Click(object sender, DirectEventArgs e)
+    {
+        Response.Redirect(UserCommon.TSAdmin_MatterListDetails, true);
+    }
+    protected void btEdit_Click(object sender, DirectEventArgs e)
+    {
+        object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grMatterList, true);
+        if (oRecordID == null)
+            UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+        else
+        {
+            int SID = UserCommon.ToInt(this.cbbSID.SelectedItem.Value);
+            int MTID = UserCommon.ToInt(this.cbbMTID.SelectedItem.Value);
+            string Keyword = UserCommon.FormatKeyword(new object[] { SID, MTID, this.txtKeyword.Text.Trim() });
+            string RedirectPage = UserCommon.FormatDetailsPage(UserCommon.TSAdmin_MatterListDetails, oRecordID[0].ToString(), Keyword);
+            Response.Redirect(RedirectPage, true);
+        }
+    }
+    protected void btDel_Click(object sender, DirectEventArgs e)
+    {
+        object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grMatterList, true);
+        if (oRecordID == null)
+            UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+        else
+        {
+            bool bResult = false;
+            for (int i = 0; i < oRecordID.Length; i++)
+            {
+                string TIDs = string.Empty;
+                DataTable dt = new MatterListTaskData().GetDataByID(oRecordID[i].ToString());
+                bResult = new MatterListData().Delete(oRecordID[i].ToString());
+                if (!bResult)
+                    break;
+                for (int j = 0; j < dt.Rows.Count; j++)
+                    bResult = new TaskData().Delete(dt.Rows[j][MatterListTaskData.TBC_TID].ToString());
+            }
+            LoadGrid_MatterList();
+            if (!bResult)
+                UserCommon.MsbShow(Message.MSE_WCNoDelete, UserCommon.ERROR);
+        }
+    }
+    protected void btRefresh_Click(object sender, DirectEventArgs e)
+    {
+        Response.Redirect(UserCommon.TSTask_MatterListManager, true);
+    }
+
+
+    private void LoadcbbMTID(bool IsAllData)
+    {
+        DataTable dt = new MatterTypeData().GetDataBy();
+        this.cbbMTID.SelectedItems.Clear();
+        this.stMTID.DataSource = dt;
+        this.stMTID.DataBind();
+        UserCommon.AddItemFilterInCombobox(this.cbbMTID, this.stMTID);
+        UserCommon.SetValueControl(this.cbbMTID, "0");
+    }
+    private void LoadcbbSID(bool IsAllData)
+    {
+        this.cbbSID.SelectedItems.Clear();
+        this.stSID.DataSource = UserCommon.ListStatus();
+        this.stSID.DataBind();
+        UserCommon.AddItemFilterInCombobox(this.cbbSID, this.stSID);
+        UserCommon.SetValueControl(this.cbbSID, "0");
+    }
+
+    protected void cbbSID_Select(object sender, DirectEventArgs e)
+    {
+
+        LoadGrid_MatterList();
+    }
+    protected void cbbMTID_Select(object sender, DirectEventArgs e)
+    {
+        LoadGrid_MatterList();
+    }
+    private void LoadGrid_MatterList()
+    {
+        this.RowSelectionModelMatterList.ClearSelection();
+        this.grMatterList.Call("clearMemory");
+        string Keyword = txtKeyword.Text.ToLower();
+        string bStatus = string.Empty;
+        string SID = this.cbbSID.SelectedItem.Value;
+        bStatus = (SID == "0") ? null : SID;
+        int MTID = UserCommon.ToInt(this.cbbMTID.SelectedItem.Value);
+        object[] Datas = new object[] { bStatus, MTID };
+        DataTable dt = new MatterListData().SearchWithUserCondition(Datas, Keyword,0);
+        this.stMatterList.DataSource = dt;
+        this.stMatterList.DataBind();
+    }
+   
+    [DirectMethod(Namespace = "CompanyX")]
+    public void Filter()
+    {
+        LoadGrid_MatterList();
+
+    }
+
+}

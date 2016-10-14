@@ -1,0 +1,305 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TimeSheetSummary.aspx.cs"
+    Inherits="TimeSheetSummary" %>
+
+<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head2" runat="server">
+    <link href="../styles/StyleCustomize.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+
+        var searchFieldTriggerClick = function (field, trigger, index) {
+            var me = field;
+            if (index == 0) {
+                me.setValue('');
+            }
+            CompanyX.Filter();
+
+        };
+
+        var onSpecialKey = function (field, e) {
+            if (e.getKey() == e.ENTER) {
+                searchFieldTriggerClick(field, null, 1);
+                e.stopEvent();
+            }
+        };
+        function getGroupingText(name) {
+            var GroupField = parseInt(App.cbbSID.getValue());
+            var store = App.grTimeSheet.getStore();
+            var index = 0;
+            var result = '';
+            switch (GroupField) {
+                case 0:
+                    index = store.findExact('CID', name);
+                    result = 'Client: ' + store.getAt(index).data.CName_EN;
+                    break;
+                case 1:
+                    index = store.findExact('CID', name);
+                    result = 'Client: ' + store.getAt(index).data.CName_EN;
+                    break;
+                case 2:
+                    index = store.findExact('MLID', name);
+                    result = 'Matter: ' + store.getAt(index).data.MLName;
+                    break;
+                case 3:
+                    index = store.findExact('TID', name);
+                    result = 'Task: ' + store.getAt(index).data.TName;
+                    break;
+                case 4:
+                    //index = store.findExact('TSDate', name);
+                    result = 'Date: ' + name;
+                    break;
+            }
+
+            return result;
+        }
+    </script>
+    <style type="text/css">
+        .x-grid-row-summary .x-grid-cell-inner
+        {
+            font-weight: bold;
+            font-size: 11px;
+            background-color: #f1f2f4;
+        }
+        .x-grid-body .x-grid-cell-clBillTime
+        {
+            background-color: #f1f2f4;
+        }
+        .decriptions .x-grid-cell-inner
+        {
+            padding-left: 15px;
+            white-space: normal;
+        }
+    </style>
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <ext:ResourceManager ID="ResourceManager1" runat="server">
+    </ext:ResourceManager>
+    <ext:KeyMap ID="KeyMap1" runat="server" Target="={Ext.isGecko ? Ext.getDoc() : Ext.getBody()}">
+        <ext:KeyBinding>
+            <Keys>
+                <ext:Key Code="BACKSPACE" />
+            </Keys>
+            <Listeners>
+                <Event Handler="var id = Ext.fly(e.getTarget()).getAttribute('id'),fields = Ext.getElementById(id); if(id.toLowerCase().search('input')<0) {e.stopEvent();} else if((id.toLowerCase().search('input')>0)&& (fields.readOnly)) {e.stopEvent();};" />
+            </Listeners>
+        </ext:KeyBinding>
+    </ext:KeyMap>
+    <ext:Viewport ID="Viewport1" runat="server" AutoScroll="False" Layout="BorderLayout">
+        <Items>
+            <ext:Hidden ID="hiErrorMessage" runat="server" />
+            <ext:Panel ID="Panel1" runat="server" Split="true" Layout="FitLayout" Region="Center"
+                Header="true">
+                <TopBar>
+                    <ext:Toolbar runat="server" Region="North" ID="ctl340">
+                        <Items>
+                            <ext:Button runat="server" Icon="Find" Text="Report Filter" ID="btReportFilter">
+                                <DirectEvents>
+                                    <Click OnEvent="btReportFilter_Click" IsUpload="true">
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                            <ext:ToolbarSeparator />
+                            <ext:Button runat="server" Icon="PageExcel" Text="Export" ID="btExport2">
+                                <DirectEvents>
+                                    <Click OnEvent="btExport_Click" IsUpload="true">
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                        </Items>
+                    </ext:Toolbar>
+                </TopBar>
+                <Items>
+                    <ext:GridPanel ID="grTimeSheet" SelectionMemory="false" runat="server" Region="Center"
+                        Layout="FitLayout" Header="false">
+                        <Store>
+                            <ext:Store ID="stTimeSheet" runat="server" AutoDestroy="true" ShowWarningOnFailure="true"
+                                GroupField="CName_EN">
+                                <Model>
+                                    <ext:Model ID="mdTimeSheet" runat="server" IDProperty="TSID" Name="Session">
+                                        <Fields>
+                                            <ext:ModelField Name="TSID" />
+                                            <ext:ModelField Name="TSDecription" />
+                                            <ext:ModelField Name="TSDate" Type="Date" />
+                                            <ext:ModelField Name="MLID" />
+                                            <ext:ModelField Name="MLName" />
+                                            <ext:ModelField Name="CID" />
+                                            <ext:ModelField Name="CName_EN" />
+                                            <ext:ModelField Name="TID" />
+                                            <ext:ModelField Name="TName" />
+                                            <ext:ModelField Name="TSTimeStart" Type="Date" />
+                                            <ext:ModelField Name="TSTimeEnd" Type="Date" />
+                                            <ext:ModelField Name="TSTimeSpan" />
+                                            <ext:ModelField Name="UUserName" />
+                                            <ext:ModelField Name="TSCreatedBy_UUserName" />
+                                        </Fields>
+                                    </ext:Model>
+                                </Model>
+                                <Listeners>
+                                    <Exception Handler="Ext.Msg.alert('Operation failed', operation.getError());" />
+                                </Listeners>
+                            </ext:Store>
+                        </Store>
+                        <ColumnModel ID="ColumnModel1" runat="server">
+                            <Columns>
+                                <ext:RowNumbererColumn ID="RowNumbererColumn1" Width="30" runat="server" />
+                                <ext:Column ID="Column4" runat="server" DataIndex="CName_EN" Text="Client" MinWidth="180" />
+                                <ext:Column ID="Column2" runat="server" DataIndex="MLName" Text="Matter" Width="180" />
+                                <ext:Column ID="Column3" runat="server" DataIndex="TName" Text="Task Name" Width="180" />
+                                <ext:Column ID="Column1" runat="server" DataIndex="TSDecription" Text="TimeSheet Description"
+                                    MinWidth="180" />
+                                <ext:DateColumn ID="colTSDate" runat="server" DataIndex="TSDate" Text="Date" Width="80" />
+                                <ext:DateColumn ID="colTSTimeStart" runat="server" DataIndex="TSTimeStart" Text="Start Ttime"
+                                    Width="80" />
+                                <ext:DateColumn ID="colTSTimeEnd" runat="server" DataIndex="TSTimeEnd" Text="End Time"
+                                    Width="80" />
+                                <ext:SummaryColumn ID="clhour" Align="Right" runat="server" Width="100" Text="Hour"
+                                    Sortable="true" DataIndex="TSTimeSpan" SummaryType="Sum">
+                                    <Renderer Handler="return Math.round(value * 100)/100;" />
+                                    <SummaryRenderer Handler="return Math.round(value * 100)/100 + ' hours';" />
+                                </ext:SummaryColumn>
+                                <ext:Column ID="Column100" runat="server" DataIndex="TSCreatedBy_UUserName" Text="Created By"
+                                    Width="120" />
+                            </Columns>
+                        </ColumnModel>
+                        <View>
+                            <ext:GridView ID="grvTimeSheet" runat="server" StripeRows="true" MarkDirty="false" />
+                        </View>
+                        <SelectionModel>
+                            <ext:RowSelectionModel ID="RowSelectionModelTimeSheet" runat="server" Mode="Multi">
+                            </ext:RowSelectionModel>
+                        </SelectionModel>
+                        <Features>
+                            <ext:GroupingSummary ID="GroupingSummaryTimeSheet" runat="server" HideGroupedHeader="true"
+                                EnableGroupingMenu="false">
+                                <GroupHeaderTpl ID="GroupHeaderTpl1" runat="server" Enabled="true">
+                                    <Html>
+                                       {[this.GroupHeaderText(values.name)]}
+                                    </Html>
+                                    <Functions>
+                                        <ext:JFunction Handler="return getGroupingText(name);" Name="GroupHeaderText" Args="name">
+                                        </ext:JFunction>
+                                    </Functions>
+                                </GroupHeaderTpl>
+                            </ext:GroupingSummary>
+                        </Features>
+                    </ext:GridPanel>
+                </Items>
+            </ext:Panel>
+            <ext:Window ID="wReportFilter" runat="server" Hidden="true" Closable="false" Resizable="false"
+                Height="235" Icon="Report" Title="Filter Report" Draggable="true" Width="450"
+                Modal="true" BodyPadding="2" Layout="FitLayout">
+                <Items>
+                    <ext:FieldSet ID="FieldSet1" Region="Center" Border="false" runat="server" Flex="1"
+                        Title="" Padding="7" Layout="AnchorLayout" DefaultAnchor="100%">
+                        <Defaults>
+                            <ext:Parameter Name="LabelWidth" Value="50" />
+                        </Defaults>
+                        <Items>
+                            <ext:ComboBox ID="cbbCID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true"
+                                Editable="false" TriggerAction="All" FieldLabel="Client" DisplayField="CName_EN"
+                                ValueField="CID">
+                                <Store>
+                                    <ext:Store ID="stCID" runat="server">
+                                        <Model>
+                                            <ext:Model ID="Model4" runat="server">
+                                                <Fields>
+                                                    <ext:ModelField Name="CID" />
+                                                    <ext:ModelField Name="CName_EN" />
+                                                </Fields>
+                                            </ext:Model>
+                                        </Model>
+                                    </ext:Store>
+                                </Store>
+                            </ext:ComboBox>
+                            <ext:ComboBox ID="cbbMLID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true"
+                                Editable="false" TriggerAction="All" FieldLabel="Matter" DisplayField="MLName"
+                                ValueField="MLID">
+                                <Store>
+                                    <ext:Store ID="stMLID" runat="server">
+                                        <Model>
+                                            <ext:Model ID="mdMLID" runat="server">
+                                                <Fields>
+                                                    <ext:ModelField Name="MLID" />
+                                                    <ext:ModelField Name="MLName" />
+                                                </Fields>
+                                            </ext:Model>
+                                        </Model>
+                                    </ext:Store>
+                                </Store>
+                            </ext:ComboBox>
+                            <ext:ComboBox ID="cbbUID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true"
+                                Editable="false" TriggerAction="All" FieldLabel="User" DisplayField="UFullName"
+                                ValueField="UID">
+                                <Store>
+                                    <ext:Store ID="stUID" runat="server">
+                                        <Model>
+                                            <ext:Model ID="mdUID" runat="server">
+                                                <Fields>
+                                                    <ext:ModelField Name="UID" />
+                                                    <ext:ModelField Name="UFullName" />
+                                                </Fields>
+                                            </ext:Model>
+                                        </Model>
+                                    </ext:Store>
+                                </Store>
+                            </ext:ComboBox>
+                            <ext:FieldContainer ID="FieldContainer1" runat="server" Anchor="100%" Layout="HBoxLayout">
+                                <Defaults>
+                                    <ext:Parameter Name="LabelWidth" Value="50" />
+                                </Defaults>
+                                <Items>
+                                    <ext:DateField ID="datMLFromDate" Width="210" Margins="0 10 0 0" runat="server" FieldLabel="From" />
+                                    <ext:DateField ID="datMLToDate" LabelWidth="30" Width="200" runat="server" FieldLabel="To" />
+                                </Items>
+                            </ext:FieldContainer>
+                            <ext:TriggerField ID="txtKeyword" runat="server" FieldLabel="Search">
+                                <Triggers>
+                                    <ext:FieldTrigger Icon="Clear" />
+                                    <ext:FieldTrigger Icon="Search" />
+                                </Triggers>
+                                <Listeners>
+                                    <TriggerClick Fn="searchFieldTriggerClick" />
+                                    <SpecialKey Fn="onSpecialKey" />
+                                </Listeners>
+                            </ext:TriggerField>
+                            <ext:ComboBox ID="cbbSID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true"
+                                Editable="false" TriggerAction="All" FieldLabel="Group By" DisplayField="Name"
+                                ValueField="ID">
+                                <Store>
+                                    <ext:Store ID="stSID" runat="server">
+                                        <Model>
+                                            <ext:Model ID="mdSID" runat="server">
+                                                <Fields>
+                                                    <ext:ModelField Name="ID" />
+                                                    <ext:ModelField Name="Name" />
+                                                </Fields>
+                                            </ext:Model>
+                                        </Model>
+                                    </ext:Store>
+                                </Store>
+                            </ext:ComboBox>
+                        </Items>
+                    </ext:FieldSet>
+                </Items>
+                <Buttons>
+                    <ext:Button runat="server" Icon="Accept" Text="Search" ID="btSearch">
+                        <DirectEvents>
+                            <Click OnEvent="btSearch_Click">
+                                <EventMask ShowMask="true" Msg="Loading..." MinDelay="200" />
+                            </Click>
+                        </DirectEvents>
+                    </ext:Button>
+                    <ext:Button runat="server" Icon="Cancel" Text="Back" ID="btCancel">
+                        <DirectEvents>
+                            <Click OnEvent="btCancel_Click" />
+                        </DirectEvents>
+                    </ext:Button>
+                </Buttons>
+            </ext:Window>
+        </Items>
+    </ext:Viewport>
+    </form>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FunctionsRightDetails.aspx.cs" Inherits="FunctionsRightDetails" %>
+<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head2" runat="server">
+    <link href="../styles/StyleCustomize.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <ext:ResourceManager ID="ResourceManager1" Theme="Default" runat="server">
+    </ext:ResourceManager>
+       <ext:KeyMap ID="KeyMap1" runat="server" Target="={Ext.isGecko ? Ext.getDoc() : Ext.getBody()}">
+        <ext:KeyBinding>
+            <Keys>
+                <ext:Key Code="BACKSPACE" />
+            </Keys>
+            <Listeners>
+                <Event Handler="var id = Ext.fly(e.getTarget()).getAttribute('id'),fields = Ext.getElementById(id); if(id.toLowerCase().search('input')<0) {e.stopEvent();} else if((id.toLowerCase().search('input')>0)&& (fields.readOnly)) {e.stopEvent();};" />
+            </Listeners>
+        </ext:KeyBinding>
+    </ext:KeyMap>
+    <ext:Viewport ID="Viewport1" runat="server" AutoScroll="true" Layout="FitLayout">
+        <Items>
+            <ext:Panel ID="pnMainFunctionsRight" runat="server" Layout="FitLayout" Icon="ApplicationFormEdit" Header="false">
+                <TopBar>
+                    <ext:Toolbar runat="server" Region="North" ID="ctl340">
+                        <Items>
+                            <ext:Button runat="server" Icon="ArrowUndo" Text="Back" ID="btBack">
+                                <DirectEvents>
+                                    <Click OnEvent="btBack_Click" >
+                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="100" />
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                            <ext:ToolbarSeparator ID="ToolbarSeparator2" runat="server">
+                            </ext:ToolbarSeparator>
+                            <ext:Button runat="server" Icon="Add" Text="New" ID="btAdd">
+                                <DirectEvents>
+                                    <Click OnEvent="btAdd_Click">
+                                        <Confirmation ConfirmRequest="true" Title="Question" Message="Do you really want to create new record?" />
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                            <ext:ToolbarSeparator ID="ToolbarSeparator4" runat="server">
+                            </ext:ToolbarSeparator>
+                            <ext:Button ID="btSave" runat="server" Text="Save" Icon="Disk">
+                                <DirectEvents>
+                                    <Click OnEvent="btSave_Click">
+                                        <EventMask ShowMask="true" Msg="Saving..." MinDelay="200" />
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                           
+                            <ext:ToolbarSeparator ID="ToolbarSeparator3" runat="server">
+                            </ext:ToolbarSeparator>
+                            <ext:Button runat="server" Icon="ArrowRefresh" Text="Refresh" ID="btRefresh">
+                                <DirectEvents>
+                                    <Click OnEvent="btRefresh_Click">
+                                        <Confirmation ConfirmRequest="true" Title="Question" Message="Do you really want to refresh this page?" />
+                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="200" />
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                        </Items>
+                    </ext:Toolbar>
+                </TopBar>
+                <Items>
+                    <ext:Panel ID="panel" runat="server" Layout="BorderLayout" BaseCls="x-plain" BodyPadding="5">
+                        <Items>
+                            <ext:FormPanel ID="WinFunctionsRight" runat="server" Icon="ApplicationFormEdit" Closable="false" Title=""
+                                Width="520" Height="350" BaseCls="x-plain" Resizable="false" Modal="false" BodyPadding="0"
+                                Layout="AutoLayout">
+                                <Items>
+                                    <ext:Panel ID="pnFunctionsRight" Width="520" HideMode="Offsets" Border="true" Height="350"
+                                        Title="FunctionsRight" runat="server" BodyPadding="5" Layout="BorderLayout">
+                                        <Items>
+                                            <ext:FieldSet ID="FieldSet5" Width="500" Border="false" Height="340" runat="server"
+                                                Anchor="100%" Padding="10">
+                                                <Defaults>
+                                                    <ext:Parameter Name="LabelWidth" Value="100" />
+                                                    <ext:Parameter Name="Width" Value="475" />
+                                                </Defaults>
+                                                <Items>
+                                                    <ext:Hidden ID="hiID" runat="server" />
+                                                    <ext:ComboBox ID="cbbFID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true" Editable="false" TriggerAction="All" LabelWidth="80" Width="280" FieldLabel="FID Filter" DisplayField="FName" ValueField="FID">
+                                                                    <Store>
+                                                                    <ext:Store ID="stFID" runat="server">
+                                                                    <Model>
+                                                                    <ext:Model ID="mdFID" runat="server">
+                                                                    <Fields>
+                                                                    <ext:ModelField Name="FID" />
+                                                                    <ext:ModelField Name="FName" />
+                                                                    </Fields>
+                                                                    </ext:Model>
+                                                        </Model>
+                                                        </ext:Store>
+                                                        </Store>                           
+                                                        </ext:ComboBox>
+
+                                                    <ext:ComboBox ID="cbbUGRPID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true" Editable="false" TriggerAction="All"  FieldLabel="UGRPID" DisplayField="UGRPName" ValueField="UGRPID">
+                                                    <Store>
+                                                    <ext:Store ID="stUGRPID" runat="server">
+                                                    <Model>
+                                                    <ext:Model ID="mdUGRPID" runat="server">
+                                                    <Fields>
+                                                    <ext:ModelField Name="UGRPID" />
+                                                    <ext:ModelField Name="UGRPName" />
+                                                    </Fields>
+                                                    </ext:Model>
+                                                    </Model>
+                                                    </ext:Store>
+                                                    </Store>
+                                                    </ext:ComboBox>
+<ext:Checkbox ID="chbFRView" runat="server" FieldLabel="FRView" Checked="false" /><ext:Checkbox ID="chbFRAdd" runat="server" FieldLabel="FRAdd" Checked="false" /><ext:Checkbox ID="chbFREdit" runat="server" FieldLabel="FREdit" Checked="false" /><ext:Checkbox ID="chbFRDelete" runat="server" FieldLabel="FRDelete" Checked="false" /><ext:Checkbox ID="chbFRActive" runat="server" FieldLabel="Active" Checked="true" />
+                                                </Items>
+                                            </ext:FieldSet>
+                                        </Items>
+                                    </ext:Panel>
+                                </Items>
+                            </ext:FormPanel>
+                        </Items>
+                    </ext:Panel>
+                </Items>
+            </ext:Panel>
+        </Items>
+    </ext:Viewport>
+    
+    </form>
+</body>
+</html>
+

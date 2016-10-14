@@ -1,0 +1,585 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MatterListDetails.aspx.cs"
+    Inherits="MatterListDetails" %>
+
+<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head2" runat="server">
+    <link href="../styles/StyleCustomize.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+
+        var searchFieldTriggerClick = function (field, trigger, index) {
+            var me = field;
+            var control = field.getName();
+            if (index == 0) {
+                me.setValue('');
+            }
+            CompanyX.Filter(control);
+        };
+
+        var onSpecialKey = function (field, e) {
+            if (e.getKey() == e.ENTER) {
+                searchFieldTriggerClick(field, null, 1);
+                e.stopEvent();
+            }
+        };
+        
+    </script>
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <ext:ResourceManager ID="ResourceManager1" Theme="Default" runat="server">
+    </ext:ResourceManager>
+    <ext:KeyMap ID="KeyMap1" runat="server" Target="={Ext.isGecko ? Ext.getDoc() : Ext.getBody()}">
+        <ext:KeyBinding StopEvent="true">
+            <Keys>
+                <ext:Key Code="BACKSPACE" />
+            </Keys>
+            <Listeners>
+                <Event Handler="var t = e.getTarget();if(t.toString().indexOf('Input')<0) {e.stopEvent();}" />
+            </Listeners>
+        </ext:KeyBinding>
+    </ext:KeyMap>
+    <ext:Viewport ID="Viewport1" runat="server" AutoScroll="true" Layout="FitLayout">
+        <Items>
+            <ext:Hidden ID="hiErrorMessage" runat="server" />
+            <ext:Panel ID="Panel1" runat="server" Layout="BorderLayout" Icon="User" Header="false">
+                <TopBar>
+                    <ext:Toolbar runat="server" Region="North" ID="ctl340">
+                        <Items>
+                            <ext:Button runat="server" Icon="ArrowUndo" Text="Back" ID="btBack">
+                                <DirectEvents>
+                                    <Click OnEvent="btBack_Click">
+                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="100" />
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                            <ext:ToolbarSeparator />
+                            <ext:Button runat="server" Icon="ArrowRefresh" Text="Refresh" ID="btRefresh">
+                                <DirectEvents>
+                                    <Click OnEvent="btRefresh_Click">
+                                        <Confirmation ConfirmRequest="true" Title="Question" Message="Do you really want to refresh this page?" />
+                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="200" />
+                                    </Click>
+                                </DirectEvents>
+                            </ext:Button>
+                        </Items>
+                    </ext:Toolbar>
+                </TopBar>
+                <Items>
+                    <ext:Panel ID="panel" runat="server" Region="North" Height="190" Border="false" Layout="BorderLayout"
+                        BodyPadding="0">
+                        <Items>
+                            <ext:FormPanel ID="WindowMatterList" runat="server" Closable="false" Title="Information"
+                                Region="Center" Border="false" Resizable="false" Modal="false" BodyPadding="0"
+                                Layout="BorderLayout">
+                                <TopBar>
+                                    <ext:Toolbar ID="Toolbar4" runat="server">
+                                        <Items>
+                                            <ext:Button runat="server" Icon="AwardStarBronze1" Text="New" ID="btAdd">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btAdd_Click">
+                                                        <Confirmation ConfirmRequest="true" Title="Question" Message="Do you really want to create new record?" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                            <ext:ToolbarSeparator ID="ToolbarSeparator5" runat="server">
+                                            </ext:ToolbarSeparator>
+                                            <ext:Button ID="btSave" runat="server" Text="Save" Icon="Disk">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btSave_Click">
+                                                        <EventMask ShowMask="true" Msg="Saving..." MinDelay="200" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
+                                <Items>
+                                    <ext:Panel ID="pnMatterList" Width="600" Region="West" Border="true" Height="190"
+                                        Title="" runat="server" Layout="BorderLayout">
+                                        <Items>
+                                            <ext:FieldSet ID="FieldSet5" Border="false" Width="600" Height="190" runat="server"
+                                                Anchor="100%" PaddingSpec="10 5 5 10">
+                                                <Defaults>
+                                                    <ext:Parameter Name="LabelWidth" Value="100" />
+                                                    <ext:Parameter Name="Width" Value="575" />
+                                                </Defaults>
+                                                <Items>
+                                                    <ext:Hidden ID="hiID" runat="server" />
+                                                    <ext:TriggerField ID="trgCID" runat="server" FieldLabel="Client Name" Editable="false">
+                                                        <Triggers>
+                                                            <ext:FieldTrigger Icon="Search" />
+                                                        </Triggers>
+                                                        <DirectEvents>
+                                                            <TriggerClick OnEvent="trgCID_Click" />
+                                                        </DirectEvents>
+                                                    </ext:TriggerField>
+                                                    <ext:Hidden ID="hiCID" runat="server" />
+                                                    <ext:TextField ID="txtMLName" runat="server" FieldLabel="Matter" />
+                                                    <ext:TextField ID="txtMLDecr" runat="server" FieldLabel="Description" />
+                                                     <ext:Hidden ID="hiTTID" runat="server" />
+                                                    <ext:ComboBox ID="cbbMTID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true"
+                                                        Editable="false" TriggerAction="All" FieldLabel="Matter Type" DisplayField="MTName"
+                                                        ValueField="MTID">
+                                                        <Store>
+                                                            <ext:Store ID="stMTID" runat="server">
+                                                                <Model>
+                                                                    <ext:Model ID="mdMTID" runat="server">
+                                                                        <Fields>
+                                                                            <ext:ModelField Name="MTID" />
+                                                                            <ext:ModelField Name="MTName" />
+                                                                        </Fields>
+                                                                    </ext:Model>
+                                                                </Model>
+                                                            </ext:Store>
+                                                        </Store>
+                                                    </ext:ComboBox>
+                                                    <ext:FieldContainer ID="FieldContainer1" runat="server" Anchor="100%" Layout="HBoxLayout">
+                                                        <Defaults>
+                                                            <ext:Parameter Name="LabelWidth" Value="100" />
+                                                        </Defaults>
+                                                        <Items>
+                                                            <ext:Checkbox ID="chbMLHourlyRate" runat="server" BoxLabel="Hourly Rate" Checked="true"
+                                                                Width="100" Margins="0 5 0 0" />
+                                                            <ext:Checkbox ID="chbMLCompleted" runat="server" BoxLabel="Completed" Checked="true"
+                                                                Width="95" />
+                                                        </Items>
+                                                    </ext:FieldContainer>
+                                                </Items>
+                                            </ext:FieldSet>
+                                        </Items>
+                                    </ext:Panel>
+                                </Items>
+                            </ext:FormPanel>
+                        </Items>
+                    </ext:Panel>
+                    <ext:Panel ID="pnMatterListSummary" Region="Center" Border="false" runat="server"
+                        Layout="BorderLayout"  HideMode="Offsets">
+                        <Items>
+                            <ext:GridPanel ID="grMatterListSummary" SelectionMemory="false"  HideMode="Offsets"
+                                Border="true" runat="server" Region="Center" Split="true" Layout="BorderLayout"
+                                Title="Assign Task">
+                                <TopBar>
+                                    <ext:Toolbar runat="server" Region="North" ID="Toolbar2">
+                                        <Items>
+                                            <ext:Button runat="server" Icon="Add" Text="Add" ID="btAddTask">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btAddTask_Click" />
+                                                </DirectEvents>
+                                            </ext:Button>
+                                            <ext:ToolbarSeparator ID="ToolbarSeparator1" runat="server">
+                                            </ext:ToolbarSeparator>
+                                            <ext:Button runat="server" Icon="ApplicationFormEdit" Text="Edit" ID="btEditTask">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btEditTask_Click">
+                                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="200" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                            <ext:ToolbarSeparator ID="ToolbarSeparator2" runat="server">
+                                            </ext:ToolbarSeparator>
+                                            <ext:Button runat="server" Icon="Delete" Text="Delete" ID="btDelTask">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btDelTask_Click">
+                                                        <Confirmation ConfirmRequest="true" Title="Question" Message="Do you really want to delete this records?" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                            <ext:ToolbarSeparator ID="ToolbarSeparator3" runat="server">
+                                            </ext:ToolbarSeparator>
+                                            <ext:Button runat="server" Icon="ArrowRefresh" Text="Refresh" ID="btRefreshTask">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btRefreshTask_Click">
+                                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="200" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
+                                <Store>
+                                    <ext:Store ID="stMatterListSummary" runat="server" AutoDestroy="true" ShowWarningOnFailure="true">
+                                        <Model>
+                                            <ext:Model ID="mdMatterListSummary" runat="server" IDProperty="TID" Name="Session">
+                                                <Fields>
+                                                    <ext:ModelField Name="TUID" />
+                                                    <ext:ModelField Name="MLID" />
+                                                    <ext:ModelField Name="TID" />
+                                                    <ext:ModelField Name="TName" />
+                                                    <ext:ModelField Name="TDescr" />
+                                                    <ext:ModelField Name="TTName" />
+                                                    <ext:ModelField Name="TCreatedBy_UUserName" />
+                                                    <ext:ModelField Name="TCreatedD" Type="Date" />
+                                                    <ext:ModelField Name="TLastUpdatedBy_UUserName" />
+                                                    <ext:ModelField Name="TLastUpdatedD" Type="Date" />
+                                                    <ext:ModelField Name="UID" />
+                                                    <ext:ModelField Name="UUserName" />
+                                                </Fields>
+                                            </ext:Model>
+                                        </Model>
+                                        <Listeners>
+                                            <Exception Handler="Ext.Msg.alert('Operation failed', operation.getError());" />
+                                        </Listeners>
+                                    </ext:Store>
+                                </Store>
+                                <ColumnModel ID="ColumnModel4" runat="server">
+                                    <Columns>
+                                        <ext:Column ID="Column3" runat="server" DataIndex="MLID" Text="Matter ID" Width="40"
+                                            Hidden="true" />
+                                        <ext:Column ID="Column14" runat="server" DataIndex="TID" Text="Task ID" Width="40"
+                                            Hidden="true" />
+                                        <ext:Column ID="Column6" runat="server" DataIndex="UID" Text="User ID" Width="40"
+                                            Hidden="true" />
+                                        <ext:Column ID="Column10" runat="server" DataIndex="TName" Text="Task Name" MinWidth="250" />
+                                        <ext:Column ID="Column12" runat="server" DataIndex="TDescr" Text="Task Description"
+                                            MinWidth="250" />
+                                        <ext:Column ID="Column13" runat="server" DataIndex="UUserName" Text="Assign User"
+                                            MinWidth="250" />
+                                        <ext:Column ID="colTCreatedBy" runat="server" DataIndex="TCreatedBy_UUserName" Text="Created By"
+                                            Width="100" Hidden="true" />
+                                        <ext:DateColumn ID="colTCreatedD" runat="server" DataIndex="TCreatedD" Text="Created Date"
+                                            Width="100" Hidden="true" />
+                                        <ext:Column ID="colTLastUpdatedBy" runat="server" DataIndex="TLastUpdatedBy_UUserName"
+                                            Text="Last Updated By" Width="100" Hidden="true" />
+                                        <ext:DateColumn ID="colTLastUpdatedD" runat="server" DataIndex="TLastUpdatedD" Text="Last Updated Date"
+                                            Width="100" Hidden="true" />
+                                    </Columns>
+                                </ColumnModel>
+                                <View>
+                                    <ext:GridView ID="grvTaskUser" runat="server" StripeRows="true" MarkDirty="false" />
+                                </View>
+                                <SelectionModel>
+                                    <ext:RowSelectionModel ID="RowSelectionModelTaskUser" runat="server" Mode="Multi">
+                                    </ext:RowSelectionModel>
+                                </SelectionModel>
+                                <DirectEvents>
+                                    <ItemDblClick OnEvent="btEditTask_Click">
+                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="200" />
+                                    </ItemDblClick>
+                                </DirectEvents>
+                            </ext:GridPanel>
+                            <ext:Panel ID="pnTaskUserDetails" Width="600" Region="Center" HideMode="Offsets"
+                                Border="true" Hidden="true" Title="Task" runat="server" BodyPadding="0" Layout="BorderLayout">
+                                <TopBar>
+                                    <ext:Toolbar runat="server" Region="North" ID="Toolbar3">
+                                        <Items>
+                                            <ext:Button runat="server" Icon="AwardStarBronze1" Text="New" ID="btAddTask2">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btAddTask_Click">
+                                                        <Confirmation ConfirmRequest="true" Title="Question" Message="Do you really want to create new record?" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                            <ext:ToolbarSeparator ID="ToolbarSeparator6" runat="server">
+                                            </ext:ToolbarSeparator>
+                                            <ext:Button ID="btSaveTaskUser" runat="server" Text="Save" Icon="Disk">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btSaveTask_Click">
+                                                        <EventMask ShowMask="true" Msg="Saving..." MinDelay="200" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                            <ext:ToolbarSeparator ID="ToolbarSeparator4" runat="server" />
+                                            <ext:Button runat="server" Icon="Cancel" Text="Cancel" ID="btBackTaskUser">
+                                                <DirectEvents>
+                                                    <Click OnEvent="btBackTask_Click">
+                                                        <EventMask ShowMask="true" Msg="Loading..." MinDelay="100" />
+                                                    </Click>
+                                                </DirectEvents>
+                                            </ext:Button>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
+                                <Items>
+                                    <ext:Panel ID="Panel2" Width="600" Region="West" Border="true" Header="false" runat="server"
+                                        Layout="BorderLayout">
+                                        <Items>
+                                            <ext:Panel ID="pnlTask" Width="600" Height="90" Region="North" Border="false" Header="false"
+                                                runat="server" Layout="BorderLayout">
+                                                <Items>
+                                                    <ext:FieldSet ID="FieldSet1" Border="false" runat="server" Anchor="100%" PaddingSpec="10 5 5 10">
+                                                        <Defaults>
+                                                            <ext:Parameter Name="LabelWidth" Value="100" />
+                                                            <ext:Parameter Name="Width" Value="575" />
+                                                        </Defaults>
+                                                        <Items>
+                                                            <ext:Hidden ID="hiTID" runat="server" />
+                                                            <ext:TextField ID="txtTName" runat="server" FieldLabel="Task Name" />
+                                                            <ext:TextField ID="txtTDescr" runat="server" FieldLabel="Task Description" />
+                                                            <ext:ComboBox ID="cbbTTID" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true"
+                                                                Editable="false" TriggerAction="All" FieldLabel="Task Type" DisplayField="TTName"
+                                                                ValueField="TTID">
+                                                                <Store>
+                                                                    <ext:Store ID="stTTID" runat="server">
+                                                                        <Model>
+                                                                            <ext:Model ID="mdTTID" runat="server">
+                                                                                <Fields>
+                                                                                    <ext:ModelField Name="TTID" />
+                                                                                    <ext:ModelField Name="TTName" />
+                                                                                </Fields>
+                                                                            </ext:Model>
+                                                                        </Model>
+                                                                    </ext:Store>
+                                                                </Store>
+                                                            </ext:ComboBox>
+                                                        </Items>
+                                                    </ext:FieldSet>
+                                                </Items>
+                                            </ext:Panel>
+                                            <ext:GridPanel ID="grUserAssign" SelectionMemory="false" runat="server" Region="Center"
+                                                Header="false">
+                                                <TopBar>
+                                                    <ext:Toolbar runat="server">
+                                                        <Items>
+                                                            <ext:Button ID="btAddUser" runat="server" Text="Assign User" Icon="UserAdd">
+                                                                <DirectEvents>
+                                                                    <Click OnEvent="btAddUser_Click" />
+                                                                </DirectEvents>
+                                                            </ext:Button>
+                                                            <ext:ToolbarSeparator ID="ToolbarSeparator7" runat="server" />
+                                                            <ext:Button runat="server" Icon="UserDelete" Text="Remove User" ID="btRemoveUser">
+                                                                <DirectEvents>
+                                                                    <Click OnEvent="btRemoveUser_Click">
+                                                                        <EventMask ShowMask="true" Msg="Removing..." MinDelay="100" />
+                                                                    </Click>
+                                                                </DirectEvents>
+                                                            </ext:Button>
+                                                        </Items>
+                                                    </ext:Toolbar>
+                                                </TopBar>
+                                                <Store>
+                                                    <ext:Store ID="stUserAssign" runat="server" AutoDestroy="true" ShowWarningOnFailure="true">
+                                                        <Model>
+                                                            <ext:Model ID="mdUserAssign" runat="server" IDProperty="UID" Name="Session">
+                                                                <Fields>
+                                                                    <ext:ModelField Name="UID" />
+                                                                    <ext:ModelField Name="UUserName" />
+                                                                    <ext:ModelField Name="UFullName" />
+                                                                    <ext:ModelField Name="MLUCreatedBy_UUserName" />
+                                                                    <ext:ModelField Name="MLUCreatedD" Type="Date" />
+                                                                </Fields>
+                                                            </ext:Model>
+                                                        </Model>
+                                                        <Listeners>
+                                                            <Exception Handler="Ext.Msg.alert('Operation failed', operation.getError());" />
+                                                        </Listeners>
+                                                    </ext:Store>
+                                                </Store>
+                                                <ColumnModel ID="ColumnModel2" runat="server">
+                                                    <Columns>
+                                                        <ext:RowNumbererColumn ID="RowNumbererColumn2" Width="30" runat="server" />
+                                                        <ext:Column ID="Column7" runat="server" DataIndex="UUserName" Text="UserName" Width="80">
+                                                        </ext:Column>
+                                                        <ext:Column ID="Column8" runat="server" DataIndex="UFullName" Text="Full Name" Width="200" />
+                                                        <ext:Column ID="colMLUCreatedBy" runat="server" DataIndex="MLUCreatedBy_UUserName"
+                                                            Text="Created By" Width="100" Hidden="true" />
+                                                        <ext:DateColumn ID="colMLUCreatedD" runat="server" DataIndex="MLUCreatedD" Text="Created Date"
+                                                            Width="100" Hidden="true" />
+                                                    </Columns>
+                                                </ColumnModel>
+                                                <View>
+                                                    <ext:GridView ID="grvUserInfo" runat="server" StripeRows="true" MarkDirty="false" />
+                                                </View>
+                                                <SelectionModel>
+                                                    <ext:RowSelectionModel ID="RowSelectionModelUserAssign" runat="server" Mode="Multi">
+                                                    </ext:RowSelectionModel>
+                                                </SelectionModel>
+                                            </ext:GridPanel>
+                                        </Items>
+                                    </ext:Panel>
+                                </Items>
+                            </ext:Panel>
+                        </Items>
+                    </ext:Panel>
+                </Items>
+            </ext:Panel>
+            <ext:Window ID="WindowClient" runat="server" Icon="User" Hidden="true" Collapsible="true"
+                Title="Select a Client" MinWidth="640" MinHeight="350" Maximized="true" Modal="true"
+                Resizable="false" Draggable="true" BodyPadding="0" Layout="FitLayout">
+                <Items>
+                    <ext:Panel ID="Panel4" runat="server" Icon="Table" Layout="FitLayout" Header="false"
+                        Title="Client List">
+                        <Items>
+                            <ext:GridPanel ID="grClient" SelectionMemory="false" runat="server" Region="Center"
+                                Layout="FitLayout" Title="">
+                                <Store>
+                                    <ext:Store ID="stClient" runat="server" AutoDestroy="true" ShowWarningOnFailure="true">
+                                        <Model>
+                                            <ext:Model ID="mdClient" runat="server" IDProperty="CID" Name="Session">
+                                                <Fields>
+                                                    <ext:ModelField Name="CID" />
+                                                    <ext:ModelField Name="CName_VN" />
+                                                    <ext:ModelField Name="CName_EN" />
+                                                    <ext:ModelField Name="BTName" />
+                                                    <ext:ModelField Name="CAddress1" />
+                                                    <ext:ModelField Name="CAddress2" />
+                                                    <ext:ModelField Name="CPhone" />
+                                                    <ext:ModelField Name="CFax" />
+                                                </Fields>
+                                            </ext:Model>
+                                        </Model>
+                                        <Listeners>
+                                            <Exception Handler="Ext.Msg.alert('Operation failed', operation.getError());" />
+                                        </Listeners>
+                                    </ext:Store>
+                                </Store>
+                                <ColumnModel ID="ColumnModel1" runat="server">
+                                    <Columns>
+                                        <ext:RowNumbererColumn ID="RowNumbererColumn1" Width="40" runat="server" />
+                                        <ext:Column ID="Column9" runat="server" DataIndex="CID" Width="0" Hidden="true" />
+                                        <ext:Column ID="Column18" runat="server" DataIndex="CName_VN" Text="Client Name"
+                                            Width="230" Hidden="true" />
+                                        <ext:Column ID="Column1" runat="server" DataIndex="CName_EN" Text="Client Name" Width="230" />
+                                        <ext:Column ID="Column0" runat="server" DataIndex="BTName" Text="Bussiness Type"
+                                            Width="150" />
+                                        <ext:Column ID="Column2" runat="server" DataIndex="CAddress1" Text="Ofice Address"
+                                            Width="250" />
+                                        <ext:Column ID="Column11" runat="server" DataIndex="CAddress2" Hidden="true" Text="Optional Address"
+                                            Width="200" />
+                                        <ext:Column ID="Column4" runat="server" DataIndex="CPhone" Text="Phone" Width="80" />
+                                        <ext:Column ID="Column5" runat="server" DataIndex="CFax" Text="Fax" Width="70" />
+                                    </Columns>
+                                </ColumnModel>
+                                <View>
+                                    <ext:GridView ID="grvClient" runat="server" StripeRows="true" MarkDirty="false" />
+                                </View>
+                                <SelectionModel>
+                                    <ext:RowSelectionModel ID="RowSelectionModelClient" runat="server" Mode="Multi">
+                                    </ext:RowSelectionModel>
+                                </SelectionModel>
+                                <DockedItems>
+                                    <ext:Toolbar ID="Toolbar1" runat="server" Padding="5" Dock="Top">
+                                        <Items>
+                                            <ext:TriggerField ID="txtKeywordClient" runat="server" Width="350" FieldLabel="Search"
+                                                LabelWidth="50">
+                                                <Triggers>
+                                                    <ext:FieldTrigger Icon="Clear" />
+                                                    <ext:FieldTrigger Icon="Search" />
+                                                </Triggers>
+                                                <Listeners>
+                                                    <TriggerClick Fn="searchFieldTriggerClick" />
+                                                    <SpecialKey Fn="onSpecialKey" />
+                                                </Listeners>
+                                            </ext:TriggerField>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </DockedItems>
+                                <BottomBar>
+                                    <ext:PagingToolbar ID="PagingToolbar1" runat="server" HideRefresh="True" />
+                                </BottomBar>
+                                <DirectEvents>
+                                    <ItemDblClick OnEvent="btOKClient_Click">
+                                        <ExtraParams>
+                                            <ext:Parameter Name="grClient_Select_Values" Value="#{grClient}.getRowsValues({selectedOnly:true})"
+                                                Encode="true" Mode="Raw" />
+                                        </ExtraParams>
+                                        <EventMask Msg="Loading..." MinDelay="200" ShowMask="true" />
+                                    </ItemDblClick>
+                                </DirectEvents>
+                            </ext:GridPanel>
+                        </Items>
+                    </ext:Panel>
+                </Items>
+                <Buttons>
+                    <ext:Button ID="btOKClient" runat="server" Text="Ok" Icon="Accept">
+                        <DirectEvents>
+                            <Click OnEvent="btOKClient_Click">
+                                <ExtraParams>
+                                    <ext:Parameter Name="grClient_Select_Values" Value="#{grClient}.getRowsValues({selectedOnly:true})"
+                                        Encode="true" Mode="Raw" />
+                                </ExtraParams>
+                                <EventMask Msg="Loading..." MinDelay="200" ShowMask="true" />
+                            </Click>
+                        </DirectEvents>
+                    </ext:Button>
+                    <ext:Button ID="btDeclineClient" runat="server" Text="Back" Icon="Decline">
+                        <DirectEvents>
+                            <Click OnEvent="btDeclineClient_Click">
+                            </Click>
+                        </DirectEvents>
+                    </ext:Button>
+                </Buttons>
+            </ext:Window>
+            <ext:Window ID="WindowUserInfo" runat="server" Icon="User" Hidden="true" Collapsible="true"
+                Title="Select multi User" MinWidth="640" MinHeight="400" Maximizable="true" Modal="true"
+                Resizable="false" Draggable="false" BodyPadding="0" Layout="FitLayout">
+                <Items>
+                    <ext:Panel ID="PanelUserInfo" runat="server" Icon="Table" Layout="FitLayout" Header="false"
+                        Title="User Info">
+                        <Items>
+                            <ext:GridPanel ID="grUserInfo" SelectionMemory="false" runat="server" Region="Center"
+                                Layout="FitLayout" Title="">
+                                <Store>
+                                    <ext:Store ID="stUserInfo" runat="server" AutoDestroy="true" ShowWarningOnFailure="true">
+                                        <Model>
+                                            <ext:Model ID="mdUserInfo" runat="server" IDProperty="UID" Name="Session">
+                                                <Fields>
+                                                    <ext:ModelField Name="UID" />
+                                                    <ext:ModelField Name="UUserName" />
+                                                    <ext:ModelField Name="UFullName" />
+                                                </Fields>
+                                            </ext:Model>
+                                        </Model>
+                                        <Listeners>
+                                            <Exception Handler="Ext.Msg.alert('Operation failed', operation.getError());" />
+                                        </Listeners>
+                                    </ext:Store>
+                                </Store>
+                                <ColumnModel ID="ColumnModelUserInfo" runat="server">
+                                    <Columns>
+                                        <ext:RowNumbererColumn runat="server" Width="40" />
+                                        <ext:Column ID="ColUFullName" runat="server" DataIndex="UFullName" Text="Full Name"
+                                            MinWidth="250" />
+                                        <ext:Column ID="ColUUserName" runat="server" DataIndex="UUserName" Text="UserName"
+                                            Width="120">
+                                        </ext:Column>
+                                    </Columns>
+                                </ColumnModel>
+                                <View>
+                                    <ext:GridView ID="grvUserInfo2" runat="server" StripeRows="true" MarkDirty="false" />
+                                </View>
+                                <SelectionModel>
+                                    <ext:RowSelectionModel ID="RowSelectionModelUserInfo" runat="server" Mode="Multi" />
+                                </SelectionModel>
+                                <DockedItems>
+                                    <ext:Toolbar ID="ToolbarUserInfo" runat="server" Padding="5" Dock="Top">
+                                        <Items>
+                                            <ext:TriggerField ID="txtKeywordUserInfo" runat="server" Width="350" FieldLabel="Search"
+                                                LabelWidth="50">
+                                                <Triggers>
+                                                    <ext:FieldTrigger Icon="Clear" />
+                                                    <ext:FieldTrigger Icon="Search" />
+                                                </Triggers>
+                                                <Listeners>
+                                                    <TriggerClick Fn="searchFieldTriggerClick" />
+                                                    <SpecialKey Fn="onSpecialKey" />
+                                                </Listeners>
+                                            </ext:TriggerField>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </DockedItems>
+                            </ext:GridPanel>
+                        </Items>
+                    </ext:Panel>
+                </Items>
+                <Buttons>
+                    <ext:Button ID="btOKUserInfo" runat="server" Text="Ok" Icon="Accept">
+                        <DirectEvents>
+                            <Click OnEvent="btOKUserInfo_Click">
+                            </Click>
+                        </DirectEvents>
+                    </ext:Button>
+                    <ext:Button ID="btDeclineUserInfo" runat="server" Text="Back" Icon="Decline">
+                        <DirectEvents>
+                            <Click OnEvent="btDeclineUserInfo_Click">
+                            </Click>
+                        </DirectEvents>
+                    </ext:Button>
+                </Buttons>
+            </ext:Window>
+        </Items>
+    </ext:Viewport>
+    </form>
+</body>
+</html>

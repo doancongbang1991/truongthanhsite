@@ -1,0 +1,606 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using DataLayer;
+
+using Ext.Net;
+using Entities;
+using System.Configuration;
+
+public partial class MatterListDetails : System.Web.UI.Page
+{
+    #region >- Page -<
+    private static string _Exception;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!X.IsAjaxRequest)
+            LoadPage();
+    }
+    private void CheckRightRecords()
+    {
+        bool Insert = !UserCommon.ToBoolean(UserCommon.ToInt(this.hiID.Value));
+        bool RAdd = WebPermission.AddPermission(WebPermission.ADMIN_MASTERLIST);
+        bool REdit = WebPermission.EditPermission(WebPermission.ADMIN_MASTERLIST);
+
+        this.btAdd.Disabled = !RAdd;
+        if (Insert)
+            this.btSave.Disabled = !RAdd;
+        else
+            this.btSave.Disabled = !REdit;
+    }
+    private void CheckRightRecords_Task()
+    {
+        bool RAdd = WebPermission.AddPermission(WebPermission.BASICDATA_TASK);
+        bool REdit = WebPermission.EditPermission(WebPermission.BASICDATA_TASK);
+        this.btAddTask.Disabled = !RAdd;
+        if (REdit)
+            this.btEditTask.Text = "Edit";
+        else
+            this.btEditTask.Text = "Details";
+        this.btDelTask.Disabled = !WebPermission.DeletePermission(WebPermission.BASICDATA_TASK);
+
+        bool Insert = !UserCommon.ToBoolean(UserCommon.ToInt(this.hiTID.Value));
+        this.btAddTask2.Disabled = !RAdd;
+        if (Insert)
+            this.btSaveTaskUser.Disabled = !RAdd;
+        else
+            this.btSaveTaskUser.Disabled = !REdit;
+
+        this.btAddUser.Disabled = !RAdd;
+        this.btRemoveUser.Disabled = !REdit;
+
+    }
+    private void FormatWebControl()
+    {
+        this.colTCreatedD.Format = UserCommon.DateTimeFormat;
+        this.colTLastUpdatedD.Format = UserCommon.DateTimeFormat;
+        this.colMLUCreatedD.Format = UserCommon.DateTimeFormat;
+    }
+    private void LoadPage()
+    {
+        bool bRight = WebPermission.ViewPermission(WebPermission.ADMIN_MASTERLIST);
+        if (!bRight)
+        {
+            UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
+            Response.Redirect(UserCommon.Web_ErrorPage, true);
+        }
+        ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+        FormatWebControl();
+       
+        LoadcbbMTID(true);
+        LoadcbbTTID(true);
+        string MLID = UserCommon.GetValueParam_ID();
+        if (MLID.Length > 0)
+        {
+            this.pnMatterListSummary.Show();
+            this.grMatterListSummary.Show();
+            this.pnTaskUserDetails.Hide();
+            ShowDetails_MatterList(MLID);
+            LoadGrid_MatterListSummary();
+        }
+        else
+        {
+            ClearAllFields_MatterList();
+            this.pnMatterListSummary.Hide();
+        }
+        CheckRightRecords();
+        CheckRightRecords_Task();
+    }
+    protected void btBack_Click(object sender, DirectEventArgs e)
+    {
+        Response.Redirect(UserCommon.FormatPageWithParameter(UserCommon.TSAdmin_MatterListManager));
+    }
+    protected void btRefresh_Click(object sender, DirectEventArgs e)
+    {
+        int MLID = UserCommon.ToInt(this.hiID.Value);
+        if (MLID > 0)
+            Response.Redirect(UserCommon.FormatPageWithParameter(UserCommon.TSAdmin_MatterListDetails));
+        else
+            Response.Redirect(UserCommon.TSAdmin_MatterListDetails);
+    }
+    #endregion
+
+    #region >- MatterList -<
+    protected void btAdd_Click(object sender, DirectEventArgs e)
+    {
+        ClearAllFields_MatterList();
+        this.pnMatterListSummary.Hide();
+      
+        CheckRightRecords();
+
+    }
+    protected void btSave_Click(object sender, DirectEventArgs e)
+    {
+        bool Insert = true;
+        bool bResult = false;
+        MatterListEntities objMatterList = new MatterListEntities();
+        objMatterList = GetMatterList(ref Insert, ref _Exception);
+        if (objMatterList == null)
+        {
+            UserCommon.MsbShow(_Exception, UserCommon.ERROR);
+            return;
+        }
+        if (Insert)
+        {
+            bResult = new MatterListData().Insert(ref objMatterList);
+            CreateDefaultTaskAndUserAssign(objMatterList);
+            this.hiID.Value = objMatterList.MLID;
+            this.pnMatterListSummary.Show();
+            this.grMatterListSummary.Show();
+            this.pnTaskUserDetails.Hide();
+            LoadGrid_MatterListSummary();
+        }
+        else
+        {
+            bResult = new MatterListData().Update(objMatterList);
+            if (bResult)
+                UserCommon.MsbShow(Message.MSI_WCSave("Matter List"), UserCommon.INFORMATION);
+            else
+                UserCommon.MsbShow(Message.MSE_SQLEDIT, UserCommon.ERROR);
+        }
+        CheckRightRecords();
+    }
+
+    private void ClearAllFields_MatterList()
+    {
+        LoadcbbMTID(false);
+        this.hiID.Value = "";
+        this.txtMLName.Text = "";
+        this.txtMLDecr.Text = "";
+        this.hiCID.Value = "";
+        this.trgCID.Text = "";
+        this.hiTTID.Value = "";
+        UserCommon.SetValueControl(this.cbbMTID, "0");
+        chbMLHourlyRate.Checked = false;
+        chbMLCompleted.Checked = false;
+    }
+    private void ShowDetails_MatterList(string MLID)
+    {
+        LoadcbbMTID(true);
+        DataTable dt = new MatterListData().GetDataViewByID(MLID);
+        int i = 0;
+        this.hiID.Value = dt.Rows[i][MatterListData.TBC_MLID].ToString();
+        this.txtMLName.Text = dt.Rows[i][MatterListData.TBC_MLName].ToString();
+        this.txtMLDecr.Text = dt.Rows[i][MatterListData.TBC_MLDescr].ToString();
+        this.hiCID.Value = dt.Rows[i][MatterListData.TBC_CID].ToString();
+        this.trgCID.Text = dt.Rows[i][ClientData.TBC_CName_EN].ToString();
+        UserCommon.SetValueControl(this.cbbMTID, dt.Rows[i][MatterListData.TBC_MTID].ToString());
+        int MTID = UserCommon.ToInt(dt.Rows[i][MatterListData.TBC_MTID]);
+        DataTable dttype = new TaskTypeData().GetDataBy(MTID,true);
+        this.hiTTID.Value = (dttype.Rows.Count <= 0) ? 0 : UserCommon.ToInt(dttype.Rows[0][TaskTypeData.TBC_TTID]);
+        this.chbMLHourlyRate.Checked = UserCommon.ToBoolean(dt.Rows[i][MatterListData.TBC_MLHourlyRate]);
+        this.chbMLCompleted.Checked = UserCommon.ToBoolean(dt.Rows[i][MatterListData.TBC_MLCompleted]);
+
+    }
+
+    private void LoadcbbMTID(bool IsAllData)
+    {
+        object Datas = (IsAllData) ? null : "true";
+        DataTable dt = new MatterTypeData().GetDataBy();
+        this.cbbMTID.SelectedItems.Clear();
+        this.stMTID.DataSource = dt;
+        this.stMTID.DataBind();
+        UserCommon.AddItemOptionInCombobox(this.cbbMTID, this.stMTID);
+        UserCommon.SetValueControl(this.cbbMTID, "0");
+    }
+    private MatterListEntities GetMatterList(ref bool Insert, ref string Exception)
+    {
+        MatterListEntities res = new MatterListEntities();
+        int MLID = UserCommon.ToInt(this.hiID.Value);
+        Insert = !UserCommon.ToBoolean(MLID);
+        if (!UserCommon.HasValue(this.trgCID))
+        {
+            Exception = Message.MSE_WCFieldRequired("Client");
+            return null;
+        }
+        if (!UserCommon.HasValue(this.cbbMTID))
+        {
+            Exception = Message.MSE_WCFieldRequired("Matter Type");
+            return null;
+        }
+        
+        int CookieID = UserCommon.ToInt(UserCommon.GetCookie_UID());
+        res.MLID = MLID;
+        res.MLName = txtMLName.Text;
+        res.MLDescr = this.txtMLDecr.Text;
+        res.CID = UserCommon.ToInt(this.hiCID.Value);
+        res.MTID = UserCommon.ToInt(this.cbbMTID.SelectedItem.Value);
+        res.MLHourlyRate = UserCommon.ToInt(chbMLHourlyRate.Checked);
+        res.MLCompleted = UserCommon.ToInt(chbMLCompleted.Checked);
+        res.MLCreatedBy = CookieID;
+        res.MLCreatedD = UserCommon.GetDateTime();
+        res.MLLastUpdatedBy = CookieID;
+        res.MLLastUpdatedD = UserCommon.GetDateTime();
+        return res;
+    }
+
+    private void LoadGrid_MatterListSummary()
+    {
+        this.RowSelectionModelTaskUser.ClearSelection();
+        this.grMatterListSummary.Call("clearMemory");
+        int MLID = UserCommon.ToInt(this.hiID.Value);
+        DataTable dt = new  MatterListData().GetDataViewSummaryByID(MLID.ToString());
+        this.stMatterListSummary.DataSource = dt;
+        this.stMatterListSummary.DataBind();
+    }
+    #endregion
+
+    #region >- MasterListTask -<
+    protected void btAddTask_Click(object sender, EventArgs e)
+    {
+        this.grMatterListSummary.Hide();
+        this.pnTaskUserDetails.Show();
+        ClearAllFields_Task();
+        ClearAllFields_UserAssign();
+        CheckRightRecords_Task();
+    }
+    protected void btEditTask_Click(object sender, EventArgs e)
+    {
+        object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grMatterListSummary, true);
+        if (oRecordID == null)
+            UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+        else
+        {
+            this.grMatterListSummary.Hide();
+            this.pnTaskUserDetails.Show();
+            ShowDetails_Task(oRecordID[0].ToString());
+            ShowDetails_UserAssign();
+            CheckRightRecords_Task();
+        }
+        
+    }
+    protected void btDelTask_Click(object sender, EventArgs e)
+    {
+        object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grMatterListSummary, true);
+        if (oRecordID == null)
+            UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+        else
+        {
+            bool bResult = false;
+            for (int i = 0; i < oRecordID.Length; i++)
+            {
+                bResult = new TaskData().Delete(oRecordID[i].ToString());
+                if (!bResult)
+                    break;
+            }
+            LoadGrid_MatterListSummary();
+            if (!bResult)
+                UserCommon.MsbShow(Message.MSE_WCNoDelete, UserCommon.ERROR);
+        }
+    }
+    protected void btRefreshTask_Click(object sender, EventArgs e)
+    {
+        LoadGrid_MatterListSummary();
+    }
+
+   
+
+    #endregion
+
+    #region >- TaskDetails -<
+
+    private void CreateDefaultTaskAndUserAssign(MatterListEntities objML)
+    {
+        TaskEntities objTask = new TaskEntities();
+        int TID = 0;
+        int MTID = objML.MTID;
+        DataTable dt = new TaskTypeData().GetDataBy(MTID,true);
+        if (dt.Rows.Count <= 0)
+            return;
+        int TTID = UserCommon.ToInt(dt.Rows[0][TaskTypeData.TBC_TTID]);
+        this.hiTTID.Value = TTID;
+        int CookieID = UserCommon.ToInt(UserCommon.GetCookie_UID());
+
+        objTask.TID = TID;
+        objTask.TName = objML.MLName;
+        objTask.TDescr = objML.MLDescr;
+        objTask.TTID = TTID;
+        objTask.TCreatedBy = objML.MLCreatedBy;
+        objTask.TCreatedD = objML.MLCreatedD;
+        objTask.TLastUpdatedBy = objML.MLLastUpdatedBy;
+        objTask.TLastUpdatedD = objML.MLLastUpdatedD;
+
+        bool bResult = new TaskData().Insert(ref objTask);
+        if (!bResult)
+            return;
+        MatterListTaskEntities objMatterListTask = new MatterListTaskEntities();
+        objMatterListTask.MLID = objML.MLID;
+        objMatterListTask.TID = objTask.TID;
+        bResult = new MatterListTaskData().Insert(ref objMatterListTask);
+        if (!bResult)
+            return;
+        MatterListUserEntities objMatterListUser = new MatterListUserEntities();
+        objMatterListUser.MLID = objML.MLID;
+        objMatterListUser.TID = objTask.TID;
+        objMatterListUser.UID = CookieID;
+        objMatterListUser.MLUCreatedBy = objML.MLCreatedBy;
+        objMatterListUser.MLUCreatedD = objML.MLCreatedD;
+        bool bDel = new MatterListUserData().Delete(objMatterListUser.MLID, objMatterListUser.TID, objMatterListUser.UID);
+        bool bInsert = new MatterListUserData().Insert(ref objMatterListUser);
+
+    }
+    protected void btBackTask_Click(object sender, EventArgs e)
+    {
+        this.pnTaskUserDetails.Hide();
+        this.grMatterListSummary.Show();
+
+        LoadGrid_MatterListSummary();
+    }
+    protected void btSaveTask_Click(object sender, EventArgs e)
+    {
+        bool Insert = true;
+        bool bResult = false;
+        TaskEntities objTask = new TaskEntities();
+        objTask = GetTask(ref Insert, ref _Exception);
+        if (objTask == null)
+        {
+            UserCommon.MsbShow(_Exception, UserCommon.ERROR);
+            return;
+        }
+        if (Insert)
+        {
+            bResult = new TaskData().Insert(ref objTask);
+            if (bResult)
+            {
+                this.hiTID.Value = objTask.TID;
+                MatterListTaskEntities objMatterListTask =  GetMatterListTask();
+                bResult = new MatterListTaskData().Insert(ref objMatterListTask);
+
+                MatterListUserEntities objMatterListUser = GetMatterListUser(UserCommon.ToInt(UserCommon.GetCookie_UID()));
+               
+                bool bDel = new MatterListUserData().Delete(objMatterListUser.MLID, objMatterListUser.TID, objMatterListUser.UID);
+                bool bInsert = new MatterListUserData().Insert(ref objMatterListUser);
+                this.grUserAssign.Show();
+                ShowDetails_UserAssign();
+            }
+            else
+                UserCommon.MsbShow(Message.MSE_SQLADD, UserCommon.ERROR);
+        }
+        else
+        {
+            bResult = new TaskData().Update(objTask);
+            if (bResult)
+                UserCommon.MsbShow(Message.MSI_WCSave("Task"), UserCommon.INFORMATION);
+            else
+                UserCommon.MsbShow(Message.MSE_SQLEDIT, UserCommon.ERROR);
+        }
+        CheckRightRecords_Task();
+
+    }
+
+    private void LoadcbbTTID(bool IsAllData)
+    {
+        object Datas = (IsAllData) ? null : "true";
+        DataTable dt = new TaskTypeData().GetDataBy();
+        this.cbbTTID.SelectedItems.Clear();
+        this.stTTID.DataSource = dt;
+        this.stTTID.DataBind();
+        UserCommon.AddItemOptionInCombobox(this.cbbTTID, this.stTTID);
+        UserCommon.SetValueControl(this.cbbTTID, "0");
+    }
+    private void ClearAllFields_Task()
+    {
+        LoadcbbTTID(true);
+        this.hiTID.Value = "";
+        this.txtTName.Text = "";
+        this.txtTDescr.Text = "";
+        int TTID = UserCommon.ToInt(this.hiTTID.Value);
+        UserCommon.SetValueControl(this.cbbTTID, TTID.ToString());
+    }
+    private void ShowDetails_Task(string TID)
+    {
+        LoadcbbTTID(true);
+        DataTable dt = new TaskData().GetDataViewByID(TID);
+        int i = 0;
+        this.hiTID.Value = dt.Rows[i][TaskData.TBC_TID].ToString();
+        this.txtTName.Text = dt.Rows[i][TaskData.TBC_TName].ToString();
+        this.txtTDescr.Text = dt.Rows[i][TaskData.TBC_TDescr].ToString();
+        UserCommon.SetValueControl(this.cbbTTID, dt.Rows[i][TaskData.TBC_TTID].ToString());
+    }
+
+    private TaskEntities GetTask(ref bool Insert, ref string Exception)
+    {
+        TaskEntities res = new TaskEntities();
+        int TID = UserCommon.ToInt(this.hiTID.Value);
+        Insert = !UserCommon.ToBoolean(TID);
+        if (!UserCommon.HasValue(this.txtTName))
+        {
+            Exception = Message.MSE_WCFieldRequired("Task Name");
+            return null;
+        }
+        if (!UserCommon.HasValue(this.cbbTTID))
+        {
+            Exception = Message.MSE_WCFieldRequired("Task Type");
+            return null;
+        }
+                
+        int CookieID = UserCommon.ToInt(UserCommon.GetCookie_UID());
+        res.TID = TID;
+        res.TName = txtTName.Text;
+        res.TDescr = txtTDescr.Text;
+        res.TTID = UserCommon.ToInt(this.cbbTTID.SelectedItem.Value);
+        res.TCreatedBy = CookieID;
+        res.TCreatedD = UserCommon.GetDateTime();
+        res.TLastUpdatedBy = CookieID;
+        res.TLastUpdatedD = UserCommon.GetDateTime();
+        return res;
+    }
+    private MatterListTaskEntities GetMatterListTask()
+    {
+        MatterListTaskEntities res = new MatterListTaskEntities();
+        res.MLID = UserCommon.ToInt(this.hiID.Value);
+        res.TID = UserCommon.ToInt(this.hiTID.Value);
+        return res;
+    }
+    #endregion
+
+    #region >- MatterListUser -<
+
+
+    protected void btAddUser_Click(object sender, EventArgs e)
+    {
+        LoadGrid_UserInfo();
+        this.WindowUserInfo.Show();
+
+    }
+    protected void btRemoveUser_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grUserAssign, true);
+            if (oRecordID == null)
+                UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+            else
+            {
+                for (int i = 0; i < oRecordID.Length; i++)
+                {
+                    int UID = UserCommon.ToInt(oRecordID[i]);
+                    MatterListUserEntities objMatterListUser = GetMatterListUser(UID);
+                    bool bDel = new MatterListUserData().Delete(objMatterListUser.MLID, objMatterListUser.TID, objMatterListUser.UID);
+                }
+                ShowDetails_UserAssign();
+                this.WindowUserInfo.Hide();
+            }
+        }
+        catch (Exception Ex)
+        {
+            UserCommon.MsbShow(Ex.Message, UserCommon.ERROR);
+        }
+    }
+    protected void btOKUserInfo_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grUserInfo, true);
+            if (oRecordID == null)
+                UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+            else
+            {
+                for (int i = 0; i < oRecordID.Length; i++)
+                {
+                    int UID = UserCommon.ToInt(oRecordID[i]);
+                    MatterListUserEntities objMatterListUser = GetMatterListUser(UID);
+                    bool bDel = new MatterListUserData().Delete(objMatterListUser.MLID, objMatterListUser.TID, objMatterListUser.UID);
+                    bool bInsert = new MatterListUserData().Insert(ref objMatterListUser);
+                }
+                ShowDetails_UserAssign();
+                this.WindowUserInfo.Hide();
+            }
+        }
+        catch (Exception Ex)
+        {
+            UserCommon.MsbShow(Ex.Message, UserCommon.ERROR);
+        }
+    }
+    protected void btDeclineUserInfo_Click(object sender, EventArgs e)
+    {
+        this.WindowUserInfo.Hide();
+
+    }
+    private void ShowDetails_UserAssign()
+    {
+        this.grUserAssign.Show();
+        int MLID = UserCommon.ToInt(this.hiID.Value);
+        int TID = UserCommon.ToInt(this.hiTID.Value);
+        LoadGrid_UserAssign(MLID,TID);
+    }
+    private void ClearAllFields_UserAssign()
+    {
+        LoadGrid_UserAssign(0, 0);
+        this.grUserAssign.Hide();
+    }
+    private void LoadGrid_UserAssign(int MLID,int TID)
+    {
+        this.RowSelectionModelUserAssign.ClearSelection();
+        this.grUserAssign.Call("clearMemory");
+        DataTable dt = new MatterListUserData().GetDataViewBy(MLID, TID);
+        this.stUserAssign.DataSource = dt;
+        this.stUserAssign.DataBind();
+    }
+    private MatterListUserEntities GetMatterListUser (int UID)
+    {
+        int CookieID = UserCommon.ToInt(UserCommon.GetCookie_UID());
+
+        MatterListUserEntities res = new MatterListUserEntities();
+        res.MLID = UserCommon.ToInt(this.hiID.Value);
+        res.TID = UserCommon.ToInt(this.hiTID.Value);
+        res.UID = UID;
+        res.MLUCreatedBy = CookieID;
+        res.MLUCreatedD = UserCommon.GetDateTime();
+
+        return res;
+    }
+
+    private void LoadGrid_UserInfo()
+    {
+        this.RowSelectionModelUserInfo.ClearSelection();
+        this.grUserInfo.Call("clearMemory");
+        string Keyword = txtKeywordUserInfo.Text.ToLower();
+        object[] Datas = null;
+        DataTable dt = new UserInfoData().Search(Datas, Keyword);
+        this.stUserInfo.DataSource = dt;
+        this.stUserInfo.DataBind();
+    }
+
+    #endregion
+
+    #region Select Client Form
+
+    protected void trgCID_Click(object sender, DirectEventArgs e)
+    {
+        this.WindowClient.Show();
+        LoadGrid_Client();
+    }
+    private void LoadGrid_Client()
+    {
+        this.RowSelectionModelClient.ClearSelection();
+        this.grClient.Call("clearMemory");
+        string Keyword = this.txtKeywordClient.Text.ToLower();
+        object[] Datas = null;
+        DataTable dt = new ClientData().Search(Datas, Keyword);
+        this.stClient.DataSource = dt;
+        this.stClient.DataBind();
+    }
+    [DirectMethod(Namespace = "CompanyX")]
+    public void Filter(string Field)
+    {
+        switch (Field)
+        {
+            case "txtKeywordClient":
+                LoadGrid_Client();
+                break;
+            case "txtKeywordUserInfo":
+                LoadGrid_UserInfo();
+                break;
+        }
+
+
+    }
+
+    protected void btOKClient_Click(object sender, DirectEventArgs e)
+    {
+        object[] oRecordID = UserCommon.GetRecordIDInGridPanel(this.grClient, true);
+        if (oRecordID == null)
+            UserCommon.MsbShow(Message.MSE_WCSelectRowRequired, UserCommon.ERROR);
+        else
+        {
+            string json = e.ExtraParams["grClient_Select_Values"];
+            string[] Fields = new string[] { ClientData.TBC_CID, ClientData.TBC_CName_EN };
+            string[] value = UserCommon.GetValueFromJson(json, Fields);
+            this.hiCID.Value = value[0];
+            this.trgCID.Text = value[1];
+            this.WindowClient.Hide();
+        }
+    }
+    protected void btDeclineClient_Click(object sender, DirectEventArgs e)
+    {
+        this.WindowClient.Hide();
+    }
+    #endregion
+
+
+}

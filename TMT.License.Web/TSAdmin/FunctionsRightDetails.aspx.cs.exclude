@@ -1,0 +1,163 @@
+using System;
+using System.Data;
+using System.Web.UI;
+using DataLayer;
+using Entities;
+using Ext.Net;
+
+public partial class FunctionsRightDetails : Page
+{
+    #region >- Page -<
+
+    private static string _Exception;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!ExtNet.IsAjaxRequest)
+            LoadPage();
+    }
+
+    private void LoadPage()
+    {
+        bool bRight = WebPermission.ViewPermission(WebPermission.ADMIN_FUNCTION);
+        if (!bRight)
+        {
+            UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
+            Response.Redirect(UserCommon.Web_ErrorPage, true);
+        }
+        ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+        btAdd.Disabled = !WebPermission.AddPermission(WebPermission.ADMIN_FUNCTION);
+        LoadcbbUGRPID(true);
+        LoadcbbFID(true);
+        string FRID = UserCommon.GetValueParam_ID();
+        if (FRID.Length > 0)
+        {
+            ShowDetails_FunctionsRight(FRID);
+        }
+        else
+        {
+            ClearAllFields_FunctionsRight();
+        }
+    }
+
+    protected void btBack_Click(object sender, DirectEventArgs e)
+    {
+        Response.Redirect(UserCommon.FormatPageWithParameter(UserCommon.TSAdmin_FunctionListManager));
+    }
+
+    protected void btRefresh_Click(object sender, DirectEventArgs e)
+    {
+        int FRID = UserCommon.ToInt(hiID.Value);
+        if (FRID > 0)
+            Response.Redirect(UserCommon.FormatPageWithParameter(UserCommon.TSAdmin_FunctionListDetails));
+        else
+            Response.Redirect(UserCommon.TSAdmin_FunctionListDetails);
+    }
+
+    #endregion
+
+    #region >- FunctionsRight -<
+
+    protected void btAdd_Click(object sender, DirectEventArgs e)
+    {
+        ClearAllFields_FunctionsRight();
+    }
+
+    protected void btSave_Click(object sender, DirectEventArgs e)
+    {
+        bool Insert = true;
+        bool bResult = false;
+        var objFunctionsRight = new FunctionsRightEntities();
+        objFunctionsRight = GetFunctionsRight(ref Insert, ref _Exception);
+        if (objFunctionsRight == null)
+        {
+            UserCommon.MsbShow(_Exception, UserCommon.ERROR);
+            return;
+        }
+        if (Insert)
+        {
+            bResult = new FunctionsRightData().Insert(ref objFunctionsRight);
+            if (bResult)
+                ClearAllFields_FunctionsRight();
+            else
+                UserCommon.MsbShow(Message.MSE_SQLADD, UserCommon.ERROR);
+        }
+        else
+        {
+            bResult = new FunctionsRightData().Update(objFunctionsRight);
+            if (bResult)
+                UserCommon.MsbShow(Message.MSI_WCSave("User"), UserCommon.INFORMATION);
+            else
+                UserCommon.MsbShow(Message.MSE_SQLEDIT, UserCommon.ERROR);
+        }
+    }
+
+    private void ClearAllFields_FunctionsRight()
+    {
+        LoadcbbUGRPID(false);
+        LoadcbbFID(false);
+        hiID.Value = "";
+        UserCommon.SetValueControl(cbbUGRPID, "0");
+        UserCommon.SetValueControl(cbbFID, "0");
+        chbFRView.Checked = false;
+        chbFRAdd.Checked = false;
+        chbFREdit.Checked = false;
+        chbFRDelete.Checked = false;
+        chbFRActive.Checked = true;
+    }
+
+    private void ShowDetails_FunctionsRight(string FRID)
+    {
+        LoadcbbUGRPID(true);
+        LoadcbbFID(true);
+        DataTable dt = new FunctionsRightData().GetDataByID(FRID);
+        int i = 0;
+        hiID.Value = dt.Rows[i][FunctionsRightData.TBC_FRID].ToString();
+        UserCommon.SetValueControl(cbbUGRPID, dt.Rows[i][FunctionsRightData.TBC_UGRPID].ToString());
+        UserCommon.SetValueControl(cbbFID, dt.Rows[i][FunctionsRightData.TBC_FID].ToString());
+        chbFRView.Checked = UserCommon.ToBoolean(dt.Rows[i][FunctionsRightData.TBC_FRView]);
+        chbFRAdd.Checked = UserCommon.ToBoolean(dt.Rows[i][FunctionsRightData.TBC_FRAdd]);
+        chbFREdit.Checked = UserCommon.ToBoolean(dt.Rows[i][FunctionsRightData.TBC_FREdit]);
+        chbFRDelete.Checked = UserCommon.ToBoolean(dt.Rows[i][FunctionsRightData.TBC_FRDelete]);
+        chbFRActive.Checked = UserCommon.ToBoolean(dt.Rows[i][FunctionsRightData.TBC_FRActive]);
+    }
+
+    private void LoadcbbUGRPID(bool IsAllData)
+    {
+        DataTable dt = new UserGroupData().GetDataBy("True");
+        cbbUGRPID.SelectedItems.Clear();
+        stUGRPID.DataSource = dt;
+        stUGRPID.DataBind();
+        UserCommon.AddItemFilterInCombobox(cbbUGRPID, stUGRPID);
+        UserCommon.SetValueControl(cbbUGRPID, "0");
+    }
+
+    private void LoadcbbFID(bool IsAllData)
+    {
+        DataTable dt = new MenuData().GetDataBy();
+        cbbFID.SelectedItems.Clear();
+        stFID.DataSource = dt;
+        stFID.DataBind();
+        UserCommon.AddItemFilterInCombobox(cbbFID, stFID);
+        UserCommon.SetValueControl(cbbFID, "0");
+    }
+
+    private FunctionsRightEntities GetFunctionsRight(ref bool Insert, ref string Exception)
+    {
+        var res = new FunctionsRightEntities();
+        int FRID = UserCommon.ToInt(hiID.Value);
+        Insert = !UserCommon.ToBoolean(FRID);
+
+        int CookieID = UserCommon.ToInt(UserCommon.GetCookie_UID());
+        res.FRID = FRID;
+        res.UGRPID = UserCommon.ToInt(cbbUGRPID.SelectedItem.Value);
+        res.FID = cbbFID.SelectedItem.Value;
+        res.FRView = UserCommon.ToInt(chbFRView.Checked);
+        res.FRAdd = UserCommon.ToInt(chbFRAdd.Checked);
+        res.FREdit = UserCommon.ToInt(chbFREdit.Checked);
+        res.FRDelete = UserCommon.ToInt(chbFRDelete.Checked);
+        return res;
+    }
+
+    #endregion
+}

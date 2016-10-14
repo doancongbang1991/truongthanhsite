@@ -45,3 +45,16 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+#config
+DataLayer/bin/
+DataLayer/obj/
+Entities/bin/
+Entities/obj/
+packages/
+PrecompiledWeb
+SqlLibrary/bin/
+SqlLibrary/obj/
+TMT.License.Core/bin/
+TMT.License.Core/obj/
+TMT.License.Web/bin/
+TMT.License.Web/obj/
