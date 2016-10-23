@@ -1,0 +1,63 @@
+﻿html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline;}
+/* Tables still need 'cellspacing="0"' in the markup. */
+table {border-collapse: separate; border-spacing: 0;}
+caption, th, td {font-size: 13px;padding:5px;}
+caption, td {text-align: left; font-weight: normal;}
+th {text-align:left;font-weight: bold;background:#eee;border:1px solid #c6c6c6;border-style:solid none none solid;}
+td {border:1px solid #c6c6c6;border-style:solid none none solid;}
+table {border:1px solid #c6c6c6;border-style:none solid solid none;}
+table, td, th {vertical-align: middle;}
+/* Remove possible quote marks (") from <q>, <blockquote>. */
+blockquote:before, blockquote:after, q:before, q:after {content: "";}
+blockquote, q {quotes: "" "";}
+body {height: 100%; font-size: 62.5%; color: #333; font-family: arial, helvetica, georgia, sans-serif; line-height: 20px;}
+/* Typography */
+a {text-decoration: none;color: #336699;}
+a:active {outline: none;}
+a:focus {outline: none;}
+a img {border: none;}
+h1 {font-size: 22px;}
+h2 {font-size: 20px;}
+h3 {font-size: 18px;}
+h4 {font-size: 16px;}
+h5 {font-size: 14px;}
+h6 {font-size: 12px;}
+p, label, ul, button {font-size: 13px;}
+p {padding: 3px 0;}
+ul {list-style: none;}
+/* fixes nested lists */
+ul ul {font-size: 100%; font-weight: normal;}
+fieldset {border: 1px solid #ccc;padding: 5px;}
+legend {font-size: 13px;padding:5px;}
+legend label {font-size: 100%;padding:5px;font-weight:normal;}
+
+
+/********* END Reset *********/
+
+pre {font-family: courier; clear: both;}
+.clear {clear: both;}
+.floatleft {float: left;}
+.floatright {float: right;}
+.aligncenter {text-align: center;}
+.show {display: block;}
+.topleft {top: 0; left: 0;}
+.bottomleft {bottom: 0; left: 0;}
+.topright {top: 0; left: 0;}
+.bottomright {bottom: 0; left: 0;}
+.last {margin-right:0 !important;}
+.hide {display:none;}
+.chide {display:none;}
+.top {top: 0;left: 0;}
+.bottom {bottom: 0;left: 0;}
+
+.wfieldset {width:510px;}
+.wlarge, .text-box {width:516px;}
+.wmedium {width:300px !important;}
+.wsmall {width:100px;}
+
+.hlarge {height:450px;}
+.hmedium {height:300px;}
+.hsmall, .multi-line {height:100px;}
+
+.break { page-break-before: always; }
+/*****************************/

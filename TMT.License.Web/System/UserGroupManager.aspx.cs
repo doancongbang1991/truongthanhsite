@@ -32,7 +32,7 @@ namespace TMT.License.Web.TSSystem
                 UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
                 Response.Redirect(UserCommon.Web_ErrorPage, true);
             }
-            ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+            ResourceManager1.Theme = UserCommon.GetCurrentTheme();
             //FormatWebControl();
             btAdd.Disabled = !WebPermission.AddPermission(WebPermission.SYSTEM_USERGROUP);
             btEdit.Disabled = !WebPermission.EditPermission(WebPermission.SYSTEM_USERGROUP);

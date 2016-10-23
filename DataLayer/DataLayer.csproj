@@ -37,10 +37,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FurnitureTypeData.cs" />
+    <Compile Include="ProjectsData.cs" />
+    <Compile Include="SiteData.cs" />
+    <Compile Include="ProjectTypeData.cs" />
+    <Compile Include="FurnitureData.cs" />
     <Compile Include="ForeignKeyData.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LicenseData.cs" />
+    <Compile Include="ArchData.cs" />
+    <Compile Include="ConstructionData.cs" />
+    <Compile Include="ConTypeData.cs" />
+    <Compile Include="FooterData.cs" />
+    <Compile Include="FooterTypeData.cs" />
+    <Compile Include="AboutData.cs" />
     <Compile Include="FunctionsData.cs" />
     <Compile Include="FunctionsRightData.cs" />
     <Compile Include="MenuData.cs">

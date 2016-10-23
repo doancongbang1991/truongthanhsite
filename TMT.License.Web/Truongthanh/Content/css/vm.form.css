@@ -1,0 +1,73 @@
+﻿/***************************************************************
+ * Coder: Phan Nguyên Như (nhuphan@vietmeta.com, +84986030757) *
+ ***************************************************************/
+/* BEGIN Form */
+.display-label,
+.editor-label,
+.sub-label 
+{
+    float:left;
+    width:200px;
+    height:25px;
+    clear:left;
+}
+.display-field,
+.editor-field,
+.sub-field
+{
+    float:left;
+    clear:right;
+    margin-bottom: 5px;
+}
+.editor-field span.success
+{
+    background:url('../../Areas/Admin/Content/images/success.gif') no-repeat;
+    padding-left: 20px;
+    margin-left: 5px;
+    color: Green;
+    font-size:12px;
+}
+.sub-label 
+{
+    width:125px;
+}
+.sub-field input[type="text"]
+{
+    width:100px;
+}
+.display-field 
+{
+    font-size:12px;
+}
+.description 
+{
+    font-size:11px;
+    margin-bottom: 5px;
+    color:#888;
+}
+
+.button-group 
+{
+    float:right;
+    margin-top: 10px;
+}
+
+.validation-summary-errors 
+{
+  color:red;
+}
+.validation-summary-errors span
+{
+  font-size:12px;
+}
+.field-validation-error 
+{
+  margin-left:5px;
+  font-size: 1.1em;
+  color: Red;
+}
+.error 
+{
+    color:Red;
+}
+/* END Form */

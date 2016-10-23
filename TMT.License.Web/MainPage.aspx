@@ -43,9 +43,9 @@
                 </Loader>
             </ext:Panel>
             <ext:Panel ID="pnlBottom" runat="server" Title="" Region="South" Split="false" Collapsible="false"
-                Height="26" BodyPadding="0" Html="">
+                Height="40" BodyPadding="0" Html="">
                 <BottomBar>
-                    <ext:StatusBar ID="StatusBar4" CtCls="word-status" runat="server" DefaultText="Tai Minh Corporation">
+                    <ext:StatusBar ID="StatusBar4" CtCls="word-status" runat="server" DefaultText="Truong Thanh Company">
                         <Items>
                             <ext:ToolbarTextItem ID="txtDateTime" runat="server" AutoDataBind="true" Text="" />
                             <ext:ToolbarSeparator ID="ToolbarSeparator1" runat="server" />

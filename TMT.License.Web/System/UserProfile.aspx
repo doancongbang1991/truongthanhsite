@@ -204,10 +204,10 @@
                     <ext:Panel ID="panel" runat="server" Layout="BorderLayout" BaseCls="x-plain" BodyPadding="5">
                         <Items>
                             <ext:FormPanel ID="Window1" runat="server" Icon="User" Closable="false" Title=""
-                                Width="520" Height="300" BaseCls="x-plain" Resizable="false" Modal="false" BodyPadding="0"
+                                Width="520" Height="450" BaseCls="x-plain" Resizable="false" Modal="false" BodyPadding="0"
                                 Layout="AutoLayout">
                                 <Items>
-                                    <ext:Panel ID="pnChangePass" Width="520" HideMode="Offsets" Border="true" Height="170"
+                                    <ext:Panel ID="pnChangePass" Width="520" HideMode="Offsets" Border="true" Height="260"
                                         Header="true" Title="Change Password" runat="server" Layout="BorderLayout">
                                         <TopBar>
                                             <ext:Toolbar runat="server">
@@ -245,14 +245,15 @@
                                             </ext:FieldSet>
                                         </Items>
                                     </ext:Panel>
-                                    <ext:Panel ID="pnProfile" Width="520" HideMode="Offsets" Border="true" Height="300" 
+                                    <ext:Panel ID="pnProfile" Width="520" HideMode="Offsets" Border="true" Height="450" 
                                         Title="Profile" runat="server" BodyPadding="5" Layout="BorderLayout">
                                         <Items>
-                                            <ext:FieldSet ID="FieldSet5" Width="500" Border="false" Height="290" runat="server" AutoScroll="true"
+                                            <ext:FieldSet ID="FieldSet5" Width="520" Border="false" Height="450" runat="server" AutoScroll="true"
                                                 Anchor="100%" Padding="10">
                                                 <Defaults>
                                                     <ext:Parameter Name="LabelWidth" Value="100" />
                                                     <ext:Parameter Name="Width" Value="475" />
+                                                    
                                                 </Defaults>
                                                 <Items>
                                                     <ext:Hidden ID="hiID" runat="server" />

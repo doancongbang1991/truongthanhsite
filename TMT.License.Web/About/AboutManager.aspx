@@ -41,97 +41,13 @@
             return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
         };
 
-        var changesize = function () {
-            var prevWidth = 10000,
-                viewPort,
-                thresholdWidth = 1000,
-                resizeHandler = function (width, height) {
-                    var portal,
-                        menu,
-                        breadcrumb,
-                        wide,
-                        narrow,
-                        north;
-                    viewPort = viewPort || Ext.ComponentQuery.query("#Viewport1")[0];
-                    
-
-                    if (!viewPort) {
-                        return;
-                    }
-                    narrow = width < thresholdWidth && thresholdWidth <= prevWidth;
-                    wide = width >= thresholdWidth && thresholdWidth > prevWidth;
-
-                    if (wide || narrow) {
-                        Ext.suspendLayouts();
-                        portal = viewPort.down("#Panel1");
-                        menu = viewPort.down("#ctl340");
-                        breadcrumb = viewPort.down("#Toolbar3");
-
-                        if (narrow) {
-                            portal.items.each(function (column) {
-                                column._columnWidth = column.columnWidth;
-                                column.columnWidth = 1;
-
-                                column.items.each(function (item) {
-                                    item._minHeight = item.minHeight;
-                                    item.minHeight = item.minHeight >= 500 ? item.minHeight : 500;
-                                });
-                            });
-                            
-                           
-                            breadcrumb.show();
-                            menu.hide();
-                            north = viewPort.down("#Panel1");
-                            north.setHeight(150);
-                          
-                            //north.getComponent(1).add(north.getComponent(0).removeAll(false));
-                        }
-                        else if (wide) {
-                            portal.items.each(function (column) {
-                                column.columnWidth = column._columnWidth;
-
-                                column.items.each(function (item) {
-                                    item.minHeight = item._minHeight;
-                                });
-                            });
-
-                            breadcrumb.hide();
-                            menu.show();
-                            north = viewPort.down("#Panel1");
-                            
-                            //north.getComponent(0).add(north.getComponent(1).removeAll(false));
-                            north.setHeight(100);
-                           
-                        }
-
-                        Ext.resumeLayouts(false);
-                        viewPort.updateLayout();
-                    }
-
-                    prevWidth = width;
-                };
-
-            Ext.EventManager.onWindowResize(resizeHandler, window, { buffer: 100 });
-            Ext.net.Bus.subscribe("App.resize", function () {
-                resizeHandler(Ext.Element.getViewportWidth());
-            });
-        };
-
+        
     </script> 
 </head>
 <body>
     <form ID="Form1" runat="server">
     <ext:ResourceManager ID="ResourceManager1" runat="server" />
-    <ext:KeyMap ID="KeyMap2" runat="server" Target="={Ext.isGecko ? Ext.getDoc() : Ext.getBody()}">
-       <%-- <ext:KeyBinding>
-            <Keys>
-                <ext:Key Code="BACKSPACE" />
-            </Keys>
-            <Listeners>
-                <Event Handler="var id = Ext.fly(e.getTarget()).getAttribute('id'),fields = Ext.getElementById(id); if(id.toLowerCase().search('input')<0) {e.stopEvent();} else if((id.toLowerCase().search('input')>0)&& (fields.readOnly)) {e.stopEvent();};" />
-            </Listeners>
-        </ext:KeyBinding>--%>
-    </ext:KeyMap>
+    
     <ext:Viewport ID="Viewport1" runat="server" AutoScroll="False" Layout="BorderLayout">
         <Items>
             <ext:Panel ID="Panel1" runat="server" Split="true" Layout="FitLayout" Region="Center"
@@ -174,7 +90,7 @@
                                     <Change Handler="if(this.valueModels.length>0){this.setIconCls(this.valueModels[0].get('iconCls'));}" />
                                 </Listeners>  
                             </ext:ComboBox>  
-                             <ext:Button runat="server" Text="Do Fucking This"/>  
+                             
                         </Items>
                     </ext:Toolbar>
                 </DockedItems>
@@ -189,7 +105,7 @@
                                 </DirectEvents>
                             </ext:Button>
                            
-                            <ext:Button runat="server" Icon="ApplicationFormEdit" Text="Approve" ID="btEdit">
+                            <ext:Button runat="server" Icon="ApplicationFormEdit" Text="Edit" ID="btEdit">
                                 <DirectEvents>
                                     <Click OnEvent="btEdit_Click">
                                         <ExtraParams>
@@ -233,20 +149,12 @@
                         <Store>
                             <ext:Store ID="stPosition" runat="server" AutoDestroy="true" >
                                 <Model>
-                                    <ext:Model ID="mdPosition" runat="server" IDProperty="LicID" Name="Session">
+                                    <ext:Model ID="mdPosition" runat="server" IDProperty="AboutID" Name="Session">
                                         <Fields>
-                                            <ext:ModelField Name="LicID" />
-                                            <ext:ModelField Name="LicSerial" />
-                                            <ext:ModelField Name="LicKey" />
-                                            <ext:ModelField Name="LicDes" />
-                                            <ext:ModelField Name="LicStatus" />
-                                            <ext:ModelField Name="LUID"/>
-                                            <ext:ModelField Name="UUserName"/>
-                                            <ext:ModelField Name="LicProduct"/>
-                                            <ext:ModelField Name="LicDomain"/>
-                                            <ext:ModelField Name="LRegDate" Type="Date" />
-                                            <ext:ModelField Name="LAppDate" Type="Date" />
-                                            <ext:ModelField Name="PDes"/>
+                                            <ext:ModelField Name="AboutID" />
+                                            <ext:ModelField Name="AboutName" />
+                                            <ext:ModelField Name="AboutDetail" />
+                                            
                                         </Fields>
                                     </ext:Model>
                                 </Model>
@@ -258,18 +166,10 @@
                         <ColumnModel ID="ColumnModel1" runat="server">
                             <Columns>
                                 <ext:RowNumbererColumn ID="RowNumbererColumn1" Width="40" runat="server" />
-                                <ext:Column ID="colLicID" runat="server" DataIndex="LicID" Text="ID" Width="200" Hidden="true"/>
-                                <ext:Column ID="colLicSerial" runat="server" DataIndex="LicSerial" Text="Serial"  Flex="10"  />
-                                <ext:Column ID="colLicKey" runat="server" DataIndex="LicKey" Text="License Key" Flex="15" />
-                                <ext:Column ID="colLicDes" runat="server" DataIndex="LicDes" Text="License Description" Flex="10" />
-                                <ext:Column ID="colLicStatus" runat="server" DataIndex="LicStatus" Text="Status" Flex="4"/>
-                                <ext:Column ID="colLUID" runat="server" DataIndex="LUID" Text="LUID" Width="200"  Hidden="true"/>
-                                <ext:Column ID="colLUserName" runat="server" DataIndex="UUserName" Text="Username" Flex="4"/>
-                                <ext:Column ID="colProduct" runat="server" DataIndex="LicProduct" Text="Product" Width="200" Hidden="true" />
-                                <ext:Column ID="colPName" runat="server" DataIndex="PDes" Text="Product Name" Width="200" />
-                                <ext:Column ID="colDomain" runat="server" DataIndex="LicDomain" Text="Domain" Flex="6"/>
-                                <ext:DateColumn ID="colLRegDate" runat="server" DataIndex="LRegDate" Text="Register Date" Flex="6" />
-                                <ext:DateColumn ID="colLAppDate" runat="server" DataIndex="LAppDate" Text="Approved Date" Flex="6" />
+                                <ext:Column ID="colAboutID" runat="server" DataIndex="AboutID" Text="ID" Flex="10" Hidden="true"/>
+                                <ext:Column ID="colAboutName" runat="server" DataIndex="AboutName" Text="Name"  Flex="10"  />
+                                <ext:Column ID="colAboutDetail" runat="server" DataIndex="AboutDetail" Text="Detail" Flex="15" />
+                                
                                 </Columns>
                         </ColumnModel>
                         <View>
@@ -282,7 +182,7 @@
                         <DockedItems>
                             <ext:Toolbar ID="Toolbar1" runat="server" Padding="5" Dock="Top">
                                 <Items>
-                                    <ext:TriggerField ID="txtKeyword" runat="server" Width="350" FieldLabel="Search"
+                                    <ext:TextField ID="txtKeyword" runat="server" Width="350" FieldLabel="Search"
                                         LabelWidth="50">
                                         <Triggers>
                                             <ext:FieldTrigger Icon="Clear" />
@@ -292,7 +192,7 @@
                                             <TriggerClick Fn="searchFieldTriggerClick" />
                                             <SpecialKey Fn="onSpecialKey" />
                                         </Listeners>
-                                    </ext:TriggerField>
+                                    </ext:TextField>
                                 </Items>
                             </ext:Toolbar>
                         </DockedItems>
@@ -309,108 +209,16 @@
                             </ItemDblClick>
                         </DirectEvents>
                     </ext:GridPanel>
-                    <ext:GridPanel ID="grPosition1" SelectionMemory="false" runat="server" Region="West"
-                        Layout="FitLayout" Title="">
-                        <Store>
-                            <ext:Store ID="Store1" runat="server" AutoDestroy="true" ShowWarningOnFailure="true">
-                                <Model>
-                                    <ext:Model ID="Model2" runat="server" IDProperty="LicID" Name="Session">
-                                        <Fields>
-                                            <ext:ModelField Name="LicID" />
-                                            <ext:ModelField Name="LicSerial" />
-                                            <ext:ModelField Name="LicKey" />
-                                            <ext:ModelField Name="LicDes" />
-                                            <ext:ModelField Name="LicStatus" />
-                                            <ext:ModelField Name="LUID"/>
-                                            <ext:ModelField Name="UUserName"/>
-                                            <ext:ModelField Name="LicProduct"/>
-                                            <ext:ModelField Name="LicDomain"/>
-                                            <ext:ModelField Name="LRegDate" Type="Date" />
-                                            <ext:ModelField Name="LAppDate" Type="Date" />
-                                            <ext:ModelField Name="PDes"/>
-                                        </Fields>
-                                    </ext:Model>
-                                </Model>
-                                <Listeners>
-                                    <Exception Handler="Ext.Msg.alert('Operation failed', operation.getError());" />
-                                </Listeners>
-                            </ext:Store>
-                        </Store>
-                        <ColumnModel ID="ColumnModel2" runat="server">
-                            <Columns>
-                                <ext:RowNumbererColumn ID="RowNumbererColumn2" Width="40" runat="server" />
-                                <ext:Column ID="Column1" runat="server" DataIndex="LicID" Text="ID" Width="200" Hidden="true"/>
-                                <ext:Column ID="Column2" runat="server" DataIndex="LicSerial" Text="Serial"  Flex="10"  />
-                                <ext:Column ID="Column3" runat="server" DataIndex="LicKey" Text="License Key" Flex="15" />
-                                <ext:Column ID="Column4" runat="server" DataIndex="LicDes" Text="License Description" Flex="10" />
-                                <ext:Column ID="Column5" runat="server" DataIndex="LicStatus" Text="Status" Flex="4"/>
-                                <ext:Column ID="Column6" runat="server" DataIndex="LUID" Text="LUID" Width="200"  Hidden="true"/>
-                                <ext:Column ID="Column7" runat="server" DataIndex="UUserName" Text="Username" Flex="4"/>
-                                <ext:Column ID="Column8" runat="server" DataIndex="LicProduct" Text="Product" Width="200" Hidden="true" />
-                                <ext:Column ID="Column9" runat="server" DataIndex="PDes" Text="Product Name" Width="200" />
-                                <ext:Column ID="Column10" runat="server" DataIndex="LicDomain" Text="Domain" Flex="6"/>
-                                <ext:DateColumn ID="DateColumn1" runat="server" DataIndex="LRegDate" Text="Register Date" Flex="6" />
-                                <ext:DateColumn ID="DateColumn2" runat="server" DataIndex="LAppDate" Text="Approved Date" Flex="6" />
-                                </Columns>
-                        </ColumnModel>
-                        <View>
-                            <ext:GridView ID="GridView1" runat="server" StripeRows="true" MarkDirty="false" />
-                        </View>
-                        <SelectionModel>
-                            <ext:RowSelectionModel ID="RowSelectionModel1" runat="server" Mode="Multi">
-                            </ext:RowSelectionModel>
-                        </SelectionModel>
-                        <DockedItems>
-                            <ext:Toolbar ID="Toolbar4" runat="server" Padding="5" Dock="Top">
-                                <Items>
-                                    <ext:TriggerField ID="TriggerField1" runat="server" Width="350" FieldLabel="Search"
-                                        LabelWidth="50">
-                                        <Triggers>
-                                            <ext:FieldTrigger Icon="Clear" />
-                                            <ext:FieldTrigger Icon="Search" />
-                                        </Triggers>
-                                        <Listeners>
-                                            <TriggerClick Fn="searchFieldTriggerClick" />
-                                            <SpecialKey Fn="onSpecialKey" />
-                                        </Listeners>
-                                    </ext:TriggerField>
-                                </Items>
-                            </ext:Toolbar>
-                        </DockedItems>
-                        <BottomBar>
-                            <ext:PagingToolbar ID="PagingToolbar2" runat="server" HideRefresh="True" />
-                        </BottomBar>
-                        <DirectEvents>
-                            <ItemDblClick OnEvent="btEdit_Click">
-                                <ExtraParams>
-                                    <ext:Parameter Name="grPosition_Select_Values" Value="#{grPosition}.getRowsValues({selectedOnly:true})"
-                                        Encode="true" Mode="Raw" />
-                                </ExtraParams>
-                                <EventMask Msg="Loading..." MinDelay="200" ShowMask="true" />
-                            </ItemDblClick>
-                        </DirectEvents>
-                    </ext:GridPanel>
+                    
                 </Items>
             </ext:Panel>
         </Items>
-        <Listeners>
-            <Resize Fn="changesize"/>
-        </Listeners>
+        
     </ext:Viewport>
     <ext:Window ID="winDetails" runat="server" Hidden="true" Closable="false" Resizable="false"
-        Height="285" Icon="ApplicationFormEdit" Title="License Manager" Draggable="true" Width="510"
+        Height="285" Icon="ApplicationFormEdit" Title="About Manager" Draggable="true" Width="510"
         Modal="true" BodyPadding="5" Layout="FitLayout">
-        <TopBar>
-            <ext:Toolbar ID="Toolbar2" runat="server">
-                <Items>
-                    <ext:Button runat="server" Icon="AwardStarBronze1" Text="New" ID="btNew">
-                        <DirectEvents>
-                            <Click OnEvent="btNew_Click" />
-                        </DirectEvents>
-                    </ext:Button>
-                </Items>
-            </ext:Toolbar>
-        </TopBar>
+        
         <Items>
             <ext:FieldSet ID="FieldSet5" Border="false" Width="500" Height="275" runat="server"
                 Anchor="100%" Padding="5">
@@ -421,27 +229,9 @@
                 <Items>
                    <ext:TextField ID="hiID" runat="server" Hidden="true" />
                     
-                    <ext:TextField ID="txtSerial" runat="server" FieldLabel="Serial" />
-                    <ext:TextField ID="txtLicKey" runat="server" FieldLabel="License Key" />
-                    <ext:TextField ID="txtDomain" runat="server" FieldLabel="Domain" />
-                    <ext:TextField ID="txtDes" runat="server" FieldLabel="Description" />
-                    <ext:TextField ID="txtStatus" runat="server" FieldLabel="Description" Hidden="true" />
-                    <ext:ComboBox ID="cbbProduct" runat="server" TypeAhead="true" QueryMode="Local" ForceSelection="true"
-                            Editable="false" TriggerAction="All" FieldLabel="Product" DisplayField="PDes"
-                            ValueField="PID">
-                        <Store>
-                            <ext:Store ID="stcbbPID" runat="server">
-                                <Model>
-                                    <ext:Model ID="Model1" runat="server">
-                                        <Fields>
-                                            <ext:ModelField Name="PID" />
-                                            <ext:ModelField Name="PDes" />
-                                        </Fields>
-                                    </ext:Model>
-                                </Model>
-                            </ext:Store>
-                        </Store>
-                    </ext:ComboBox>
+                    <ext:TextField ID="txtAboutName" runat="server" FieldLabel="About Name" />
+                    <ext:TextArea ID="txtAboutDetail" runat="server" FieldLabel="About Detail" Height ="180" />
+                   
                 </Items>
             </ext:FieldSet>
         </Items>

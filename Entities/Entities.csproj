@@ -35,7 +35,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LicenseEntities.cs" />
+    <Compile Include="ArchEntities.cs" />
+    <Compile Include="ConstructionEntities.cs" />
+    <Compile Include="ConTypeEntities.cs" />
+    <Compile Include="FooterEntities.cs" />
+    <Compile Include="FooterTypeEntities.cs" />
+    <Compile Include="FurnitureEntities.cs" />
+    <Compile Include="FurnitureTypeEntities.cs" />
+    <Compile Include="ProjectsEntities.cs" />
+    <Compile Include="ProjectTypeEntities.cs" />
+    <Compile Include="SiteEntities.cs" />
+    <Compile Include="AboutEntities.cs" />
     <Compile Include="MenuEntities.cs" />
     <Compile Include="StatusEntities.cs" />
     <Compile Include="FunctionsEntities.cs" />

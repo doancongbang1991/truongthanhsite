@@ -46,7 +46,7 @@ namespace TMT.License.Web.TSSystem
                 UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
                 Response.Redirect(UserCommon.Web_ErrorPage, true);
             }
-            ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+            ResourceManager1.Theme = UserCommon.GetCurrentTheme();
             LoadcbbPID();
             string UID = UserCommon.GetValueParam_ID();
             if (UID.Length > 0)
@@ -152,19 +152,19 @@ namespace TMT.License.Web.TSSystem
             object Datas = (IsAllData) ? null : "true";
             DataTable dt = new UserGroupData().GetDataBy(Datas);
             this.cbbUGRPID.SelectedItems.Clear();
-            this.stcbbUGRPID.DataSource = dt;
-            this.stcbbUGRPID.DataBind();
-            UserCommon.AddItemOptionInCombobox(this.cbbUGRPID, this.stcbbUGRPID);
-            UserCommon.SetValueControl(this.cbbUGRPID, "0");
+            Store store = this.cbbUGRPID.GetStore();
+            store.DataSource = dt;
+            store.DataBind();
+            UserCommon.SetValueControl(cbbUGRPID, "0");
         }
         private void LoadcbbPID()
         {
             DataTable dt = new PositionData().GetDataBy();
             this.cbbPID.SelectedItems.Clear();
-            this.stcbbPID.DataSource = dt;
-            this.stcbbPID.DataBind();
-            UserCommon.AddItemOptionInCombobox(this.cbbPID, this.stcbbPID);
-            UserCommon.SetValueControl(this.cbbPID, "0");
+            Store store = this.cbbPID.GetStore();
+            store.DataSource = dt;
+            store.DataBind();
+            UserCommon.SetValueControl(cbbPID, "0");
         }
         private UserInfoEntities GetUserInfo(ref bool Insert, ref string Exception)
         {

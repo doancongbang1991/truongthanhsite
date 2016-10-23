@@ -235,7 +235,7 @@ namespace TMT.License.Web.TSSystem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TriggerField txtKeyword;
+        protected global::Ext.Net.TextField txtKeyword;
         
         /// <summary>
         /// PagingToolbar1 control.

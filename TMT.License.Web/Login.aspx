@@ -13,7 +13,7 @@
         <form ID="Form1" runat="server">
             <ext:ResourceManager ID="ResourceManager" runat="server" />
             <ext:Hidden ID="hiErrorMessage" runat="server" />
-            <ext:Window ID="Window1" runat="server" Closable="false" Resizable="false" Height="210"
+            <ext:Window ID="Window1" runat="server" Closable="false" Resizable="false" Height="290"
                         Icon="Lock" Title="Login" Draggable="true" Width="390" Modal="true" BodyPadding="2"
                         >
                 <LayoutConfig>
@@ -21,7 +21,7 @@
                 </LayoutConfig>
                 <Items>
                     <ext:Panel ID="pnlTop" runat="server" Title="Top" Header="false" Region="North" Split="false"
-                               Height="70" BodyPadding="2" Html="<img src='images/logoTT.png'/>" BodyCls="my-background"
+                               Height="70" BodyPadding="2" Html="<img src='images/Logo.png'/>" BodyCls="my-background"
                                Collapsible="false" BaseCls="x-plain" >
                     </ext:Panel>
                     <ext:FieldSet ID="FieldSet1" Region="Center" runat="server" Flex="1" Title="" Padding="7"

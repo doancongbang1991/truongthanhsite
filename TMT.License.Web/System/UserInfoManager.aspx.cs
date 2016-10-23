@@ -27,7 +27,7 @@ namespace TMT.License.Web.TSSystem
                 UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
                 Response.Redirect(UserCommon.Web_ErrorPage, true);
             }
-            ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+            ResourceManager1.Theme = UserCommon.GetCurrentTheme();
             btAdd.Disabled = !WebPermission.AddPermission(WebPermission.SYSTEM_USER);
             bool rEdit = WebPermission.EditPermission(WebPermission.SYSTEM_USER);
             if (rEdit)
@@ -95,9 +95,11 @@ namespace TMT.License.Web.TSSystem
             object Datas = (IsAllData) ? null : "true";
             DataTable dt = new UserGroupData().GetDataBy(Datas);
             this.cbbUGRPID.SelectedItems.Clear();
-            this.stcbbUGRPID.DataSource = dt;
-            this.stcbbUGRPID.DataBind();
-            UserCommon.AddItemFilterInCombobox(this.cbbUGRPID, this.stcbbUGRPID);
+            
+            Store store = this.cbbUGRPID.GetStore();
+            store.DataSource = dt;
+            store.DataBind();
+            UserCommon.SetValueControl(cbbUGRPID, "0");
             UserCommon.SetValueControl(this.cbbUGRPID, "0");
         }
         private void LoadGrid_UserInfo()

@@ -1,0 +1,252 @@
+.jcarousel-skin-ie7 .jcarousel-container {
+	overflow:hidden;
+}
+
+.jcarousel-skin-ie7 .jcarousel-direction-rtl {
+	direction: rtl;
+}
+
+.jcarousel-skin-ie7 .jcarousel-container-horizontal {
+	margin: 0;
+	padding: 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-container-vertical {
+    width: 75px;
+    height: 245px;
+    padding: 0;
+}
+
+body.default .jcarousel-skin-ie7 .jcarousel-clip-horizontal {
+    height: 153px;
+    margin: 0;
+    overflow: hidden;
+}
+
+body.vertical .jcarousel-skin-ie7 .jcarousel-clip-horizontal {
+    height: 196px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.jcarousel-skin-ie7 .jcarousel-clip-vertical {
+    width:  77px;
+    height: 245px;
+}
+
+body.default .jcarousel-skin-ie7 .jcarousel-item {
+    text-align: center;
+	width: 229px;
+    height: 142px;
+    border: 1px solid #808080;
+	overflow: hidden;
+}
+body.default .jcarousel-skin-ie7 .jcarousel-item  a{
+	display:block;
+	width: 229px;
+    height: 142px;
+}
+
+body.vertical .jcarousel-skin-ie7 .jcarousel-item {
+    text-align: center;
+	width: 143px;
+    height: 192px;
+    border: 1px solid #808080;
+	overflow: hidden;
+}
+
+
+.jcarousel-skin-ie7 .jcarousel-item:hover {
+    /*border-color: #808080;*/
+}
+
+.jcarousel-skin-ie7 .jcarousel-item-horizontal {
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+.jcarousel-skin-ie7 .jcarousel-direction-rtl .jcarousel-item-horizontal {
+	margin-left: 7px;
+	margin-right: 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-item-vertical {
+    margin-bottom: 7px;
+}
+
+.jcarousel-skin-ie7 .jcarousel-item-placeholder {
+}
+
+/**
+ *  Horizontal Buttons
+ */
+body.default .jcarousel-skin-ie7 .jcarousel-next-horizontal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 21px;
+    height: 144px;
+    cursor: pointer;
+    background: transparent url('../images/gra-next.png') repeat-y 50% 0;
+}
+body.vertical .jcarousel-skin-ie7 .jcarousel-next-horizontal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 21px;
+    height: 194px;
+    cursor: pointer;
+    background: transparent url('../images/gra-next.png') repeat-y 50% 0;
+}
+body.default .jcarousel-skin-ie7 .jcarousel-next-horizontal .btn {
+    position: absolute;
+    top: 43px;
+    right: -5px;
+    width: 32px;
+    height: 64px;
+    cursor: pointer;
+    background: transparent url('../images/next.png') no-repeat 0 0;
+}
+body.vertical .jcarousel-skin-ie7 .jcarousel-next-horizontal .btn {
+    position: absolute;
+    top: 69px;
+    right: -5px;
+    width: 32px;
+    height: 64px;
+    cursor: pointer;
+    background: transparent url('../images/next.png') no-repeat 0 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-direction-rtl .jcarousel-next-horizontal .btn {
+    left: 5px;
+    right: auto;
+    background-image: url('../images/prev.png');
+}
+
+.jcarousel-skin-ie7 .jcarousel-next-horizontal .btn:hover {
+    background-position: -32px 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-next-horizontal .btn:active {
+    background-position: -64px 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-next-disabled-horizontal .btn,
+.jcarousel-skin-ie7 .jcarousel-next-disabled-horizontal .btn:hover,
+.jcarousel-skin-ie7 .jcarousel-next-disabled-horizontal .btn:active {
+    cursor: default;
+    background-position: -96px 0;
+}
+
+body.default .jcarousel-skin-ie7 .jcarousel-prev-horizontal {
+    position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 21px;
+	height: 144px;
+    cursor: pointer;
+    background: transparent url('../images/gra-prev.png') repeat-y 50% 0;
+}
+body.vertical .jcarousel-skin-ie7 .jcarousel-prev-horizontal {
+    position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 21px;
+	height: 194px;
+    cursor: pointer;
+    background: transparent url('../images/gra-prev.png') repeat-y 50% 0;
+}
+
+
+body.default .jcarousel-skin-ie7 .jcarousel-prev-horizontal .btn {
+    position: absolute;
+    top: 43px;
+    left: -5px;
+    width: 32px;
+    height: 64px;
+    cursor: pointer;
+    background: transparent url('../images/prev.png') no-repeat 0 0;
+}
+body.vertical .jcarousel-skin-ie7 .jcarousel-prev-horizontal .btn {
+    position: absolute;
+    top: 69px;
+    left: -5px;
+    width: 32px;
+    height: 64px;
+    cursor: pointer;
+    background: transparent url('../images/prev.png') no-repeat 0 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-direction-rtl .jcarousel-prev-horizontal .btn {
+    left: auto;
+    right: 5px;
+    background-image: url('../images/next.png');
+}
+
+.jcarousel-skin-ie7 .jcarousel-prev-horizontal .btn:hover {
+    background-position: -32px 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-prev-horizontal .btn:active {
+    background-position: -64px 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-prev-disabled-horizontal .btn,
+.jcarousel-skin-ie7 .jcarousel-prev-disabled-horizontal .btn:hover,
+.jcarousel-skin-ie7 .jcarousel-prev-disabled-horizontal .btn:active {
+    cursor: default;
+    background-position: -96px 0;
+}
+
+/**
+ *  Vertical Buttons
+ */
+.jcarousel-skin-ie7 .jcarousel-next-vertical {
+    position: absolute;
+    bottom: 5px;
+    left: 43px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url('../images/next-vertical.html') no-repeat 0 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-next-vertical .btn:hover {
+    background-position: 0 -32px;
+}
+
+.jcarousel-skin-ie7 .jcarousel-next-vertical .btn:active {
+    background-position: 0 -64px;
+}
+
+.jcarousel-skin-ie7 .jcarousel-next-disabled-vertical .btn,
+.jcarousel-skin-ie7 .jcarousel-next-disabled-vertical .btn:hover,
+.jcarousel-skin-ie7 .jcarousel-next-disabled-vertical .btn:active {
+    cursor: default;
+    background-position: 0 -96px;
+}
+
+.jcarousel-skin-ie7 .jcarousel-prev-vertical {
+    position: absolute;
+    top: 5px;
+    left: 43px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url('../images/prev-vertical.html') no-repeat 0 0;
+}
+
+.jcarousel-skin-ie7 .jcarousel-prev-vertical .btn:hover {
+    background-position: 0 -32px;
+}
+
+.jcarousel-skin-ie7 .jcarousel-prev-vertical .btn:active {
+    background-position: 0 -64px;
+}
+
+.jcarousel-skin-ie7 .jcarousel-prev-disabled-vertical .btn,
+.jcarousel-skin-ie7 .jcarousel-prev-disabled-vertical .btn:hover,
+.jcarousel-skin-ie7 .jcarousel-prev-disabled-vertical .btn:active {
+    cursor: default;
+    background-position: 0 -96px;
+}

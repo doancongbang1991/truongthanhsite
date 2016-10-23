@@ -30,7 +30,7 @@ namespace TMT.License.Web.TSSystem
                 UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
                 Response.Redirect(UserCommon.Web_ErrorPage, true);
             }
-            ResourceManager1.SetTheme(UserCommon.GetCurrentTheme());
+            ResourceManager1.Theme = UserCommon.GetCurrentTheme();
             ReadOnlyControl(true);
             pnChangePass.Hide();
             pnProfile.Show();

@@ -1,68 +1,70 @@
-﻿ .my-background
-{
+﻿.my-background {
     background: #f3f3f3 repeat;
 }
-.x-toolbar div.ux-bold-text-item
-{
+
+.x-toolbar div.ux-bold-text-item {
     font-weight: bold !important;
     color: Red !important;
-}
-.btn-message .x-btn-inner
-{
-    font-weight: bold !important;
-    color: Red !important;
-}
-.x-fieldset
-{
-    margin:0 !important;
-}
- .x-form-field
-{
-    font-size: 11px !important;
-}
-.x-form-item
-{
-    font-size: 11px !important;
-    margin-bottom: 2px !important;
-}
-.x-form-item-label
-{
-    font-size: 11px !important;
 }
 
-.x-form-display-field
-{
-    font-size: 11px !important;
+.btn-message .x-btn-inner {
+    font-weight: bold !important;
+    color: Red !important;
+}
+
+.x-fieldset {
+    margin: 0 !important;
+}
+
+.x-form-field {
+    font-size: 13px !important;
+}
+
+.x-form-item {
+    font-size: 13px !important;
+    margin-bottom: 2px !important;
+}
+
+.x-form-item-label {
+    font-size: 13px !important;
+}
+
+.x-form-display-field {
+    font-size: 13px !important;
     font-weight: bold !important;
 }
-.xReadOnly input
-{
-     background: #EEEEEE !important;
+
+.xReadOnly input {
+    background: #EEEEEE !important;
 }
-.xReadOnly textarea
-{
-     background: #EEEEEE !important;
+
+.xReadOnly textarea {
+    background: #EEEEEE !important;
 }
-.x-body
-{
-    font-size:11px !important;
+
+.x-body {
+    font-size: 13px !important;
 }
-.xImageColumnAlign
-{
-    padding-left:5px !important;
-    vertical-align:middle !important;
+
+.xImageColumnAlign {
+    padding-left: 5px !important;
+    vertical-align: middle !important;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
     background-color: #f1f2f4;
     color: Blue;
 }
-.x-fieldset-header
-{
+
+.x-fieldset-header {
     font-weight: bold !important;
 }
-  .DisplayHightlight
-        {
-            font-weight: bold !important;
-            font-size: 12px !important;
-            color: #9A0E14 !important;
-        }
+
+.DisplayHightlight {
+    font-weight: bold !important;
+    font-size: 13px !important;
+    color: #9A0E14 !important;
+}
+.x-label-value {
+    font-size: 14px;
+    
+}

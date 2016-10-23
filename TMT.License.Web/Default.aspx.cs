@@ -14,30 +14,96 @@ namespace TMT.License.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckUrlReturn();
-            if (UserCommon.GetCookie_UIDForLogin() == null)
-                HttpContext.Current.Response.Redirect(UserCommon.Web_LoginPage, true);
+           
+            //if (UserCommon.GetCookie_UIDForLogin() == null)
+            //    HttpContext.Current.Response.Redirect(UserCommon.Web_LoginPage, true);
             if (!IsPostBack)
                 LoadPage();
-            if (LoadMenu())
-                LoadPageInFrame();
-            else
-                HttpContext.Current.Response.Redirect(UserCommon.Web_ErrorPage, true);
+            //if (LoadMenu())
+            //    LoadPageInFrame();
+            //else
+            //    HttpContext.Current.Response.Redirect(UserCommon.Web_ErrorPage, true);
+
+            
         }
         private void LoadPage()
         {
-            LoadThemeDefault();
-            SetInfoStatusBar();
-
+            
+           
         }
-        private void CheckUrlReturn()
+        protected void Show(object sender, DirectEventArgs e)
         {
-            string Url = UserCommon.GetValueParam_URLReturn();
-            if (Url.Trim().Replace("/", "").Trim().Length > 0)
-            {
-                UserCommon.SetSession(UserCommon.SS_URLReturn, Url);
-                Response.Redirect(UserCommon.Web_MainPage);
-            }
+           
+            //if (UserCommon.GetCookie_UIDForLogin() == null)
+            //    HttpContext.Current.Response.Redirect(UserCommon.Web_LoginPage, true);
+            //if (!IsPostBack)
+            //    LoadPage();
+            //if (LoadMenu())
+            //    LoadPageInFrame();
+            //else
+            //    HttpContext.Current.Response.Redirect(UserCommon.Web_ErrorPage, true);
+        }
+        protected void ShowCost(object sender, DirectEventArgs e)
+        {
+            
+            ComponentLoader cn = new ComponentLoader();
+            cn.Url = @"~\Cost\Cost.aspx";
+            cn.Mode = LoadMode.Html;
+            cn.DisableCaching = true;
+            this.pnlCost.LoadContent(cn);
+        }
+        protected void ShowAbout(object sender, DirectEventArgs e)
+        {
+            ComponentLoader cn = new ComponentLoader();
+            cn.Url = @"~\About\About.aspx";
+            cn.Mode = LoadMode.Html;
+            cn.DisableCaching = true;
+            this.pnlAbout.LoadContent(cn);
+        }
+        protected void ShowArch(object sender, DirectEventArgs e)
+        {
+            ComponentLoader cn = new ComponentLoader();
+            cn.Url = @"~\Arch\Arch.aspx";
+            cn.Mode = LoadMode.Html;
+            cn.DisableCaching = true;
+            this.pnlArch.LoadContent(cn);
+        }
+        protected void ShowCon(object sender, DirectEventArgs e)
+        {
+            ComponentLoader cn = new ComponentLoader();
+            cn.Url = @"~\Home\Cons.html";
+            cn.Mode = LoadMode.Html;
+            cn.DisableCaching = true;
+            this.pnlCon.LoadContent(cn);
+        }
+        protected void ShowProject(object sender, DirectEventArgs e)
+        {
+            ComponentLoader cn = new ComponentLoader();
+            cn.Url = @"~\Home\Projects.html";
+            cn.Mode = LoadMode.Html;
+            cn.DisableCaching = true;
+            this.pnlProject.LoadContent(cn);
+        }
+        protected void ShowFur(object sender, DirectEventArgs e)
+        {
+            ComponentLoader cn = new ComponentLoader();
+            cn.Url = @"~\Home\Fur.html";
+            cn.Mode = LoadMode.Html;
+            cn.DisableCaching = true;
+            this.pnlFur.LoadContent(cn);
+        }
+        protected void ShowContact(object sender, DirectEventArgs e)
+        {
+            ComponentLoader cn = new ComponentLoader();
+            cn.Url = @"~\Contact\Contact.aspx";
+            cn.Mode = LoadMode.Html;
+            cn.DisableCaching = true;
+            this.pnlContact.LoadContent(cn);
+        }
+        protected void ShowHotLine(object sender, DirectEventArgs e)
+        {
+            //pnlHome.Show();
+            TabPanelMain.SetActiveTab(pnlHome);
         }
         private void LoadPageInFrame()
         {
@@ -50,7 +116,7 @@ namespace TMT.License.Web
                     cn.Url = url.ToString();
                     cn.Mode = LoadMode.Html;
                     cn.DisableCaching = true;
-                    this.pnlCenter.LoadContent(cn);
+                    //this.pnlCenter.LoadContent(cn);
                 }
             }
             else
@@ -61,125 +127,12 @@ namespace TMT.License.Web
                 else cn.Url = UserCommon.System_UserInfoManager;
                 cn.Mode = LoadMode.Html;
                 cn.DisableCaching = true;
-                this.pnlCenter.LoadContent(cn);
+                //this.pnlCenter.LoadContent(cn);
             }
 
         }
-        private void LoadThemeDefault()
-        {
-            Theme currentTheme = UserCommon.GetCurrentTheme();
-            if (currentTheme.ToString().Equals("Gray"))
-                ThemeLabel.Text = "Blue Themes";
-            else
-                ThemeLabel.Text = "Default Themes";
-            rsmain.SetTheme(currentTheme);
-        }
-        private void SetInfoStatusBar()
-        {
-            try
-            {
-                DateTime CurrentDate = UserCommon.GetDateTime();
-                txtDateTime.Text = "Today: " + UserCommon.ToDateString(CurrentDate);
-                string UID = UserCommon.GetCookie_UID();
-                DataTable dt = new UserInfoData().GetDataByID(UID);
-                if (dt.Rows.Count > 0)
-                    txtUserStatus.Text = dt.Rows[0][(string)UserInfoData.TBC_UUserName].ToString().ToUpper() + " - " + dt.Rows[0][(string)UserInfoData.TBC_UFullName].ToString();
-                else
-                {
-                    UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_SQLNullData("User"));
-                    Response.Redirect(UserCommon.Web_ErrorPage, true);
-                }
-            }
-            catch
-            {
-                UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_SQLNullData("User"));
-                Response.Redirect(UserCommon.Web_ErrorPage, true);
-            }
-        }
-        private bool LoadMenu()
-        {
-            bool bResult = false;
-            try
-            {
-                string UGRPID = UserCommon.GetCookie_GRPID();
-                string ParentID = "0";
-                DataTable dt = new MenuData().GetDataViewBy(ParentID, UGRPID);
-                if (dt.Rows.Count > 0)
-                {
-                    for (int r = 0; r < dt.Rows.Count; r++)
-                    {
-                        Ext.Net.MenuPanel prmenu = new MenuPanel(); // define a menu panel
-                        prmenu.Icon = (Icon)Enum.Parse(typeof(Icon), dt.Rows[r][(string)MenuData.TBC_MIcon].ToString());
-                        prmenu.Title = dt.Rows[r][(string)MenuData.TBC_MDecription].ToString();
-                        ParentID = dt.Rows[r][(string)MenuData.TBC_MID].ToString();
-                        DataTable dtSub = new MenuData().GetDataViewBy(ParentID, UGRPID);
-                        if (dtSub.Rows.Count > 0)
-                        {
-                            for (int rc = 0; rc < dtSub.Rows.Count; rc++)
-                            {
-                                Ext.Net.MenuItem item = new Ext.Net.MenuItem();
-                                item.Text = dtSub.Rows[rc][(string)MenuData.TBC_MDecription].ToString();
-                                item.Icon = Icon.Rgb;
-                                item.DirectEvents.Click.Event += click;
 
-                                Ext.Net.Parameter prmurl = new Ext.Net.Parameter();
-                                prmurl.Name = "url";
-                                prmurl.Value = dtSub.Rows[rc][(string)MenuData.TBC_MUrl].ToString();
-                                prmurl.Mode = ParameterMode.Value;
-
-                                Ext.Net.Parameter prmName = new Ext.Net.Parameter();
-                                prmName.Name = "Name";
-                                prmName.Value = dtSub.Rows[rc][(string)MenuData.TBC_MDecription].ToString();
-                                prmName.Mode = ParameterMode.Value;
-
-                                item.DirectEvents.Click.ExtraParams.Add(prmurl);
-                                item.DirectEvents.Click.ExtraParams.Add(prmName);
-
-                                prmenu.Menu.Items.Add(item);
-                            }
-                        }
-                        pnlMenu.Items.Add(prmenu);
-                    }
-                    bResult = true;
-                }
-                else
-                    UserCommon.SetSession(UserCommon.SS_Message, Message.MSE_RGNoPermissionView);
-            }
-            catch (Exception ex)
-            {
-                UserCommon.SetSession(UserCommon.SS_Message, ex.ToString());
-            }
-            return bResult;
-        }
-        protected void Theme_Click(object sender, DirectEventArgs e)
-        {
-            if (UserCommon.GetCurrentTheme().ToString().Equals("Gray"))
-            {
-                UserCommon.SetCookieTheme("Default", false);
-                ThemeLabel.Text = "Gray Themes";
-            }
-            else
-            {
-                UserCommon.SetCookieTheme("Gray", false);
-                ThemeLabel.Text = "Default Themes";
-            }
-            Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
-
-        }
-        protected void btLogout_Click(object sender, DirectEventArgs e)
-        {
-            UserCommon.ClearCookieUserInfo();
-            Response.Redirect(UserCommon.Web_LoginPage, true);
-        }
-        protected void click(object sender, DirectEventArgs e)
-        {
-            ComponentLoader cn = new ComponentLoader();
-            cn.Url = e.ExtraParams["url"].ToString();
-            cn.Mode = LoadMode.Frame;
-            cn.DisableCaching = true;
-            this.pnlCenter.LoadContent(cn);
-            this.pnlCenter.Title = e.ExtraParams["Name"].ToString();
-
-        }
+        
+        
     }
 }

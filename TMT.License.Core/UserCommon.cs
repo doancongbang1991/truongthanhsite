@@ -41,35 +41,23 @@ namespace TMT.License.Core
         public static string System_UserGroupManager = "~/System/UserGroupManager.aspx";
         public static string System_UserGroupDetails = "~/System/UserGroupDetails.aspx";
 
-        public static string TT_About = "~/About/About.aspx";
-        public static string TT_AboutDetails = "~/About/AboutDetails.aspx";
         public static string TT_AboutManager = "~/About/AboutManager.aspx";
 
-        public static string TT_Construction = "~/Construction/Construction.aspx";
-        public static string TT_ConstructionDetails = "~/Construction/ConDetails.aspx";
         public static string TT_ConstructionManager = "~/Construction/ConManager.aspx";
 
         public static string TT_Contact = "~/Contact/Contact.aspx";
 
         public static string TT_Cost = "~/Cost/Cost.aspx";
 
-        public static string TT_Footer = "~/Footer/Footer.aspx";
-        public static string TT_FooterDetails = "~/Footer/FooterDetails.aspx";
         public static string TT_FooterManager = "~/Footer/FooterManager.aspx";
 
-        public static string TT_Arch = "~/Arch/Arch.aspx";
-        public static string TT_ArchDetails = "~/Arch/ArchDetails.aspx";
         public static string TT_ArchManager = "~/Arch/ArchManager.aspx";
 
-        public static string TT_Fur = "~/Furniture/Furniture.aspx";
-        public static string TT_FurDetails = "~/Furniture/FurDetails.aspx";
         public static string TT_FurManager = "~/Furniture/FurManager.aspx";
 
-        public static string TT_Project = "~/Project/Project.aspx";
-        public static string TT_ProjectDetails = "~/Project/ProjectDetails.aspx";
         public static string TT_ProjectManager = "~/Project/ProjectManager.aspx";
 
-
+        public static string TT_SiteManager = "~/Site/SiteManager.aspx";
         public static string TestManager = "~/TestManager.aspx";
         public static string TestDetails = "~/TestDetails.aspx";
 
@@ -231,7 +219,7 @@ namespace TMT.License.Core
         {
             string CurTheme = string.Empty;
             if (HttpContext.Current.Request.Cookies[Cookie_Themes] == null)
-                CurTheme = "Gray";
+                CurTheme = "Triton";
             else
                 CurTheme = HttpContext.Current.Request.Cookies[Cookie_Themes].Value;
             Theme objTheme = (Theme)Enum.Parse(typeof(Theme), CurTheme);
@@ -526,17 +514,17 @@ namespace TMT.License.Core
             catch { bResult = false; }
             return bResult;
         }
-        public static bool HasValue(TriggerField trg)
-        {
-            bool bResult = false;
-            try
-            {
-                if (trg.Text.Trim().Length > 0)
-                    bResult = true;
-            }
-            catch { bResult = false; }
-            return bResult;
-        }
+        //public static bool HasValue(TriggerField trg)
+        //{
+        //    bool bResult = false;
+        //    try
+        //    {
+        //        if (trg.Text.Trim().Length > 0)
+        //            bResult = true;
+        //    }
+        //    catch { bResult = false; }
+        //    return bResult;
+        //}
         public static bool HasValue(ComboBox cbb)
         {
             bool bResult = false;
@@ -635,20 +623,20 @@ namespace TMT.License.Core
                 cb.ReadOnly = true;
             }
         }
-        public static void ReadOnlyControl(TriggerField trg, bool RO)
-        {
-            if (!RO)
-            {
-                trg.ReadOnly = false;
-                trg.RemoveCls("xReadOnly");
-            }
-            else
-            {
+        //public static void ReadOnlyControl(TriggerField trg, bool RO)
+        //{
+        //    if (!RO)
+        //    {
+        //        trg.ReadOnly = false;
+        //        trg.RemoveCls("xReadOnly");
+        //    }
+        //    else
+        //    {
 
-                trg.AddCls("xReadOnly");
-                trg.ReadOnly = true;
-            }
-        }
+        //        trg.AddCls("xReadOnly");
+        //        trg.ReadOnly = true;
+        //    }
+        //}
         public static void ReadOnlyControl(Checkbox trg, bool RO)
         {
             if (!RO)

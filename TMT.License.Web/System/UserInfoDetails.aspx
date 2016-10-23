@@ -78,13 +78,13 @@
                             <ext:Panel ID="panel" runat="server" Layout="BorderLayout" BaseCls="x-plain" BodyPadding="5">
                                 <Items>
                                     <ext:FormPanel ID="Window1" runat="server" Icon="User" Closable="false" Title=""
-                                                   Width="520" Height="350" BaseCls="x-plain" Resizable="false" Modal="false" BodyPadding="0"
+                                                   Width="580" Height="550" BaseCls="x-plain" Resizable="false" Modal="false" BodyPadding="0"
                                                    Layout="AutoLayout">
                                         <Items>
-                                            <ext:Panel ID="pnProfile" Width="520" HideMode="Offsets" Border="true" Height="350"
+                                            <ext:Panel ID="pnProfile" Width="580" HideMode="Offsets" Border="true" Height="550"
                                                        Title="Profile" runat="server" BodyPadding="5" Layout="BorderLayout">
                                                 <Items>
-                                                    <ext:FieldSet ID="FieldSet5" Width="500" Border="false" Height="340" runat="server"
+                                                    <ext:FieldSet ID="FieldSet5" Width="500" Border="false" Height="550" runat="server"
                                                                   Anchor="100%" Padding="10">
                                                         <Defaults>
                                                             <ext:Parameter Name="LabelWidth" Value="100" />

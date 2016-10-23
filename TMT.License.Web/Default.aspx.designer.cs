@@ -49,24 +49,6 @@ namespace TMT.License.Web {
         protected global::Ext.Net.Viewport Viewport1;
         
         /// <summary>
-        /// pnlTop control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Panel pnlTop;
-        
-        /// <summary>
-        /// pnlMenu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Panel pnlMenu;
-        
-        /// <summary>
         /// pnlCenter control.
         /// </summary>
         /// <remarks>
@@ -76,84 +58,102 @@ namespace TMT.License.Web {
         protected global::Ext.Net.Panel pnlCenter;
         
         /// <summary>
-        /// pnlBottom control.
+        /// TabPanelMain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Panel pnlBottom;
+        protected global::Ext.Net.TabPanel TabPanelMain;
         
         /// <summary>
-        /// StatusBar4 control.
+        /// pnlHome control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.StatusBar StatusBar4;
+        protected global::Ext.Net.Panel pnlHome;
         
         /// <summary>
-        /// txtDateTime control.
+        /// pnlAbout control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ToolbarTextItem txtDateTime;
+        protected global::Ext.Net.Panel pnlAbout;
         
         /// <summary>
-        /// ToolbarSeparator1 control.
+        /// pnlArch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ToolbarSeparator ToolbarSeparator1;
+        protected global::Ext.Net.Panel pnlArch;
         
         /// <summary>
-        /// txtUserStatus control.
+        /// pnlCon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ToolbarTextItem txtUserStatus;
+        protected global::Ext.Net.Panel pnlCon;
         
         /// <summary>
-        /// ToolbarSeparator3 control.
+        /// pnlFur control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ToolbarSeparator ToolbarSeparator3;
+        protected global::Ext.Net.Panel pnlFur;
         
         /// <summary>
-        /// ThemeLabel control.
+        /// pnlCost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button ThemeLabel;
+        protected global::Ext.Net.Panel pnlCost;
         
         /// <summary>
-        /// ToolbarSeparator2 control.
+        /// pnlProject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ToolbarSeparator ToolbarSeparator2;
+        protected global::Ext.Net.Panel pnlProject;
         
         /// <summary>
-        /// btLogout control.
+        /// pnlContact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button btLogout;
+        protected global::Ext.Net.Panel pnlContact;
+        
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Panel Panel1;
+        
+        /// <summary>
+        /// Panel3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Panel Panel3;
     }
 }

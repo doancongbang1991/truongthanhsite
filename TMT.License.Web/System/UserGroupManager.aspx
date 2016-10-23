@@ -122,7 +122,7 @@
                         <DockedItems>
                             <ext:Toolbar ID="Toolbar1" runat="server" Padding="5" Dock="Top">
                                 <Items>
-                                    <ext:TriggerField ID="txtKeyword" runat="server" Width="350" FieldLabel="Search"
+                                    <ext:TextField ID="txtKeyword" runat="server" Width="350" FieldLabel="Search"
                                         LabelWidth="50">
                                         <Triggers>
                                             <ext:FieldTrigger Icon="Clear" />
@@ -132,7 +132,7 @@
                                             <TriggerClick Fn="searchFieldTriggerClick" />
                                             <SpecialKey Fn="onSpecialKey" />
                                         </Listeners>
-                                    </ext:TriggerField>
+                                    </ext:TextField>
                                 </Items>
                             </ext:Toolbar>
                         </DockedItems>

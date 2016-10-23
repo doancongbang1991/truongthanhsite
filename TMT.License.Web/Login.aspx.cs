@@ -22,7 +22,7 @@ namespace TMT.License.Web
         private void LoadPage()
         {
             UserCommon.ClearCookieUserInfo();
-            ResourceManager.SetTheme(UserCommon.GetCurrentTheme());
+            ResourceManager.Theme = UserCommon.GetCurrentTheme();
             FormatWebControl();
         }
         private void FormatWebControl()

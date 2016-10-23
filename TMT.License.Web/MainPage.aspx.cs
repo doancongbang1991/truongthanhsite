@@ -72,7 +72,7 @@ namespace TMT.License.Web
                 ThemeLabel.Text = "Blue Themes";
             else
                 ThemeLabel.Text = "Default Themes";
-            rsmain.SetTheme(currentTheme);
+            rsmain.Theme = currentTheme;
         }
         private void SetInfoStatusBar()
         {
