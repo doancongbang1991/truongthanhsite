@@ -10,7 +10,7 @@
     <meta name="DC.Title" content="Thiết kế và Thi công nhà đẹp" />
     <meta name="DC.Publisher" content="Công ty TNHH Thiết Kế Đẹp" />
     <meta name="DC.Subject" content="Nhà đẹp" />
-    <title>Giới thiệu | Trường Thành</title>
+    <title>Khải Toán | Trường Thành</title>
 
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
@@ -45,7 +45,7 @@
     <!-- Please call pinit.js only once per page -->
     <script type="text/javascript" async defer data-pin-color="red" data-pin-hover="true" src="../assets.pinterest.com/js/pinit.js"></script>
 </head>
-<body class="horizontal">
+<body class="horizontal" ng-app="truongthanhApp" ng-controller="costctrlr">
     <div id="outer-main">
         <div id="DropDownMenu">
             <div class="dropinner" style="float:left">
@@ -64,56 +64,118 @@
             <div id="gradian"></div>
 
             <ul id="h-menu">
-                <li><a href="index.html">TRANG CHỦ</a></li>
-                <li><a href="kientruc.html">KIẾN TRÚC</a></li>
-                <li><a href="xaydung.html">XÂY DỰNG</a></li>
-                <li><a href="noithat.html">NỘI THẤT</a></li>
-                <li><a href="khaitoan.html">KHÁI TOÁN</a></li>
-                <li><a href="gioithieu.html" class=sel>GIỚI THIỆU</a></li>
-                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+                <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
+                
             </ul><!-- #h-menu -->
-            <div id="h-content">
-                <h2>GIỚI THIỆU</h2>
+            <div id="h-content" ng-repeat="sitedetail in sitedetails">
+                <h2>{{sitedetail.SiteDetail}}</h2>
                 <div id="h-description">
-                    <p>Thiết kế và thi công trên toàn quốc.</p>
+                    <p>{{sitedetail.SiteDesp}}</p>
                 </div> <!-- #h-description -->
             </div> <!-- #h-content -->
-        </div><!-- #header -->  
+
+
+        </div><!-- #header -->
     </div><!-- #outer-main -->
-    <div id="content" style="margin-top: -30px;">
-        <h1 style="font-weight:bold; font-style:italic; padding-bottom: 5px;float: left;">Về chúng tôi</h1>        
-    </div>
-    <div id="content">        
+    <div id="content" style="margin-top:-50px" >
+        <iframe id="maps" src="../Cost/Cost.aspx" width="100%" height="500" frameborder="0" style="border: 0 "></iframe>
+        <div hidden>
+        <div class="col1 modyfylienhe" style="height:auto">
+            <h3 style="padding-bottom: 5px;margin:20px 0 10px 0;font-size: 21px;font-weight: bold;background: none; border-bottom:double 4px black">Ước tính dự trù chi phí</h3>
+
+        </div><!--Head-->
+        <div class="col4 modyfylienhe">
+            <p style="font-style:italic">Chọn địa điểm</p>
+            <select style="width:100%">
+                <option>TP HCM</option>
+                <option>Đà Nẵng</option>
+                <option>Hà Nội</option>
+            </select>
+        </div>
+        <div class="col4 modyfylienhe">
+            <p style="font-style:italic">Chọn công trình</p>
+            <select style="width:100%">
+                <option>Khách sạn, Resort, Karaoke</option>
+                <option>Bar, Cafe, Nhà hàng, Showroom, Shop, Office</option>
+                <option>Biệt thự, nhà từ 2 mặt tiền trở lên</option>
+                <option>Nhà phố, căn hộ</option>
+            </select>
+        </div>
+        <!-- .col3 -->
+        <div class="col4 modyfylienhe ">
+            <p style="font-style:italic">Trạng thái</p>
+            <select style="width:100%">
+                <option>Cải tạo</option>
+                <option>Xây mới</option>
+            </select>
+        </div><!-- .col3 -->
+
+
+        <div class="col4 modyfylienhe last">
+            <p style="font-style:italic">Diện tích đất trong sổ đỏ</p>
+            <input type="text" value="0" />
+        </div>
+        <div class="col4 modyfylienhe">
+            <p style="font-style:italic">Diện tích xây dựng (tầng trệt):</p>
+            <input type="text" value="0" />
+
+        </div>
+        <div class="col4 modyfylienhe">
+            <p style="font-style:italic">Số tầng (bao gồm tầng trệt):</p>
+            <input type="text" value="0" />
+        </div>
+        <!-- .col3 -->
+        <div class="col4 modyfylienhe ">
+            <p style="font-style:italic">Số phòng ngủ:</p>
+            <input type="text" value="0" />
+
+        </div><!-- .col3 -->
+        <div class="col4 modyfylienhe last">
+            <p style="font-style:italic">Số phòng vệ sinh:</p>
+            <input type="text" value="0" />
+        </div>
+        <div class="clear"></div>
+        <div class="col1 modyfylienhe" style="height:auto">
+            <h3 style="padding-bottom: 5px;margin:20px 0 10px 0;font-size: 21px;font-weight: bold;background: none; border-bottom:double 4px black">Khải toán mức đầu tư</h3>
+        </div><!--Head-->
+        <div class="col4 modyfylienhe">
+            <p style="font-style:italic">Thiết kế trọn gói:</p>
+            <input type="text" value="0" disabled="disabled" />
+
+        </div>
+        <div class="col4 modyfylienhe">
+            <p style="font-style:italic">Phần thô:</p>
+            <input type="text" value="0" disabled="disabled"/>
+        </div>
+        <!-- .col3 -->
+        <div class="col4 modyfylienhe ">
+            <p style="font-style:italic">Hoàn thiện:</p>
+            <input type="text" value="0" disabled="disabled"/>
+
+        </div><!-- .col3 -->
+        <div class="col4 modyfylienhe last">
+            <p style="font-style:italic">Nội thất:</p>
+            <input type="text" value="0" disabled="disabled"/>
+        </div>
+        <div class="col4 modyfylienhe ">
+            <p style="font-style:italic">Dự phòng phí:</p>
+            <input type="text" value="0" disabled="disabled" />
+        </div><!-- .col3 -->
+        <div class="col4 modyfylienhe " style="color:#354ea2">
+            <p style="font-style:italic">Tổng cộng:</p>
+            <input type="text"  disabled="disabled" placeholder="Phí tạm tính" />
+        </div><!-- .col3 -->
+            </div>
+        <div class="clear"></div>
         
-        <div id="wrapper">
-            <div id="content2">
-                <div style="float:left;width:100%;">
-                    <p style="font-style:italic; color:#a7a7a7; font-size:12px">Là doanh nghiệp ra đời vào đúng thời điểm nền kinh tế vĩ mô gặp nhiều khó khăn, thị trưởng bất động sản lao dốc. Nhưng với đội ngũ nhân sự cốt cán là những người có chuyên môn cao và kinh nghiệm trong tổ chức điều hành doanh nghiệp. Công ty Bất Động Sản và Xây Dựng Trường Thành đã vượt qua khó khăn, từng bước vươn lên, khẳng định và nâng cao vị thế của mình trên thị trường bất động sản Việt Nam, khẳng định niềm tin của đối tác và khách hàng</p>
-                    <p class="h"><strong>Thiết kế:</strong></p>
-                    <p>Trường thành sở hữu một thư viện tuyệt vời cho việc học hỏi và nâng cao tay nghề của các Kiến trúc sư và chuyên viên Mỹ thuật - Nội thất.</p>
-                    <p>Phong cách thiết kế đơn giản và bố trí nội thất thông minh. Ánh sáng tràn ngập với các khung cửa kính lớn, thiên về cảnh quan xanh màu lá.</p>
-                    <p>Thiết kế bao gồm kiến trúc, nội thất, cảnh quan và quy hoạch đô thị.</p>
-                    <p>Thiết kế kết cấu, điện và hệ thống ống cấp thoát nước</p>
-
-                    <p class="h"><strong>Thi công:</strong></p>
-                    <p>Mọi công trình thi công đều có bảo hộ lao động, bảo hiểm công trình và bảo hiểm cho công nhân, giảm thiểu mọi rủi ro.</p>
-
-                    <p class="h"><strong>Tiêu chí:</strong></p>
-                    <p>Tuyển chọn nhân viên trẻ có thành tích học tập cao, đầy nhiệt huyết và sáng tạo, tiếp thu công nghệ và những phần mềm mới nhất nhằm mục đích hỗ trợ cho kỹ năng thiết kế ngày càng nhanh và đẹp hơn.</p>
-
-                    <div class="clear" style="height:26px;"></div>
-                </div>
-                <div class="clear"></div>
-            </div><!-- end #content -->
-        </div><!-- end #wrapper -->
-
     </div><!-- #content -->
 
-    <div id="outer-foot">
-
+   <div id="outer-foot">
+       
         <div id="outer-foot2">
             <div id="footer">
-                <div style="float:left">
+                 <iframe id="Iframe1" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0 "></iframe>
+                <div style="float:left" hidden>
                     <div class="col-f1">
                         <fieldset>
                             <legend>NHÂN SỰ</legend>
@@ -168,7 +230,7 @@
                     <div class="clear"></div>
                 </div>
 
-                <div class="col-f3 last" style="position:relative;">
+                <div class="col-f3 last" style="position:relative;" hidden>
                     <fieldset>
                         <legend>Gửi mail cho chúng tôi</legend>
                         <div style="top:37px;color:#ED1C24;font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
@@ -211,6 +273,7 @@
             </div><!-- #footer -->
         </div><!-- #outer-foot2 -->
     </div><!-- #outer-foot -->
-
+    <script type="text/javascript" src="../scripts/angular.min.js"></script>
+    <script src="./cost.js"></script>
 </body>
 </html>

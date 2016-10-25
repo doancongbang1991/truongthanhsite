@@ -69,7 +69,7 @@ namespace DataLayer
             string[] Fields = null;
             string[] SFields = new string[] { TBC_ArchID, TBC_ArchName, TBC_ArchDetail};
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
-            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_ArchID, "DESC");
+            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_ArchID, "ASC");
             return dtResult;
         }
         public bool CheckExistArch(string Arch)

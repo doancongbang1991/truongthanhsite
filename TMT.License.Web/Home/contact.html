@@ -10,7 +10,7 @@
     <meta name="DC.Title" content="Thiết kế và Thi công nhà đẹp" />
     <meta name="DC.Publisher" content="Công ty TNHH Thiết Kế Đẹp" />
     <meta name="DC.Subject" content="Nhà đẹp" />
-    <title>Xây Dựng | Trường Thành</title>
+    <title>Liên hệ | Trường Thành</title>
 
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
@@ -45,8 +45,9 @@
     <!-- Please call pinit.js only once per page -->
     <script type="text/javascript" async defer data-pin-color="red" data-pin-hover="true" src="../assets.pinterest.com/js/pinit.js"></script>
 </head>
-<body class="horizontal">
+<body class="horizontal" ng-app="truongthanhApp" ng-controller="contactctrlr">
     <div id="outer-main">
+
         <div id="DropDownMenu">
             <div class="dropinner" style="float:left">
                 <a href="index.html" style="background:none;padding-right:0px;color:#555;"></a>
@@ -64,128 +65,69 @@
             <div id="gradian"></div>
 
             <ul id="h-menu">
-                <li><a href="index.html">TRANG CHỦ</a></li>
-                <li><a href="kientruc.html">KIẾN TRÚC</a></li>
-                <li><a href="xaydung.html">XÂY DỰNG</a></li>
-                <li><a href="noithat.html" class=sel>NỘI THẤT</a></li>
-                <li><a href="khaitoan.html">KHÁI TOÁN</a></li>
-                <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
-                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+                <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
+                
             </ul><!-- #h-menu -->
-            <div id="h-content">
-                <h2>5 BỘ NỘI THẤT KIỂU DÁNG ITALY</h2>
+            <div id="h-content" ng-repeat="sitedetail in sitedetails">
+                <h2>{{sitedetail.SiteDetail}}</h2>
                 <div id="h-description">
-                    <p>
-                        Bao gồm 5 kiểu dáng, phong cách khác nhau: Love, Romantic, Simple, Modern, Neo Classic
-                        Nội thất sẽ đẹp hơn rất nhiều nếu tất cả vật dụng cùng chung một phong cách thiết kế.
-                    </p>
+                    <p>{{sitedetail.SiteDesp}}</p>
                 </div> <!-- #h-description -->
             </div> <!-- #h-content -->
-
-            <ul id="h-menu-g">
-                <li><a href="#" class=sel>Nhà bếp</a></li>
-                <li><a href="#">P. khách</a></li>
-                <li><a href="#">Phòng ngủ</a></li>
-                <li><a href="#">Tiểu cảnh</a></li>
-                <li><a href="#">Dự án đã thi công</a></li>
-            </ul><!-- #h-menu-g -->
         </div><!-- #header -->
     </div><!-- #outer-main -->
-
-    <div id="content">
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c014.jpg" /></div></div>
-                <p class="td"><strong>Biệt thự</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
+    <iframe id="maps" src="../Contact/Contact.aspx" width="100%" height="500" frameborder="0" style="border: 0 "></iframe>
+    <div id="content" style="margin-top:-50px">
+        
+         
+    </div><!-- #content -->
+    <div id="content1" style="margin-top:-50px" hidden>
+        
+        <div class="col3 modyfylienhe">
+            <h3 style="margin:20px 0 10px 0;font-size: 21px;font-weight: bold;background: none; border-bottom:double 4px black">Thông tin liên hệ</h3>
+            <p><i class="fa fa-home" aria-hidden="true" style="margin-right:10px; text-align:center"></i>Công ty Xây Dựng Trường Thành</p>
+            <p><i class="fa fa-location-arrow" aria-hidden="true" style="margin-right:10px;text-align:center"></i>Địa chỉ, đường, quận</p>
+            <p><i class="fa fa-phone" aria-hidden="true" style="margin-right:10px;text-align:center"></i>Điện thoại: 38.xxx.xxx</p>
+            <p><i class="fa fa-phone" aria-hidden="true" style="margin-right:10px;text-align:center"></i>Hotline: 0909.xxx.xxx</p>
+            <p><i class="fa fa-envelope-o" aria-hidden="true" style="margin-right:10px;text-align:center"></i>Email: info@truongthanh.vn</p>
         </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2ctong%20the.jpg" /></div></div>
-                <p class="td"><strong>Beer Club, Bar, Cafe, Nhà hàng, Karaoke...</strong></p>
-                <p class="pInfo">Nội thất</p>
-            </a>
-        </div><!-- .col3 -->
+        <div class="col3 modyfylienhe">
+            <h3 style="margin:20px 0 10px 0;font-size: 21px;font-weight: bold;background: none; border-bottom:double 4px black">Gửi mail cho chúng tôi</h3>
+            <div class="form-1">
+                <input type="text" placeholder="Họ và tên" />
+            </div>
+            <div class="form-1">
+                <input type="text" placeholder="Năm sinh" />
+            </div>
+            <div class="form-1">
+                <input type="text" placeholder="Email" />
+            </div>
+            <div class="form-1" style="border-bottom:1px solid #757575;">
+                <input type="radio" name="Gender" id="nam" value="nam" style="width:20px !important" /> <label for="nam">Nam</label>
+                <input type="radio" name="Gender" id="nu" value="nu" style="width:20px !important" /> <label for="nu">Nữ</label>
+            </div>
+            <div class="form-1">
+                <input type="text" placeholder="Số điện thoại" />
+            </div>
+            <div class="form-1">
+                <textarea rows="3" placeholder="Nội dung"></textarea>
+            </div>
+            <div class="form-1">
+                <button class="pull-right btn-xs btn btn-mod">Gửi mail</button>
+            </div>
+        </div>
+        <!-- .col3 -->
         <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cRESORT%2021-10-2014%20night_View04.jpg" /></div></div>
-                <p class="td"><strong>Khách sạn, Resort</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cDSC_2251.jpg" alt="Audrey Nail (Thiết kế và thi công nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Ảnh thực tế sau thi công</strong></p>
-                <p class="pInfo">Thiết kế và thi công</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c05.phong%20khach1.jpg" alt="Trần Thị Vân Anh (Thiết kế nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Căn hộ, Pent house</strong></p>
-                <p class="pInfo">Thiết kế nội thất</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c716.jpg" alt="Trần Nguyên Hiệp (Thiết kế nội thất) " nopin="nopin" /></div></div>
-                <p class="td"><strong>Showroom, Shop, Văn phòng</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c014.jpg" /></div></div>
-                <p class="td"><strong>Biệt thự</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2ctong%20the.jpg" /></div></div>
-                <p class="td"><strong>Beer Club, Bar, Cafe, Nhà hàng, Karaoke...</strong></p>
-                <p class="pInfo">Nội thất</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cRESORT%2021-10-2014%20night_View04.jpg" /></div></div>
-                <p class="td"><strong>Khách sạn, Resort</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cDSC_2251.jpg" alt="Audrey Nail (Thiết kế và thi công nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Ảnh thực tế sau thi công</strong></p>
-                <p class="pInfo">Thiết kế và thi công</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c05.phong%20khach1.jpg" alt="Trần Thị Vân Anh (Thiết kế nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Căn hộ, Pent house</strong></p>
-                <p class="pInfo">Thiết kế nội thất</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c716.jpg" alt="Trần Nguyên Hiệp (Thiết kế nội thất) " nopin="nopin" /></div></div>
-                <p class="td"><strong>Showroom, Shop, Văn phòng</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
+            <img src="Images/Capture.PNG" style="width: 100%;" />
         </div><!-- .col3 -->
         <div class="clear"></div>
     </div><!-- #content -->
-    <!-- #content -->
-
-    <div id="outer-foot">
-
+  <div id="outer-foot">
+       
         <div id="outer-foot2">
             <div id="footer">
-                <div style="float:left">
+                 <iframe id="Iframe1" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0 "></iframe>
+                <div style="float:left" hidden>
                     <div class="col-f1">
                         <fieldset>
                             <legend>NHÂN SỰ</legend>
@@ -240,7 +182,7 @@
                     <div class="clear"></div>
                 </div>
 
-                <div class="col-f3 last" style="position:relative;">
+                <div class="col-f3 last" style="position:relative;" hidden>
                     <fieldset>
                         <legend>Gửi mail cho chúng tôi</legend>
                         <div style="top:37px;color:#ED1C24;font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
@@ -249,8 +191,8 @@
                                 <div id="ContactOutput"></div>
                                 <label for="Fullname">Họ và tên:</label> <input type="text" name="Fullname" id="Fullname" value="" /><br />
                                 <label for="Birth">Năm sinh:</label> <input type="text" name="Birth" id="Birth" value="" />
-                                <input type="radio" name="Gender" id="nam" value="nam" /> <label for="nam">Nam</label>
-                                <input type="radio" name="Gender" id="nu" value="nu" /> <label for="nu">Nữ</label><br />
+                                <input type="radio" name="Gender" id="Radio1" value="nam" /> <label for="nam">Nam</label>
+                                <input type="radio" name="Gender" id="Radio2" value="nu" /> <label for="nu">Nữ</label><br />
                                 <div class="clear"></div>
 
                                 <label for="Email">Email:</label> <input type="text" name="Email" id="Email" value="" /><br />
@@ -283,6 +225,8 @@
             </div><!-- #footer -->
         </div><!-- #outer-foot2 -->
     </div><!-- #outer-foot -->
-
+    <script type="text/javascript" src="../scripts/angular.min.js"></script>
+    <script src="./contact.js"></script>
 </body>
+
 </html>

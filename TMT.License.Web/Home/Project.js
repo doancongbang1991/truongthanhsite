@@ -5,7 +5,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 responseType: "json",
-                data: { method: 'GetProject' },
+                data: { method: 'GetSite' },
                 success: OnComplete,
                 error: OnFail
             });
@@ -26,14 +26,37 @@ $(document).ready(function () {
 
 var app = angular.module('truongthanhApp', []);
 app.controller('projectctrlr', function ($scope, $http) {
+    //menu
     var req = {
+        method: 'GET',
+        url: '../ServiceHandler.ashx',
+        params: { method: 'GetSite' }
+    };
+    $http(req)
+    .then(function (response) {
+        $scope.sites = response.data;
+       
+    });
+    var req1 = {
         method: 'GET',
         url: '../ServiceHandler.ashx',
         params: { method: 'GetProject' }
     };
-    $http(req)
+    $http(req1)
     .then(function (response) {
         $scope.projects = response.data;
-       
+
+    });
+    var name = "Projects";
+    var req2 = {
+        method: 'GET',
+        url: '../ServiceHandler.ashx',
+        params: { method: 'GetSiteByName', name: name }
+
+    };
+    $http(req2)
+    .then(function (response) {
+
+        $scope.sitedetails = response.data;
     });
 });

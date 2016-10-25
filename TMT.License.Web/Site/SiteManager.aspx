@@ -156,7 +156,9 @@
                                             <ext:ModelField Name="SiteDetail" />
                                             <ext:ModelField Name="SiteDesp" />
                                             <ext:ModelField Name="SiteLink" />
-                                            
+                                            <ext:ModelField Name="SiteOrder" />
+                                            <ext:ModelField Name="SiteHidden" />
+                                            <ext:ModelField Name="SiteNameVi" />
                                         </Fields>
                                     </ext:Model>
                                 </Model>
@@ -171,9 +173,12 @@
                                 
                                 <ext:Column ID="colSiteID" runat="server" DataIndex="SiteID" Text="ID" Flex="10" Hidden="true"/>
                                 <ext:Column ID="colSiteName" runat="server" DataIndex="SiteName" Text="Name"  Flex="10"  />
+                                <ext:Column ID="colSiteNameVi" runat="server" DataIndex="SiteNameVi" Text="Name Vi"  Flex="10"  />
                                 <ext:Column ID="colSiteDetail" runat="server" DataIndex="SiteDetail" Text="Detail" Flex="15" />
                                 <ext:Column ID="colSiteDesp" runat="server" DataIndex="SiteDesp" Text="Description"  Flex="10"  />
                                 <ext:Column ID="colSiteLink" runat="server" DataIndex="SiteLink" Text="Link" Flex="15" />
+                                <ext:Column ID="colSiteOrder" runat="server" DataIndex="SiteOrder" Text="Order"  Flex="10"  />
+                                <ext:CheckColumn ID="colSiteHidden" runat="server" DataIndex="SiteHidden" Text="Hidden"  Flex="10"  />
                                 </Columns>
                         </ColumnModel>
                         <View>
@@ -220,11 +225,11 @@
         
     </ext:Viewport>
     <ext:Window ID="winDetails" runat="server" Hidden="true" Closable="false" Resizable="false"
-        Height="285" Icon="ApplicationFormEdit" Title="Arch Manager" Draggable="true" Width="510"
+        Height="405" Icon="ApplicationFormEdit" Title="Site Manager" Draggable="true" Width="510"
         Modal="true" BodyPadding="5" Layout="FitLayout">
         
         <Items>
-            <ext:FieldSet ID="FieldSet5" Border="false" Width="500" Height="275" runat="server"
+            <ext:FieldSet ID="FieldSet5" Border="false" Width="500" Height="395" runat="server"
                 Anchor="100%" Padding="5">
                 <Defaults>
                     <ext:Parameter Name="LabelWidth" Value="80" />
@@ -234,11 +239,23 @@
                    <ext:TextField ID="hiID" runat="server" Hidden="true" />
                     
                    <ext:TextField ID="txtSiteName" runat="server" FieldLabel="Site Name" />
+                    <ext:TextField ID="txtSiteNameVi" runat="server" FieldLabel="Site Name" />
                     <ext:TextField ID="txtSiteDetail" runat="server" FieldLabel="Site Detail" />
                     
                     <ext:TextField ID="txtSiteLink" runat="server" FieldLabel="Site Link" />
                     <ext:TextArea ID="txtSiteDesp" runat="server" FieldLabel="Site Description" />
-                   
+                    <ext:NumberField ID="numSiteOrder" runat="server" FieldLabel="Order" />
+                     <ext:RadioGroup
+                            ID="radiohidden"
+                            runat="server"
+                            FieldLabel="Is Hidden"
+                            ColumnsNumber="3"
+                            Vertical="true">
+                            <Items>
+                                <ext:Radio ID="rHiddenTrue" runat="server" BoxLabel="True" />
+                                <ext:Radio ID="rHiddenFalse" runat="server" BoxLabel="False" Checked="true" />
+                            </Items>
+                        </ext:RadioGroup>
                 </Items>
             </ext:FieldSet>
         </Items>

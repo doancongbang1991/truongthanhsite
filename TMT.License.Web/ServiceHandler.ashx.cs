@@ -33,14 +33,42 @@ namespace TMT.License.Web
                 case "GetFur":
                     GetFur(context);
                     break;
+                case "GetFurType":
+                    GetFurType(context);
+                    break;
+                case "GetFurByType":
+                    GetFurByType(context);
+                    break;
                 case "GetCon":
                     GetCon(context);
                     break;
+                case "GetConType":
+                    GetConType(context);
+                    break;
+                case "GetConByType":
+                    GetConByType(context);
+                    break;
+                case "GetSite":
+                    GetSite(context);
+                    break;
+                case "GetSiteByName":
+                    GetSiteByName(context);
+                    break;
+                case "GetAbout":
+                    GetAbout(context);
+                    break;
+                case "GetArch":
+                    GetArch(context);
+                    break;
+                //case "GetFurByType":
+                //    GetFurByType(context);
+                //    break;
                 //other methods
                 default:
                     throw new ArgumentException("unknown method");
             }
         }
+        
         public void GetProject(HttpContext context)
         {
             context.Response.ContentType = "text/json";
@@ -57,6 +85,82 @@ namespace TMT.License.Web
                     tmp.ProjectImg = dt.Rows[r][ProjectsData.TBC_ProjectImg].ToString();
                     tmp.ProjectTypeID = int.Parse(dt.Rows[r][ProjectsData.TBC_ProjectTypeID].ToString());
                     
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetSite(HttpContext context)
+        {
+            context.Response.ContentType = "text/json";
+            List<SiteEntities> list = new List<SiteEntities>();
+            DataTable dt = new SiteData().GetSite(null, "");
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    SiteEntities tmp = new SiteEntities();
+                    if (dt.Rows[r][SiteData.TBC_SiteHidden].ToString()=="True")
+                    {
+                        continue;
+                    }
+                    tmp.SiteID = int.Parse(dt.Rows[r][SiteData.TBC_SiteID].ToString());
+                    tmp.SiteName = dt.Rows[r][SiteData.TBC_SiteName].ToString();
+                    tmp.SiteNameVi = dt.Rows[r][SiteData.TBC_SiteNameVi].ToString();
+                    tmp.SiteDetail = dt.Rows[r][SiteData.TBC_SiteDetail].ToString();
+                    tmp.SiteLink = dt.Rows[r][SiteData.TBC_SiteLink].ToString();
+                    tmp.SiteDesp = dt.Rows[r][SiteData.TBC_SiteDesp].ToString();
+                    tmp.SiteOrder = int.Parse(dt.Rows[r][SiteData.TBC_SiteOrder].ToString());
+
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetSiteByName(HttpContext context) {
+            context.Response.ContentType = "text/json";
+            var idStr = context.Request["name"];
+            List<SiteEntities> list = new List<SiteEntities>();
+            DataTable dt = new SiteData().GetDataByName(idStr);
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    SiteEntities tmp = new SiteEntities();
+                   
+                    tmp.SiteID = int.Parse(dt.Rows[r][SiteData.TBC_SiteID].ToString());
+                    tmp.SiteName = dt.Rows[r][SiteData.TBC_SiteName].ToString();
+                    tmp.SiteNameVi = dt.Rows[r][SiteData.TBC_SiteNameVi].ToString();
+                    tmp.SiteDetail = dt.Rows[r][SiteData.TBC_SiteDetail].ToString();
+                    tmp.SiteLink = dt.Rows[r][SiteData.TBC_SiteLink].ToString();
+                    tmp.SiteDesp = dt.Rows[r][SiteData.TBC_SiteDesp].ToString();
+                    tmp.SiteOrder = int.Parse(dt.Rows[r][SiteData.TBC_SiteOrder].ToString());
+
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetAbout(HttpContext context)
+        {
+            context.Response.ContentType = "text/json";
+            List<AboutEntities> list = new List<AboutEntities>();
+            DataTable dt = new AboutData().Search(null, "");
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    AboutEntities tmp = new AboutEntities();
+                    
+                    tmp.AboutID = int.Parse(dt.Rows[r][AboutData.TBC_AboutID].ToString());
+                    tmp.AboutName = dt.Rows[r][AboutData.TBC_AboutName].ToString();
+
+                    tmp.AboutDetail = dt.Rows[r][AboutData.TBC_AboutDetail].ToString();
+                    
+
                     list.Add(tmp);
                 }
             }
@@ -85,6 +189,59 @@ namespace TMT.License.Web
             var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             context.Response.Write(response);
         }
+        public void GetConByType(HttpContext context)
+        {
+            context.Response.ContentType = "text/json";
+            List<ConTypeEntities> list = new List<ConTypeEntities>();
+            DataTable dt = new ConTypeData().Search(null, "");
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    ConTypeEntities tmp = new ConTypeEntities();
+                    tmp.ConTypeID = int.Parse(dt.Rows[r][ConTypeData.TBC_ConTypeID].ToString());
+                    tmp.ConTypeName = dt.Rows[r][ConTypeData.TBC_ConTypeName].ToString();
+                    tmp.listcon = new List<ConstructionEntities>();
+                    DataTable dt1 = new ConstructionData().GetDataByType(tmp.ConTypeID.ToString());
+                    if (dt1.Rows.Count > 0)
+                    {
+                        for (int r1 = 0; r1 < dt1.Rows.Count; r1++)
+                        {
+                            ConstructionEntities tmp1 = new ConstructionEntities();
+                            tmp1.ConID = int.Parse(dt1.Rows[r1][ConstructionData.TBC_ConID].ToString());
+                            tmp1.ConName = dt1.Rows[r1][ConstructionData.TBC_ConName].ToString();
+                            tmp1.ConDetail = dt1.Rows[r1][ConstructionData.TBC_ConDetail].ToString();
+                            tmp1.ConImg = dt1.Rows[r1][ConstructionData.TBC_ConImg].ToString();
+                            tmp1.ConTypeID = int.Parse(dt1.Rows[r1][ConstructionData.TBC_ConTypeID].ToString());
+
+                            tmp.listcon.Add(tmp1);
+                        }
+                    }
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetConType(HttpContext context)
+        {
+
+            context.Response.ContentType = "text/json";
+            List<ConTypeEntities> list = new List<ConTypeEntities>();
+            DataTable dt = new ConTypeData().Search(null, "");
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    ConTypeEntities tmp = new ConTypeEntities();
+                    tmp.ConTypeID = int.Parse(dt.Rows[r][ConTypeData.TBC_ConTypeID].ToString());
+                    tmp.ConTypeName = dt.Rows[r][ConTypeData.TBC_ConTypeName].ToString();
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
         public void GetFur(HttpContext context)
         {
             context.Response.ContentType = "text/json";
@@ -101,6 +258,79 @@ namespace TMT.License.Web
                     tmp.FurImg = dt.Rows[r][FurnitureData.TBC_FurImg].ToString();
                     tmp.FurTypeID = int.Parse(dt.Rows[r][FurnitureData.TBC_FurTypeID].ToString());
 
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetFurByType(HttpContext context)
+        {
+            context.Response.ContentType = "text/json";
+            List<FurTypeEntities> list = new List<FurTypeEntities>();
+            DataTable dt = new FurnitureTypeData().Search(null, "");
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    FurTypeEntities tmp = new FurTypeEntities();
+                    tmp.FurTypeID = int.Parse(dt.Rows[r][FurnitureTypeData.TBC_FurTypeID].ToString());
+                    tmp.FurTypeName = dt.Rows[r][FurnitureTypeData.TBC_FurTypeName].ToString();
+                    tmp.listfur = new List<FurnitureEntities>();
+                    DataTable dt1 = new FurnitureData().GetDataByType(tmp.FurTypeID.ToString());
+                    if (dt1.Rows.Count > 0)
+                    {
+                        for (int r1 = 0; r1 < dt1.Rows.Count; r1++)
+                        {
+                            FurnitureEntities tmp1 = new FurnitureEntities();
+                            tmp1.FurID = int.Parse(dt1.Rows[r1][FurnitureData.TBC_FurID].ToString());
+                            tmp1.FurName = dt1.Rows[r1][FurnitureData.TBC_FurName].ToString();
+                            tmp1.FurDetail = dt1.Rows[r1][FurnitureData.TBC_FurDetail].ToString();
+                            tmp1.FurImg = dt1.Rows[r1][FurnitureData.TBC_FurImg].ToString();
+                            tmp1.FurTypeID = int.Parse(dt1.Rows[r1][FurnitureData.TBC_FurTypeID].ToString());
+
+                            tmp.listfur.Add(tmp1);
+                        }
+                    }
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetFurType(HttpContext context)
+        {
+            
+            context.Response.ContentType = "text/json";
+            List<FurTypeEntities> list = new List<FurTypeEntities>();
+            DataTable dt = new FurnitureTypeData().Search(null, "");
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    FurTypeEntities tmp = new FurTypeEntities();
+                    tmp.FurTypeID = int.Parse(dt.Rows[r][FurnitureTypeData.TBC_FurTypeID].ToString());
+                    tmp.FurTypeName = dt.Rows[r][FurnitureTypeData.TBC_FurTypeName].ToString();
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetArch(HttpContext context)
+        {
+
+            context.Response.ContentType = "text/json";
+            List<ArchEntities> list = new List<ArchEntities>();
+            DataTable dt = new ArchData().Search(null, "");
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    ArchEntities tmp = new ArchEntities();
+                    tmp.ArchID = int.Parse(dt.Rows[r][ArchData.TBC_ArchID].ToString());
+                    tmp.ArchName = dt.Rows[r][ArchData.TBC_ArchName].ToString();
+                    tmp.ArchDetail = dt.Rows[r][ArchData.TBC_ArchDetail].ToString();
                     list.Add(tmp);
                 }
             }

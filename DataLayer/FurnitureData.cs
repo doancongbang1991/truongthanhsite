@@ -34,7 +34,12 @@ namespace DataLayer
             DataTable dtResult = lib.GetDataBy("*", 0, "AND", Fields, Datas);
             return dtResult;
         }
-
+        public DataTable GetDataByType(string typeid)
+        {
+            QueryLibrary lib = new QueryLibrary(TableName, TBC_FurTypeID);
+            DataTable dtResult = lib.GetAllByID(typeid);
+            return dtResult;
+        }
         public bool Insert(ref FurnitureEntities obj)
         {
             bool bResult = false;
@@ -74,7 +79,7 @@ namespace DataLayer
             string[] Fields = null;
             string[] SFields = new string[] { TBC_FurName, TBC_FurTypeID, TBC_FurDetail, TBC_FurImg};
             QueryLibrary lib = new QueryLibrary(ViewName, TBC_FurID);
-            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_FurID, "DESC");
+            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_FurID, "ASC");
             return dtResult;
         }
         public bool CheckExistAbout(string Fur)

@@ -8,6 +8,7 @@ namespace Entities
     {
         public int ConTypeID { get; set; }
         public string ConTypeName { get; set; }
+        public List<ConstructionEntities> listcon { get; set; } 
         public ConTypeEntities()
         {
 

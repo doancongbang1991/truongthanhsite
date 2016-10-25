@@ -130,31 +130,31 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Panel pnlemail;
         
         /// <summary>
-        /// TextField10 control.
+        /// txtMessName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField10;
+        protected global::Ext.Net.TextField txtMessName;
         
         /// <summary>
-        /// TextField6 control.
+        /// numMessYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.NumberField TextField6;
+        protected global::Ext.Net.NumberField numMessYear;
         
         /// <summary>
-        /// TextField1 control.
+        /// txtMessMail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField1;
+        protected global::Ext.Net.TextField txtMessMail;
         
         /// <summary>
         /// FieldSet11 control.
@@ -166,49 +166,49 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.FieldSet FieldSet11;
         
         /// <summary>
-        /// RadioGroup1 control.
+        /// rMessGen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.RadioGroup RadioGroup1;
+        protected global::Ext.Net.RadioGroup rMessGen;
         
         /// <summary>
-        /// Radio1 control.
+        /// rMessGenM control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Radio Radio1;
+        protected global::Ext.Net.Radio rMessGenM;
         
         /// <summary>
-        /// Radio2 control.
+        /// rMessGenF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Radio Radio2;
+        protected global::Ext.Net.Radio rMessGenF;
         
         /// <summary>
-        /// TextField3 control.
+        /// txtMessPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField3;
+        protected global::Ext.Net.TextField txtMessPhone;
         
         /// <summary>
-        /// TextField2 control.
+        /// txtMessBody control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextArea TextField2;
+        protected global::Ext.Net.TextArea txtMessBody;
         
         /// <summary>
         /// Button1 control.

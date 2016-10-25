@@ -175,6 +175,15 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Column colSiteName;
         
         /// <summary>
+        /// colSiteNameVi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Column colSiteNameVi;
+        
+        /// <summary>
         /// colSiteDetail control.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,24 @@ namespace TMT.License.Web.License {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.Column colSiteLink;
+        
+        /// <summary>
+        /// colSiteOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Column colSiteOrder;
+        
+        /// <summary>
+        /// colSiteHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.CheckColumn colSiteHidden;
         
         /// <summary>
         /// grvPosition control.
@@ -283,6 +310,15 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.TextField txtSiteName;
         
         /// <summary>
+        /// txtSiteNameVi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.TextField txtSiteNameVi;
+        
+        /// <summary>
         /// txtSiteDetail control.
         /// </summary>
         /// <remarks>
@@ -308,6 +344,42 @@ namespace TMT.License.Web.License {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.TextArea txtSiteDesp;
+        
+        /// <summary>
+        /// numSiteOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.NumberField numSiteOrder;
+        
+        /// <summary>
+        /// radiohidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.RadioGroup radiohidden;
+        
+        /// <summary>
+        /// rHiddenTrue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Radio rHiddenTrue;
+        
+        /// <summary>
+        /// rHiddenFalse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Radio rHiddenFalse;
         
         /// <summary>
         /// btApprove control.

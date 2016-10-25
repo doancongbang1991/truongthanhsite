@@ -74,6 +74,14 @@ namespace DataLayer
             DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_ProjectID, "DESC");
             return dtResult;
         }
+        public DataTable GetProject(object[] Datas, string Keyword)
+        {
+            string[] Fields = null;
+            string[] SFields = new string[] { TBC_ProjectName, TBC_ProjectDetail, TBC_ProjectTypeID, TBC_ProjectImg };
+            QueryLibrary lib = new QueryLibrary(ViewName, TBC_ProjectID);
+            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_ProjectID, "ASC");
+            return dtResult;
+        }
         public bool CheckExistAbout(string About)
         {
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ProjectID);

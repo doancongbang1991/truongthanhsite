@@ -22,9 +22,12 @@ namespace DataLayer
 
         public const string TBC_SiteID = "SiteID";
         public const string TBC_SiteName = "SiteName";
+        public const string TBC_SiteNameVi = "SiteNameVi";
         public const string TBC_SiteDetail = "SiteDetail";
         public const string TBC_SiteDesp = "SiteDesp";
         public const string TBC_SiteLink = "SiteLink";
+        public const string TBC_SiteOrder = "SiteOrder";
+        public const string TBC_SiteHidden = "SiteHidden";
         public DataTable GetDataByName()
         {
             QueryLibrary lib = new QueryLibrary(TableName, TBC_SiteID);
@@ -42,8 +45,8 @@ namespace DataLayer
         public bool Insert(ref SiteEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_SiteName, TBC_SiteDetail, TBC_SiteDesp, TBC_SiteLink};
-            dDatas = new object[] { obj.SiteName, obj.SiteDetail, obj.SiteDesp, obj.SiteLink };
+            dFields = new string[] { TBC_SiteName, TBC_SiteDetail, TBC_SiteDesp, TBC_SiteLink, TBC_SiteOrder, TBC_SiteHidden, TBC_SiteNameVi };
+            dDatas = new object[] { obj.SiteName, obj.SiteDetail, obj.SiteDesp, obj.SiteLink, obj.SiteOrder, obj.SiteHidden, obj.SiteNameVi };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_SiteID);
             obj.SiteID = lib.Insert(dFields, dDatas);
             bResult = Convert.ToBoolean(obj.SiteID);
@@ -53,8 +56,8 @@ namespace DataLayer
         public bool Update(SiteEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_SiteName, TBC_SiteDetail, TBC_SiteDesp, TBC_SiteLink };
-            dDatas = new object[] { obj.SiteName, obj.SiteDetail, obj.SiteDesp, obj.SiteLink };
+            dFields = new string[] { TBC_SiteName, TBC_SiteDetail, TBC_SiteDesp, TBC_SiteLink, TBC_SiteOrder, TBC_SiteHidden, TBC_SiteNameVi };
+            dDatas = new object[] { obj.SiteName, obj.SiteDetail, obj.SiteDesp, obj.SiteLink, obj.SiteOrder, obj.SiteHidden, obj.SiteNameVi };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_SiteID);
             bResult = Convert.ToBoolean(lib.Update(obj.SiteID, dFields, dDatas));
             return bResult;
@@ -79,6 +82,14 @@ namespace DataLayer
             string[] SFields = new string[] { TBC_SiteName, TBC_SiteDetail, TBC_SiteDesp, TBC_SiteLink};
             QueryLibrary lib = new QueryLibrary(TableName, TBC_SiteID);
             DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_SiteID, "DESC");
+            return dtResult;
+        }
+        public DataTable GetSite(object[] Datas, string Keyword)
+        {
+            string[] Fields = null;
+            string[] SFields = new string[] { TBC_SiteName, TBC_SiteDetail, TBC_SiteDesp, TBC_SiteLink };
+            QueryLibrary lib = new QueryLibrary(TableName, TBC_SiteID);
+            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_SiteOrder, "ASC");
             return dtResult;
         }
         public bool CheckExistSite(string About)

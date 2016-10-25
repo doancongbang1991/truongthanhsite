@@ -71,7 +71,7 @@ namespace DataLayer
             string[] Fields = null;
             string[] SFields = new string[] { TBC_FurTypeName};
             QueryLibrary lib = new QueryLibrary(TableName, TBC_FurTypeID);
-            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_FurTypeID, "DESC");
+            DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_FurTypeID, "ASC");
             return dtResult;
         }
         public bool CheckExistAbout(string About)

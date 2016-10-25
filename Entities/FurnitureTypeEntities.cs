@@ -8,6 +8,7 @@ namespace Entities
     {
         public int FurTypeID { get; set; }
         public string FurTypeName { get; set; }
+        public List<FurnitureEntities> listfur { get; set; }
         public FurTypeEntities()
         {
 

@@ -58,6 +58,7 @@ namespace TMT.License.Core
         public static string TT_ProjectManager = "~/Project/ProjectManager.aspx";
 
         public static string TT_SiteManager = "~/Site/SiteManager.aspx";
+        public static string TT_MessManager = "~/Message/MessageManager.aspx";
         public static string TestManager = "~/TestManager.aspx";
         public static string TestDetails = "~/TestDetails.aspx";
 

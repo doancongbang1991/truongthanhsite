@@ -56,7 +56,7 @@ namespace TMT.License.Web.License
             else
             {
                 string json = e.ExtraParams["grPosition_Select_Values"];
-                string[] Fields = new string[] { SiteData.TBC_SiteID, SiteData.TBC_SiteName,SiteData.TBC_SiteDetail, SiteData.TBC_SiteDesp, SiteData.TBC_SiteLink, };
+                string[] Fields = new string[] { SiteData.TBC_SiteID, SiteData.TBC_SiteName, SiteData.TBC_SiteNameVi, SiteData.TBC_SiteDetail, SiteData.TBC_SiteDesp, SiteData.TBC_SiteLink, SiteData.TBC_SiteOrder, SiteData.TBC_SiteHidden };
                 string[] value = UserCommon.GetValueFromJson(json, Fields);
                 ClearAllFields_Details();
                 UserCommon.ReadOnlyControl(txtSiteName, true);
@@ -110,19 +110,32 @@ namespace TMT.License.Web.License
         {
             this.hiID.Value = "";
             this.txtSiteName.Text = "";
+            this.txtSiteNameVi.Text = "";
             this.txtSiteDetail.Text = "";
             this.txtSiteDesp.Text = "";
             this.txtSiteLink.Text = "";
+            this.numSiteOrder.Text = "0";
+            rHiddenFalse.Checked = true;
 
         }
         private void ShowDetails_Details(string[] Value)
         {
             this.hiID.Text = Value[0];
             this.txtSiteName.Text = Value[1];
-            this.txtSiteDetail.Text = Value[2];
-            this.txtSiteDesp.Text = Value[3];
-            this.txtSiteLink.Text = Value[4];
-            
+            this.txtSiteNameVi.Text = Value[2];
+            this.txtSiteDetail.Text = Value[3];
+            this.txtSiteDesp.Text = Value[4];
+            this.txtSiteLink.Text = Value[5];
+            this.numSiteOrder.Text = Value[6];
+            string hidden = Value[7];
+            if (hidden == "true")
+            {
+                rHiddenTrue.Checked = true;
+            }
+            else
+            {
+                rHiddenFalse.Checked = true;
+            }
         }
         private SiteEntities GetArch(ref bool Insert, ref string Exception)
         {
@@ -148,9 +161,16 @@ namespace TMT.License.Web.License
                 res.SiteID = int.Parse(hiID.Text);
             }
             res.SiteName = txtSiteName.Text.Trim();
+            res.SiteNameVi = txtSiteNameVi.Text.Trim();
             res.SiteDetail = txtSiteDetail.Text;
             res.SiteDesp = txtSiteDesp.Text.Trim();
             res.SiteLink = txtSiteLink.Text;
+            res.SiteOrder = int.Parse(numSiteOrder.Text);
+            if (rHiddenTrue.Checked)
+            {
+                res.SiteHidden = true;
+
+            }
             return res;
         }
         protected void btApprove_Click(object sender, DirectEventArgs e)

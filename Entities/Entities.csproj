@@ -38,6 +38,7 @@
     <Compile Include="ArchEntities.cs" />
     <Compile Include="ConstructionEntities.cs" />
     <Compile Include="ConTypeEntities.cs" />
+    <Compile Include="MessageEntities.cs" />
     <Compile Include="FooterEntities.cs" />
     <Compile Include="FooterTypeEntities.cs" />
     <Compile Include="FurnitureEntities.cs" />

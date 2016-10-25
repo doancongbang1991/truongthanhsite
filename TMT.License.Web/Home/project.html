@@ -10,6 +10,9 @@
     <meta name="DC.Title" content="Thiết kế và Thi công nhà đẹp" />
     <meta name="DC.Publisher" content="Công ty TNHH Thiết Kế Đẹp" />
     <meta name="DC.Subject" content="Nhà đẹp" />
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+    <script src="bootstrap/js/bootstrap.js" ></script> 
     <title>Dự Án | Trường Thành</title>
 
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
@@ -45,7 +48,7 @@
     <!-- Please call pinit.js only once per page -->
     <script type="text/javascript" async defer data-pin-color="red" data-pin-hover="true" src="../assets.pinterest.com/js/pinit.js"></script>
 </head>
-<body class="horizontal">
+<body class="horizontal" ng-app="truongthanhApp" ng-controller="projectctrlr">
     <div id="outer-main">
         <div id="DropDownMenu">
             <div class="dropinner" style="float:left">
@@ -61,116 +64,63 @@
             </div><!-- #logo -->
             <div id="gradian"></div>
 
-            <ul id="h-menu">
-                <li><a href="index.html">TRANG CHỦ</a></li>
-                <li><a href="duan.html" class=sel>DỰ ÁN</a></li>
-                <li><a href="noithat.html">NỘI THẤT</a></li>
-                <li><a href="khaitoan.html">KHÁI TOÁN</a></li>
-                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+             <ul id="h-menu">
+                <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
+                
             </ul><!-- #h-menu -->
-            <div id="h-content">
-                <h2>DỰ ÁN</h2>
+            <div id="h-content" ng-repeat="sitedetail in sitedetails">
+                <h2>{{sitedetail.SiteDetail}}</h2>
                 <div id="h-description">
-                    <p style="font-size:21px; line-height:25px; letter-spacing:1px;">Những dự án chúng tôi đã và đang thực hiện</p>
+                    <p>{{sitedetail.SiteDesp}}</p>
                 </div> <!-- #h-description -->
             </div> <!-- #h-content -->
         </div><!-- #header -->
     </div><!-- #outer-main -->
 
-    <div id="content">
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c014.jpg" /></div></div>
-                <p class="td"><strong>Biệt thự</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2ctong%20the.jpg" /></div></div>
-                <p class="td"><strong>Beer Club, Bar, Cafe, Nhà hàng, Karaoke...</strong></p>
-                <p class="pInfo">Nội thất</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cRESORT%2021-10-2014%20night_View04.jpg" /></div></div>
-                <p class="td"><strong>Khách sạn, Resort</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cDSC_2251.jpg" alt="Audrey Nail (Thiết kế và thi công nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Ảnh thực tế sau thi công</strong></p>
-                <p class="pInfo">Thiết kế và thi công</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c05.phong%20khach1.jpg" alt="Trần Thị Vân Anh (Thiết kế nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Căn hộ, Pent house</strong></p>
-                <p class="pInfo">Thiết kế nội thất</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c716.jpg" alt="Trần Nguyên Hiệp (Thiết kế nội thất) " nopin="nopin" /></div></div>
-                <p class="td"><strong>Showroom, Shop, Văn phòng</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c014.jpg" /></div></div>
-                <p class="td"><strong>Biệt thự</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2ctong%20the.jpg" /></div></div>
-                <p class="td"><strong>Beer Club, Bar, Cafe, Nhà hàng, Karaoke...</strong></p>
-                <p class="pInfo">Nội thất</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cRESORT%2021-10-2014%20night_View04.jpg" /></div></div>
-                <p class="td"><strong>Khách sạn, Resort</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cDSC_2251.jpg" alt="Audrey Nail (Thiết kế và thi công nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Ảnh thực tế sau thi công</strong></p>
-                <p class="pInfo">Thiết kế và thi công</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c05.phong%20khach1.jpg" alt="Trần Thị Vân Anh (Thiết kế nội thất)" nopin="nopin" /></div></div>
-                <p class="td"><strong>Căn hộ, Pent house</strong></p>
-                <p class="pInfo">Thiết kế nội thất</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="col3 last">
-            <a href="#">
-                <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c716.jpg" alt="Trần Nguyên Hiệp (Thiết kế nội thất) " nopin="nopin" /></div></div>
-                <p class="td"><strong>Showroom, Shop, Văn phòng</strong></p>
-                <p class="pInfo">Thiết kế trọn gói</p>
-            </a>
-        </div><!-- .col3 -->
-        <div class="clear"></div>
-    </div><!-- #content -->
+   <div id="content">
+            
+            <div class="col-md-4" ng-repeat="project in projects">
+                <a href="#">
+                    <div class="boxshadow" style="height: 172px;width: 302px;border: 1px solid; border-radius: 2px;box-shadow: 0px 0px 15px #888888;"><div><img ng-src="{{project.ProjectImg}}" /></div></div>
+                    <p class="td text-center" style="color:black;"><strong>{{project.ProjectName}}</strong></p>
+                    <p class="pInfo text-center" style="color:black;">{{project.ProjectDetail}}</p>
+                    <br />
+                </a>
+                <div class="clear"></div>
+            </div><!-- .col3 -->
+           
+            <div class="col3 hidden">
+                <a href="#">
+                    <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2c014.jpg" /></div></div>
+                    <p class="td"><strong>Biệt thự</strong></p>
+                    <p class="pInfo">Thiết kế trọn gói</p>
+                </a>
+            </div><!-- .col3 -->
+            <div class="col3 hidden">
+                <a href="#">
+                    <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2ctong%20the.jpg" /></div></div>
+                    <p class="td"><strong>Beer Club, Bar, Cafe, Nhà hàng, Karaoke...</strong></p>
+                    <p class="pInfo">Nội thất</p>
+                </a>
+            </div><!-- .col3 -->
+            <div class="col3 last hidden">
+                <a href="#">
+                    <div class="boxshadow"><div><img src="Images/290x163/images%2chinh-anh-du-an%2cRESORT%2021-10-2014%20night_View04.jpg" /></div></div>
+                    <p class="td"><strong>Khách sạn, Resort</strong></p>
+                    <p class="pInfo">Thiết kế trọn gói</p>
+                </a>
+            </div><!-- .col3 -->
+            
+            <div class="clear"></div>
+        </div><!-- #content -->
     <!-- #content -->
 
-    <div id="outer-foot">
-
+  <div id="outer-foot">
+       
         <div id="outer-foot2">
             <div id="footer">
-                <div style="float:left">
+                 <iframe id="maps" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0 "></iframe>
+                <div style="float:left" hidden>
                     <div class="col-f1">
                         <fieldset>
                             <legend>NHÂN SỰ</legend>
@@ -225,7 +175,7 @@
                     <div class="clear"></div>
                 </div>
 
-                <div class="col-f3 last" style="position:relative;">
+                <div class="col-f3 last" style="position:relative;" hidden>
                     <fieldset>
                         <legend>Gửi mail cho chúng tôi</legend>
                         <div style="top:37px;color:#ED1C24;font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
@@ -268,6 +218,7 @@
             </div><!-- #footer -->
         </div><!-- #outer-foot2 -->
     </div><!-- #outer-foot -->
-
+    <script type="text/javascript" src="../scripts/angular.min.js"></script>
+    <script src="./project.js"></script>
 </body>
 </html>

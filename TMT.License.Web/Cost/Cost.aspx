@@ -16,7 +16,7 @@
             <Items>
                 <ext:Panel ID="Panel1" runat="server" Layout="AutoLayout">
                     <Items>
-                        <ext:Panel
+                        <ext:Panel Hidden="true"
                             ID="pnlAlignMiddle"
                             runat="server"
                             Layout="VBoxLayout"

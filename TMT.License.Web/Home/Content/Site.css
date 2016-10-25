@@ -1318,12 +1318,7 @@ br.c {
         letter-spacing: 1px;
     }
 
-#h-menu-g {
-    position: absolute;
-    top: 270px;
-    right: 0;
-    z-index: 100;
-}
+
 
 #h-menu-g2 {
     position: absolute;
@@ -1346,30 +1341,64 @@ br.c {
             #h-menu-g2 span a.sel, #h-menu-g2 span a:hover {
                 color: red;
             }
-
-#h-menu-g li {
-    float: left;
-    height: 34px;
-    margin: 0 5px 0 0;
-    width: 186px;
+#h-menu-g {
+    position: absolute;
+    top: 270px;
+    right: 0;
+    z-index: 100;
 }
 
-    #h-menu-g li a {
-        display: block;
+    #h-menu-g li {
+        float: left;
         height: 34px;
-        font-weight: bold;
-        line-height: 34px;
-        background: url(images/bg-button-g.jpg) repeat-x;
-        width: 188px;
-        text-align: center;
-        color: #fff;
+        margin: 0 5px 0 0;
+        width: 186px;
     }
 
-        #h-menu-g li a.sel, #h-menu-g li a:hover {
-            /*color: #354ea2;*/
-            background: url(images/bg-button-g2.jpg) repeat-x;
+        #h-menu-g li a {
+            display: block;
+            height: 34px;
+            font-weight: bold;
+            line-height: 20px;
+            background: url(images/bg-button-g.jpg) repeat-x;
+            width: 188px;
+            text-align: center;
+            color: #fff;
         }
 
+            #h-menu-g li a.sel, #h-menu-g li a:hover {
+                /*color: #354ea2;*/
+                background: url(images/bg-button-g2.jpg) repeat-x;
+            }
+#h1-menu-g {
+    position: absolute;
+    top: 270px;
+    right: 0;
+    z-index: 100;
+}
+
+    #h1-menu-g li {
+        float: left;
+        height: 34px;
+        margin: 0 5px 0 0;
+        width: 150px;
+    }
+
+        #h1-menu-g li a {
+            display: block;
+            height: 34px;
+            font-weight: bold;
+            line-height: 20px;
+            background: url(images/bg-button-g.jpg) repeat-x;
+            width: 152px;
+            text-align: center;
+            color: #fff;
+        }
+
+            #h1-menu-g li a.sel, #h1-menu-g li a:hover {
+                /*color: #354ea2;*/
+                background: url(images/bg-button-g2.jpg) repeat-x;
+            }
 /* BEGIN GIA THAM KHAO =============================================*/
 .tableRecruit {
     margin-top: 8px;

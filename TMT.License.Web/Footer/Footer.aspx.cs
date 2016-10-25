@@ -8,6 +8,7 @@ using DataLayer;
 using Entities;
 using Ext.Net;
 using TMT.License.Core;
+using System.Net.Mail;
 
 namespace TMT.License.Web.License
 {
@@ -19,7 +20,7 @@ namespace TMT.License.Web.License
             LoadLink();
 
 
-            LoadInfo();
+            //LoadInfo();
         }
         private void LoadLink()
         {
@@ -46,7 +47,7 @@ namespace TMT.License.Web.License
 
 
                                     }
-                                    lb.MarginSpec = "5 0 20 5";
+                                    lb.MarginSpec = "1 0 20 1";
                                     lb.AddCls("lbinfo");
                                     pnlNhansu.Add(lb);
                                     break;
@@ -70,7 +71,7 @@ namespace TMT.License.Web.License
                                 try
                                 {
                                     hplink.NavigateUrl = dt.Rows[r][(string)FooterData.TBC_FooterLink].ToString();
-                                    hplink.ImageUrl = @"~\images\extnet.png";
+                                    hplink.ImageUrl = @"~\images\Logo.png";
                                 }
                                 catch (Exception)
                                 {
@@ -79,34 +80,34 @@ namespace TMT.License.Web.License
                                 }
                                 pnlWebsite.Items.Add(hplink);
                                 break;
-                            //case "3":
-                            //    Hyperlink hplink1 = new Hyperlink();
-                            //    hplink1.ID = "hplink1" + dt.Rows[r][(string)FooterData.TBC_FooterID].ToString();
-                            //    hplink1.Text = dt.Rows[r][(string)FooterData.TBC_FooterName].ToString();
-                            //    hplink1.Height = new Unit("92"); 
-                            //    try
-                            //    {
-                            //        //hplink.Icon = (Ext.Net.Icon)Enum.Parse(typeof(Ext.Net.Icon), dt.Rows[r][(string)FooterData.TBC_FooterIcon].ToString());
-                            //    }
-                            //    catch (Exception)
-                            //    {
+                            case "3":
+                                Hyperlink hplink1 = new Hyperlink();
+                                hplink1.ID = "hplink" + dt.Rows[r][(string)FooterData.TBC_FooterID].ToString();
+                                hplink1.Text = dt.Rows[r][(string)FooterData.TBC_FooterName].ToString();
+                                hplink1.Height = new Unit("92");
+                                try
+                                {
+                                    // hplink.Icon = (Ext.Net.Icon)Enum.Parse(typeof(Ext.Net.Icon), dt.Rows[r][(string)FooterData.TBC_FooterIcon].ToString());
+                                }
+                                catch (Exception)
+                                {
 
 
-                            //    }
-                                
-                                
-                            //    try
-                            //    {
-                            //        hplink1.NavigateUrl = dt.Rows[r][(string)FooterData.TBC_FooterLink].ToString();
-                            //        hplink1.ImageUrl = @"~\images\extnet.png";
-                            //    }
-                            //    catch (Exception)
-                            //    {
+                                }
 
 
-                            //    }
-                            //    pnlDoitac.Items.Add(hplink1);
-                            //    break;
+                                try
+                                {
+                                    hplink1.NavigateUrl = dt.Rows[r][(string)FooterData.TBC_FooterLink].ToString();
+                                    hplink1.ImageUrl = @"~\images\Logo.png";
+                                }
+                                catch (Exception)
+                                {
+
+
+                                }
+                                pnlInfo.Items.Add(hplink1);
+                                break;
 		                    default:
                             break;
 	                    }
@@ -125,8 +126,72 @@ namespace TMT.License.Web.License
             //this.lbsitedesp.Html = "<h6>" + desp + "</h6>";
 
         }
+        protected void SendMail(object sender, EventArgs e)
+        {
+            SmtpClient smtpClient = new SmtpClient("mail.MyWebsiteDomainName.com", 25);
 
+            smtpClient.Credentials = new System.Net.NetworkCredential("info@MyWebsiteDomainName.com", "myIDPassword");
+            smtpClient.UseDefaultCredentials = true;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
+            MailMessage mail = new MailMessage();
 
+            //Setting From , To and CC
+            mail.From = new MailAddress("info@MyWebsiteDomainName", "MyWeb Site");
+            mail.To.Add(new MailAddress("info@MyWebsiteDomainName"));
+            mail.CC.Add(new MailAddress("MyEmailID@gmail.com"));
+
+            //smtpClient.Send(mail);
+
+            bool Insert = true;
+            bool bResult = false;
+            MessageEntities objProject = new MessageEntities();
+            objProject = GetMess();
+            if (objProject == null)
+            {
+                UserCommon.MsbShow(_Exception, UserCommon.ERROR);
+                return;
+            }
+
+            if (Insert)
+            {
+
+                bResult = new MessageData().Insert(ref objProject);
+                if (bResult)
+                {
+                    UserCommon.MsbShow("Thông Tin đã được ghi nhận", UserCommon.INFORMATION);
+                }
+                else
+                    UserCommon.MsbShow(Message.MSE_SQLADD, UserCommon.ERROR);
+            }
+            ClearField();
+        }
+        private void ClearField(){
+            txtMessName.Text = "";
+            numMessYear.Text = "0";
+            txtMessMail.Text = "";
+            rMessGenM.Checked = true;
+            
+           
+            
+            txtMessPhone.Text = "";
+            txtMessBody.Text = "";
+        }
+        private MessageEntities GetMess()
+        {
+            MessageEntities res = new MessageEntities();
+            res.MessName = txtMessName.Text.Trim();
+            res.MessYear = numMessYear.Text;
+            res.MessMail = txtMessMail.Text;
+            if (rMessGenM.Checked == true) {
+                res.MessGen = true;
+            }
+            else res.MessGen = false;
+            res.MessRead = false;
+            res.MessPhone = txtMessPhone.Text;
+            res.MessBody = txtMessBody.Text;
+            return res;
+        }
         private void LoadInfo()
         {
             DataTable dt = new FooterData().GetDataByType("4");

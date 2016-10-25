@@ -5,7 +5,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 responseType: "json",
-                data: { method: 'GetCon' },
+                data: { method: 'GetSite' },
                 success: OnComplete,
                 error: OnFail
             });
@@ -25,15 +25,39 @@ $(document).ready(function () {
 });
 
 var app = angular.module('truongthanhApp', []);
-app.controller('constructionctrlr', function ($scope, $http) {
+app.controller('architectctrlr', function ($scope, $http) {
+    //menu
     var req = {
         method: 'GET',
         url: '../ServiceHandler.ashx',
-        params: { method: 'GetCon' }
+        params: { method: 'GetSite' }
     };
     $http(req)
     .then(function (response) {
-        $scope.cons = response.data;
+        $scope.sites = response.data;
        
     });
+    var req1 = {
+        method: 'GET',
+        url: '../ServiceHandler.ashx',
+        params: { method: 'GetArch' }
+    };
+    $http(req1)
+    .then(function (response) {
+        $scope.archs = response.data;
+
+    });
+    var name = "Arch";
+    var req2 = {
+        method: 'GET',
+        url: '../ServiceHandler.ashx',
+        params: { method: 'GetSiteByName', name: name }
+
+    };
+    $http(req2)
+    .then(function (response) {
+
+        $scope.sitedetails = response.data;
+    });
+    
 });

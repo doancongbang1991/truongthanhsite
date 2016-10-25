@@ -5,7 +5,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 responseType: "json",
-                data: { method: 'GetFur' },
+                data: { method: 'GetSite' },
                 success: OnComplete,
                 error: OnFail
             });
@@ -25,15 +25,27 @@ $(document).ready(function () {
 });
 
 var app = angular.module('truongthanhApp', []);
-app.controller('furniturectrlr', function ($scope, $http) {
+app.controller('indexctrlr', function ($scope, $http) {
+    //menu
     var req = {
         method: 'GET',
         url: '../ServiceHandler.ashx',
-        params: { method: 'GetFur' }
+        params: { method: 'GetSite' }
     };
     $http(req)
     .then(function (response) {
-        $scope.furs = response.data;
-    
+        $scope.sites = response.data;
+       
     });
+    var req1 = {
+        method: 'GET',
+        url: '../ServiceHandler.ashx',
+        params: { method: 'GetProject' }
+    };
+    $http(req1)
+    .then(function (response) {
+        $scope.projects = response.data;
+
+    });
+
 });

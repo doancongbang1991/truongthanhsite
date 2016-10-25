@@ -28,7 +28,12 @@ namespace DataLayer
             DataTable dtResult = lib.GetDataBy("*", 0, "AND", Fields, Datas);
             return dtResult;
         }
-
+        public DataTable GetDataByType(string typeid)
+        {
+            QueryLibrary lib = new QueryLibrary(TableName, TBC_ConTypeID);
+            DataTable dtResult = lib.GetAllByID(typeid);
+            return dtResult;
+        }
         public bool Insert(ref ConTypeEntities obj)
         {
             bool bResult = false;
