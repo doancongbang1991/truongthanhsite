@@ -67,13 +67,14 @@
 
             <ul id="h-menu">
                 <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-
+                <li ><a href="#" style="color:#da2911;font-size:16px;">Hotline: 0913246357</a></li>
             </ul>
             <!-- #h-menu -->
+            
             <div id="h-content" ng-repeat="sitedetail in sitedetails" style="width: 100%">
-                <h2>{{sitedetail.SiteDetail}}</h2>
+                <h2 style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">{{sitedetail.SiteDetail}}</h2>
                 <div id="h-description">
-                    <textarea readonly style="border: none; overflow: hidden; resize: none; width: 100%; font-size: 14px; height: 80px; background: transparent; color: white;">{{sitedetail.SiteDesp}}</textarea>
+                    <textarea readonly style="border: none; overflow: hidden; resize: none; width: 100%; font-size: 16px; height: 80px; background: transparent; color:#354ea2;text-shadow: 1px 1px 2px #ffffff;font-weight: bold;">{{sitedetail.SiteDesp}}</textarea>
                     
                 </div>
                 <!-- #h-description -->

@@ -19,7 +19,7 @@ a {
 }
 
 #v-menu a {
-    color: #bbb;
+    color: #eee;
 }
 
 body.default #outer-main {
@@ -448,7 +448,7 @@ body.vertical #header {
 
 #h-menu li a {
     font-size: 14px;
-    color: #ccc;
+    color: #eee;
     white-space: nowrap;
 }
 
@@ -479,7 +479,8 @@ body.vertical #v-menu {
 
     #v-menu li a {
         /*background:url(images/bg-button.jpg) no-repeat;*/
-        background: rgba(0,0,0,0.60);
+        background: rgba(133, 134, 139, 0.7);
+        /*background-color:#85878d;*/
         display: block;
         padding: 0 10px 0 10px;
         height: 96px;
