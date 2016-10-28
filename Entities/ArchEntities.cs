@@ -12,6 +12,7 @@ namespace Entities
         public string ArchTypeName{ get; set; }
         public int ArchTypeID { get; set; }
         public string ArchThump { get; set; }
+        public string ArchDesp { get; set; }
         public ArchEntities()
         {
 

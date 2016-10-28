@@ -96,6 +96,8 @@
     <Content Include="Home\about.js" />
     <Content Include="Home\architect.html" />
     <Content Include="Home\architect.js" />
+    <Content Include="Home\architectpage.html" />
+    <Content Include="Home\architectpage.js" />
     <Content Include="Home\asseted86.css" />
     <Content Include="Home\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Home\bootstrap\css\bootstrap-theme.min.css" />
@@ -279,6 +281,7 @@
     <Content Include="Home\Content\images\warning.gif" />
     <Content Include="Home\Content\Site.css" />
     <Content Include="Home\construction.html" />
+    <Content Include="Home\architectpost.js" />
     <Content Include="Home\cost.html" />
     <Content Include="Home\cost.js" />
     <Content Include="Home\dist\css\lightbox.css" />
@@ -1889,6 +1892,18 @@
     <Content Include="Home\javascripts\standard-nav-action.js" />
     <Content Include="Home\javascripts\waypoints.min.js" />
     <Content Include="Home\javascripts\wow.js" />
+    <Content Include="Home\less\color-cyan.css">
+      <DependentUpon>color-cyan.less</DependentUpon>
+    </Content>
+    <Content Include="Home\less\color-cyan.min.css">
+      <DependentUpon>color-cyan.less</DependentUpon>
+    </Content>
+    <Content Include="Home\less\color.css">
+      <DependentUpon>color.less</DependentUpon>
+    </Content>
+    <Content Include="Home\less\color.min.css">
+      <DependentUpon>color.less</DependentUpon>
+    </Content>
     <Content Include="Home\less\less-1.5.0.min.js" />
     <Content Include="Home\map\404.html" />
     <Content Include="Home\map\apple-touch-icon-114x114-precomposed.png" />
@@ -2154,6 +2169,8 @@
     <Content Include="Home\Scripts\video-js\video-js.png" />
     <Content Include="Home\Scripts\video-js\video.min.js" />
     <Content Include="Home\Scripts\visualize.jQuery.js" />
+    <Content Include="Home\architectpost.html" />
+    <Content Include="Home\single-post.html" />
     <Content Include="Home\stylesheets\angular-bootstrap-lightbox.css" />
     <Content Include="Home\stylesheets\angular-bootstrap-lightbox.min.css" />
     <Content Include="Home\stylesheets\animate.css" />

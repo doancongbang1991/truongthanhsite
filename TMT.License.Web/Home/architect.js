@@ -60,4 +60,10 @@ app.controller('architectctrlr', function ($scope, $http) {
         $scope.sitedetails = response.data;
     });
     
+    $scope.getIframeSrc = function (videoId) {
+        return './architectpage.html?typeid=' + videoId;
+    };
+    
+    
 });
+

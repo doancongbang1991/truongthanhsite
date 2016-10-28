@@ -1,0 +1,249 @@
+.white {
+  color: #ffffff;
+}
+.dark {
+  color: #080808;
+}
+.grey {
+  color: #f5f5f5;
+}
+.color {
+  color: #14cccc;
+}
+.white-high {
+  color: #f5f5f5;
+}
+.dark-high {
+  color: #121212;
+}
+.dark-low {
+  color: #232323;
+}
+.white-bg {
+  background: #ffffff;
+}
+.dark-bg {
+  background: #080808;
+}
+.grey-bg {
+  background: #f5f5f5;
+}
+.color-bg {
+  background: #14cccc;
+}
+.white-high-bg {
+  background: #f5f5f5;
+}
+.dark-high-bg {
+  background: #121212;
+}
+.dark-low-bg {
+  background: #232323;
+}
+.btn-presence-color {
+  border: solid 1px #14cccc;
+  color: #14cccc;
+}
+.btn-presence-color:hover {
+  border: solid 1px #14cccc;
+  background: #14cccc;
+}
+.scroll-down-pane-color {
+  background: #14cccc !important;
+}
+.scroll-down-pane-white {
+  background: #f5f5f5 !important;
+}
+.showcase-area-inner.dark h5 > span {
+  color: #14cccc;
+}
+.showcase-area-inner.dark h1 {
+  color: #080808;
+}
+.showcase-area-inner.dark h6 > span {
+  color: #ffffff;
+  border: solid 1px #14cccc;
+  background: #14cccc;
+}
+.showcase-area-inner.white h5 > span {
+  color: #14cccc;
+}
+.showcase-area-inner.white h1 {
+  color: #ffffff;
+}
+.showcase-area-inner.white h6 > span {
+  color: #ffffff;
+  border: solid 1px #14cccc;
+  background: #14cccc;
+}
+.showcase-area-inner.color h5 > span {
+  color: #080808;
+}
+.showcase-area-inner.color h1 {
+  color: #14cccc;
+}
+.showcase-area-inner.color h6 > span {
+  color: #ffffff;
+  border: solid 1px #14cccc;
+  background: #14cccc;
+}
+.intro h5 > span {
+  border-bottom: solid 1px #14cccc;
+  color: #14cccc;
+}
+.intro-button > a {
+  color: #14cccc;
+  border: solid 1px #14cccc;
+}
+.intro-button > a:hover {
+  color: #080808;
+  border: solid 1px #14cccc;
+  background: #14cccc;
+}
+.intro h2 > span {
+  color: #ffffff;
+  background: #14cccc;
+}
+.intro-mask-color {
+  background: rgba(20, 204, 204, 0.8);
+}
+.scroll-down-pane {
+  background: #14cccc;
+}
+.call-to-action {
+  color: #ffffff;
+}
+.mastfoot {
+  background: #121212;
+}
+.about {
+  background: #f5f5f5;
+}
+.testimonials {
+  background: #f5f5f5;
+}
+.testimonial-brand > span {
+  background: #14cccc;
+  color: #ffffff;
+}
+.user-thumb > img {
+  background: #14cccc;
+}
+.services {
+  background: #ffffff;
+}
+.overlay ul li a:hover,
+.overlay ul li a:focus {
+  color: #14cccc;
+}
+.promotional-area h1 > span {
+  color: #14cccc;
+}
+.emblem-area {
+  background: #14cccc;
+}
+.shoutout-area > h6 > span {
+  border-top: solid 2px #14cccc;
+}
+.shoutout-area > p {
+  color: #14cccc;
+}
+.intro-trigger-button {
+  border: solid 2px #14cccc;
+  color: #14cccc;
+}
+.intro-trigger-button:hover {
+  border: solid 2px #14cccc;
+  background: #14cccc;
+}
+#trigger-overlay {
+  background-color: #14cccc;
+}
+.view-ninth .mask-1,
+.view-ninth .mask-2 {
+  background: #14cccc;
+}
+.view-ninth:hover .content {
+  background: #14cccc;
+}
+ul#portfolioFilter li {
+  color: #ffffff;
+}
+ul#portfolioFilter li:after {
+  color: #080808;
+}
+ul#portfolioFilter li:hover {
+  color: #080808;
+}
+ul#portfolioFilter li.active-filter {
+  color: #080808 !important;
+}
+.project-info-tag {
+  background: #f5f5f5;
+}
+.project-area-inner {
+  background: #14cccc;
+}
+.project-area-inner h5 > span {
+  color: #ffffff;
+}
+.project-area-inner h1 {
+  color: #ffffff;
+}
+.project-area-inner h5 > span {
+  color: #080808;
+}
+.project-area-inner h6 > span {
+  color: #ffffff;
+  border: solid 1px #080808;
+  background: #080808;
+}
+.project-area-inner h5 > span > strong {
+  color: #ffffff;
+}
+.top-frame {
+  border-top: solid 10px #14cccc;
+}
+#item_slider .flex-direction-nav li a {
+  background: #14cccc;
+}
+#item_slider .flex-direction-nav li a:hover {
+  background: #080808;
+}
+#control_buttons a:hover {
+  border: solid 2px #14cccc;
+  background: #14cccc;
+  color: #ffffff;
+}
+.email-thumb > img,
+.newsletter-thumb > img,
+.twitter-thumb > img {
+  background: #080808;
+}
+.stats-des > span.color-border {
+  border: solid 1px #14cccc !important;
+}
+.nav li > a {
+  background: transparent !important;
+}
+.nav.dark li > a {
+  color: #080808;
+}
+.nav.white li > a {
+  color: #ffffff;
+}
+.standard-header .navbar .nav > li > a:hover,
+.standard-header .navbar .nav > li > a.active {
+  color: #ffffff;
+  background: #14cccc !important;
+}
+.standard-header .navbar .nav > li.active > a:hover,
+.standard-header .navbar .nav > li.active > a.active {
+  color: #14cccc;
+}
+.pace .pace-progress {
+  background-color: #14cccc;
+}
+.featured-roller {
+  background: #14cccc;
+}

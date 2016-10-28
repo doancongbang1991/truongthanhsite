@@ -23,6 +23,7 @@ namespace DataLayer
         public const string TBC_ArchTypeID = "ArchTypeID";
         public const string TBC_ArchTypeName = "ArchTypeName";
         public const string TBC_ArchThump = "ArchThump";
+        public const string TBC_ArchDesp= "ArchDesp";
         public DataTable GetDataBy()
         {
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
@@ -37,11 +38,19 @@ namespace DataLayer
             DataTable dtResult = lib.GetAllByID(id);
             return dtResult;
         }
+        public DataTable GetDataByType(string typeid)
+        {
+            QueryLibrary lib = new QueryLibrary(ViewName, TBC_ArchTypeID);
+            DataTable dtResult = lib.GetAllByID(typeid);
+            return dtResult;
+        }
+        
+        
         public bool Insert(ref ArchEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_ArchName, TBC_ArchDetail, TBC_ArchTypeID, TBC_ArchThump };
-            dDatas = new object[] { obj.ArchName, obj.ArchDetail, obj.ArchTypeID, obj.ArchThump };
+            dFields = new string[] { TBC_ArchName, TBC_ArchDetail, TBC_ArchTypeID, TBC_ArchThump, TBC_ArchDesp };
+            dDatas = new object[]  { obj.ArchName, obj.ArchDetail, obj.ArchTypeID, obj.ArchThump, obj.ArchDesp };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
             obj.ArchID = lib.Insert(dFields, dDatas);
             bResult = Convert.ToBoolean(obj.ArchID);
@@ -51,8 +60,8 @@ namespace DataLayer
         public bool Update(ArchEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_ArchName, TBC_ArchDetail, TBC_ArchTypeID, TBC_ArchThump };
-            dDatas = new object[] { obj.ArchName, obj.ArchDetail, obj.ArchTypeID, obj.ArchThump };
+            dFields = new string[] { TBC_ArchName, TBC_ArchDetail, TBC_ArchTypeID, TBC_ArchThump, TBC_ArchDesp };
+            dDatas = new object[] { obj.ArchName, obj.ArchDetail, obj.ArchTypeID, obj.ArchThump, obj.ArchDesp };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
             bResult = Convert.ToBoolean(lib.Update(obj.ArchID, dFields, dDatas));
             return bResult;

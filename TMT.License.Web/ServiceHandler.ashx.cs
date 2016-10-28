@@ -63,6 +63,12 @@ namespace TMT.License.Web
                 case "GetArchType":
                     GetArchType(context);
                     break;
+                case "GetArchByType":
+                    GetArchByType(context);
+                    break;
+                case "GetArchByID":
+                    GetArchByID(context);
+                    break;
                 //case "GetFurByType":
                 //    GetFurByType(context);
                 //    break;
@@ -362,6 +368,57 @@ namespace TMT.License.Web
                     tmp.ArchTypeID = int.Parse(dt.Rows[r][ArchTypeData.TBC_ArchTypeID].ToString());
                     tmp.ArchTypeName = dt.Rows[r][ArchTypeData.TBC_ArchTypeName].ToString();
                     
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetArchByType(HttpContext context)
+        {
+
+            context.Response.ContentType = "text/json";
+            var idStr = context.Request["typeid"];
+            List<ArchEntities> list = new List<ArchEntities>();
+            DataTable dt = new ArchData().GetDataByType(idStr);
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    ArchEntities tmp = new ArchEntities();
+
+                    tmp.ArchID = int.Parse(dt.Rows[r][ArchData.TBC_ArchID].ToString());
+                    tmp.ArchName = dt.Rows[r][ArchData.TBC_ArchName].ToString();
+                    tmp.ArchTypeID = int.Parse( dt.Rows[r][ArchData.TBC_ArchTypeID].ToString());
+                    tmp.ArchThump = dt.Rows[r][ArchData.TBC_ArchThump].ToString();
+                    tmp.ArchTypeName = dt.Rows[r][ArchData.TBC_ArchTypeName].ToString();
+                    tmp.ArchDesp = dt.Rows[r][ArchData.TBC_ArchDesp].ToString();
+                    list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetArchByID(HttpContext context)
+        {
+
+            context.Response.ContentType = "text/json";
+            var idStr = context.Request["archid"];
+            List<ArchEntities> list = new List<ArchEntities>();
+            DataTable dt = new ArchData().GetDataByID(idStr);
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    ArchEntities tmp = new ArchEntities();
+
+                    tmp.ArchID = int.Parse(dt.Rows[r][ArchData.TBC_ArchID].ToString());
+                    tmp.ArchName = dt.Rows[r][ArchData.TBC_ArchName].ToString();
+                    tmp.ArchDetail = dt.Rows[r][ArchData.TBC_ArchDetail].ToString();
+                    tmp.ArchTypeID = int.Parse(dt.Rows[r][ArchData.TBC_ArchTypeID].ToString());
+                    tmp.ArchThump = dt.Rows[r][ArchData.TBC_ArchThump].ToString();
+                    tmp.ArchTypeName = dt.Rows[r][ArchData.TBC_ArchTypeName].ToString();
+                    tmp.ArchDesp = dt.Rows[r][ArchData.TBC_ArchDesp].ToString();
                     list.Add(tmp);
                 }
             }
