@@ -1,16 +1,16 @@
 ﻿
-        function CallHandler() {
-            $.ajax({
-                url: "../ServiceHandler.ashx",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                responseType: "json",
-                data: { method: 'GetSite' },
-                success: OnComplete,
-                error: OnFail
-            });
-            return false;
-        }
+function CallHandler() {
+    $.ajax({
+        url: "../ServiceHandler.ashx",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        responseType: "json",
+        data: { method: 'GetSite' },
+        success: OnComplete,
+        error: OnFail
+    });
+    return false;
+}
 
 function OnComplete(result) {
     //var obj = JSON.parse(result);
@@ -35,7 +35,7 @@ app.controller('projectctrlr', function ($scope, $http) {
     $http(req)
     .then(function (response) {
         $scope.sites = response.data;
-       
+
     });
     var req1 = {
         method: 'GET',

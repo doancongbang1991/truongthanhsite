@@ -22,7 +22,8 @@ namespace DataLayer
         public const string TBC_ProjectDetail = "ProjectDetail";
         public const string TBC_ProjectTypeID = "ProjectTypeID";
         public const string TBC_ProjectImg = "ProjectImg";
-       
+        public const string TBC_ProjectImgFull = "ProjectImgFull";
+        public const string TBC_ProjectTypeName = "ProjectTypeName";
         public DataTable GetDataBy()
         {
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ProjectID);
@@ -31,12 +32,17 @@ namespace DataLayer
             DataTable dtResult = lib.GetDataBy("*", 0, "AND", Fields, Datas);
             return dtResult;
         }
-
+        public DataTable GetDataByID(string id)
+        {
+            QueryLibrary lib = new QueryLibrary(ViewName, TBC_ProjectID);
+            DataTable dtResult = lib.GetAllByID(id);
+            return dtResult;
+        }
         public bool Insert(ref ProjectsEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_ProjectName, TBC_ProjectDetail, TBC_ProjectTypeID, TBC_ProjectImg };
-            dDatas = new object[] { obj.ProjectName, obj.ProjectDetail, obj.ProjectTypeID, obj.ProjectImg };
+            dFields = new string[] { TBC_ProjectName, TBC_ProjectDetail, TBC_ProjectTypeID, TBC_ProjectImg ,TBC_ProjectImgFull};
+            dDatas = new object[] { obj.ProjectName, obj.ProjectDetail, obj.ProjectTypeID, obj.ProjectImg,obj.ProjectImgFull };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ProjectID);
             obj.ProjectID = lib.Insert(dFields, dDatas);
             bResult = Convert.ToBoolean(obj.ProjectID);
@@ -46,8 +52,8 @@ namespace DataLayer
         public bool Update(ProjectsEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_ProjectName, TBC_ProjectDetail, TBC_ProjectTypeID, TBC_ProjectImg };
-            dDatas = new object[] { obj.ProjectName, obj.ProjectDetail, obj.ProjectTypeID, obj.ProjectImg };
+            dFields = new string[] { TBC_ProjectName, TBC_ProjectDetail, TBC_ProjectTypeID, TBC_ProjectImg ,TBC_ProjectImgFull};
+            dDatas = new object[] { obj.ProjectName, obj.ProjectDetail, obj.ProjectTypeID, obj.ProjectImg, obj.ProjectImgFull };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ProjectID);
             bResult = Convert.ToBoolean(lib.Update(obj.ProjectID, dFields, dDatas));
             return bResult;

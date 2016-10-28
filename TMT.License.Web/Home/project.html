@@ -12,7 +12,8 @@
     <meta name="DC.Subject" content="Nhà đẹp" />
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-    <script src="bootstrap/js/bootstrap.js" ></script> 
+    
+    <link rel="stylesheet" href="dist/css/lightbox.css"/>
     <title>Dự Án | Trường Thành</title>
 
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
@@ -21,7 +22,7 @@
 
     <link href="Scripts/video-js/video-js.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" src="Scripts/jquery-1.5.1.min.js"></script>
+     <script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
 
     <script type="text/javascript" src="Scripts/jquery.animate-shadow-min.js"></script>
 
@@ -42,7 +43,7 @@
     <script type="text/javascript" src="Scripts/comment.js"></script>
 
     <script type="text/javascript" src="Scripts/main.js"></script>
-
+    <script src="bootstrap/js/bootstrap.js" ></script> 
     <link type="text/css" href="asseted86.css?id=kwAAAB-LCAAAAAAABABVjkEKgzAURO8y65CaiBWy7TGKixJ_oKiJxK8UJHf3owvpbubNW8yOHu69Y4bDK0WmyFAIJ4vCmEbK30H7NE0par8sMie4qqh_oafwWUe-DVO60il4PqUfP65lk2orY7TVrbECvByon40EOM4rlQOSgqr9kwAAAA%3d%3d" rel="stylesheet" />
 
     <!-- Please call pinit.js only once per page -->
@@ -66,28 +67,35 @@
 
              <ul id="h-menu">
                 <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#da2911;font-size:16px;">Hotline: 0913246357</a></li>
+                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 2px #ffffff;">Hotline: 0913246357</a></li>
             </ul><!-- #h-menu -->
+
             <div id="h-content" ng-repeat="sitedetail in sitedetails" >
                 <h2 style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">{{sitedetail.SiteDetail}}</h2>
                 <div id="h-description" style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">
                     <h3>{{sitedetail.SiteDesp}}</h3>
                 </div> <!-- #h-description -->
-            </div> <!-- #h-content -->
+            </div> 
+            <!-- #h-content -->
         </div><!-- #header -->
     </div><!-- #outer-main -->
 
    <div id="content">
             
             <div class="col-md-4" ng-repeat="project in projects">
-                <a href="#">
-                    <div class="boxshadow" style="height: 172px;width: 302px;border: 1px solid; border-radius: 2px;box-shadow: 0px 0px 15px #888888;"><div><img ng-src="{{project.ProjectImg}}" /></div></div>
-                    <p class="td text-center" style="color:black;"><strong>{{project.ProjectName}}</strong></p>
-                    <p class="pInfo text-center" style="color:black;">{{project.ProjectDetail}}</p>
+               <!-- <a href="./ProjectDetail.html?id={{project.ProjectID}}">-->
+                <a data-lightbox="project" href="{{project.ProjectImgFull}}" title="{{project.ProjectName}}<br>{{project.ProjectDetail}}">
+                    <div class="boxshadow" style="height: 172px; width: 302px; border: 1px solid; border-radius: 2px; box-shadow: 0px 0px 15px #888888;">
+                        <div>
+                           <img ng-src="{{project.ProjectImg}}" />
+                        </div>
+                    </div>
+                    <p class="td text-center" style="color: black;"><strong>{{project.ProjectName}}</strong></p>
+                    <p class="pInfo text-center" style="color: black;">{{project.ProjectTypeName}}</p>
                     <br />
                 </a>
                 <div class="clear"></div>
-            </div><!-- .col3 -->
+            </div>
            
             <div class="col3 hidden">
                 <a href="#">
@@ -204,7 +212,7 @@
                 <div class="clear"></div>
 
                 <div id="copyright">
-                    <p><a href="#" style="cursor:text;background:none;padding:0;color:#fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://dsc.vn">dsc.vn</a></a></p>
+                    <p><a href="#" style="cursor:text;background:none;padding:0;color:#fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://nichietsuvn.com/">Nichietsu</a></a></p>
 
                     <p class="hi">
                         <a href="index.html" title="Nhà đẹp">Nhà đẹp</a>
@@ -220,5 +228,6 @@
     </div><!-- #outer-foot -->
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./project.js"></script>
+    <script src="dist/js/lightbox.min.js"></script>
 </body>
 </html>

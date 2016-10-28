@@ -211,6 +211,15 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Column colProjectImg;
         
         /// <summary>
+        /// colProjectImgFull control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Column colProjectImgFull;
+        
+        /// <summary>
         /// grvPosition control.
         /// </summary>
         /// <remarks>
@@ -335,6 +344,15 @@ namespace TMT.License.Web.License {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.TextField txtProjectImg;
+        
+        /// <summary>
+        /// txtProjectImgFull control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.TextField txtProjectImgFull;
         
         /// <summary>
         /// btApprove control.

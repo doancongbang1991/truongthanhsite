@@ -93,7 +93,8 @@
                                             <Items>
 
                                                 <ext:Panel ID="pnlmap" runat="server" Height="350" Region="Center" Title="Bản Đồ" AutoScroll="false">
-                                                    <Loader ID="Loader1" runat="server" Url="" Mode="Frame" AutoLoad="false">
+                                                    
+                                                    <Loader ID="Loader1" runat="server" Url="" Mode="Frame" AutoLoad="false" >
                                                         <LoadMask ShowMask="true" />
                                                     </Loader>
 

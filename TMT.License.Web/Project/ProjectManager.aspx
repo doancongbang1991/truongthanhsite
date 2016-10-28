@@ -157,6 +157,7 @@
                                             <ext:ModelField Name="ProjectTypeID" />
                                             <ext:ModelField Name="ProjectImg" />
                                             <ext:ModelField Name="ProjectTypeName" />
+                                            <ext:ModelField Name="ProjectImgFull" />
                                         </Fields>
                                     </ext:Model>
                                 </Model>
@@ -174,6 +175,7 @@
                                 <ext:Column ID="colProjectTypeID" runat="server" DataIndex="ProjectTypeID" Text="Type"  Flex="10"  Hidden="true"/>
                                 <ext:Column ID="ColProjectTypeName" runat="server" DataIndex="ProjectTypeName" Text="Type"  Flex="10"  />
                                 <ext:Column ID="colProjectImg" runat="server" DataIndex="ProjectImg" Text="Img" Flex="15" />
+                                <ext:Column ID="colProjectImgFull" runat="server" DataIndex="ProjectImgFull" Text="Img Full" Flex="15" />
                                 </Columns>
                         </ColumnModel>
                         <View>
@@ -253,6 +255,7 @@
                         </Store>
                     </ext:ComboBox>
                     <ext:TextField ID="txtProjectImg" runat="server" FieldLabel="Project Image"  Text=""/>
+                    <ext:TextField ID="txtProjectImgFull" runat="server" FieldLabel="Image Full"  Text=""/>
                 </Items>
             </ext:FieldSet>
         </Items>

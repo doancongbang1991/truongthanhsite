@@ -11,6 +11,8 @@ namespace Entities
         public string ProjectDetail { get; set; }
         public int ProjectTypeID { get; set; }
         public string ProjectImg { get; set; }
+        public string ProjectImgFull { get; set; }
+        public string ProjectTypeName { get; set; }
         public ProjectsEntities()
         {
 

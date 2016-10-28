@@ -16,7 +16,7 @@
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="dist/css/lightbox.css"/>
     <link href="Scripts/video-js/video-js.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
@@ -67,7 +67,7 @@
 
             <ul id="h-menu">
                 <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#da2911;font-size:16px;">Hotline: 0913246357</a></li>
+                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 2px #ffffff;">Hotline: 0913246357</a></li>
             </ul>
             <!-- #h-menu -->
             <div id="h-content" ng-repeat="sitedetail in sitedetails" >
@@ -78,11 +78,43 @@
             </div> <!-- #h-content -->
             <!-- #h-content -->
 
-            <ul id="h-menu-g" class="nav nav-tabs">
+           <!-- <ul id="h-menu-g" class="nav nav-tabs">
                 <li class="active"><a href="#all" data-toggle="tab" >Tất cả</a></li>
                 <li ng-repeat="contype in contypes"><a data-toggle="tab" href="#con{{contype.ConTypeID}}">{{contype.ConTypeName}}</a></li>
 
-            </ul>
+            </ul>-->
+            <nav class="navbar navbar-default transparent" style="top:270px;background:transparent;border:none;">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        
+                       
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle glyphicon glyphicon-list" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="active"><a href="#all" data-toggle="tab" >Tất cả</a></li>
+                <li ng-repeat="contype in contypes"><a data-toggle="tab" href="#con{{contype.ConTypeID}}">{{contype.ConTypeName}}</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
             <!-- #h-menu-g -->
         </div>
         <!-- #header -->
@@ -93,14 +125,14 @@
         <div class="tab-content">
             <div id="all" class="tab-pane fade in active">
                 <div class="col-md-4" ng-repeat="con in cons">
-                    <a href="#">
+                    <a data-lightbox="constructionAll" href="{{con.ConImg}}" title="{{con.ConName}}<br>{{con.ConDetail}}">
                         <div class="boxshadow" style="height: 172px; width: 302px; border: 1px solid; border-radius: 2px; box-shadow: 0px 0px 15px #888888;">
                             <div>
                                 <img ng-src="{{con.ConImg}}" />
                             </div>
                         </div>
                         <p class="td text-center" style="color: black;"><strong>{{con.ConName}}</strong></p>
-                        <p class="pInfo text-center" style="color: black;">{{con.ConDetail}}</p>
+                        <p class="pInfo text-center" style="color: black;">{{con.ConTypeName}}</p>
                         <br />
                     </a>
                     <div class="clear"></div>
@@ -108,14 +140,14 @@
             </div>
             <div id="con{{conbytype.ConTypeID}}" class="tab-pane fade" ng-repeat="conbytype in conbytypes">
                 <div class="col-md-4" ng-repeat="con in conbytype.listcon">.
-                    <a href="#">
+                     <a data-lightbox="construction{{con.ConTypeID}}" href="{{con.ConImg}}" title="{{con.ConName}}<br>{{con.ConDetail}}">
                         <div class="boxshadow" style="height: 172px; width: 302px; border: 1px solid; border-radius: 2px; box-shadow: 0px 0px 15px #888888;">
                             <div>
                                 <img ng-src="{{con.ConImg}}" />
                             </div>
                         </div>
                         <p class="td text-center" style="color: black;"><strong>{{con.ConName}}</strong></p>
-                        <p class="pInfo text-center" style="color: black;">{{con.ConDetail}}</p>
+                        <p class="pInfo text-center" style="color: black;">{{con.ConTypeName}}</p>
                         <br />
                     </a>
                     <div class="clear"></div>
@@ -219,7 +251,7 @@
                 <div class="clear"></div>
 
                 <div id="copyright">
-                    <p><a href="#" style="cursor:text;background:none;padding:0;color:#fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://dsc.vn">dsc.vn</a></a></p>
+                    <p><a href="#" style="cursor:text;background:none;padding:0;color:#fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://nichietsuvn.com/">Nichietsu</a></a></p>
 
                     <p class="hi">
                         <a href="index.html" title="Nhà đẹp">Nhà đẹp</a>
@@ -235,5 +267,6 @@
     </div><!-- #outer-foot -->
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./construction.js"></script>
+    <script src="dist/js/lightbox.min.js"></script>
 </body>
 </html>

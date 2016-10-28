@@ -25,7 +25,7 @@ namespace DataLayer
         public const string TBC_ConDetail = "ConDetail";
         public const string TBC_ConTypeID = "ConTypeID";
         public const string TBC_ConImg = "ConImg";
-        
+        public const string TBC_ConTypeName = "ConTypeName";
         public DataTable GetDataBy()
         {
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ConID);

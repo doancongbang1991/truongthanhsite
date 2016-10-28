@@ -56,7 +56,7 @@ namespace TMT.License.Web.License
             else
             {
                 string json = e.ExtraParams["grPosition_Select_Values"];
-                string[] Fields = new string[] { ProjectsData.TBC_ProjectID, ProjectsData.TBC_ProjectName, ProjectsData.TBC_ProjectDetail, ProjectsData.TBC_ProjectTypeID, ProjectsData.TBC_ProjectImg };
+                string[] Fields = new string[] { ProjectsData.TBC_ProjectID, ProjectsData.TBC_ProjectName, ProjectsData.TBC_ProjectDetail, ProjectsData.TBC_ProjectTypeID, ProjectsData.TBC_ProjectImg,ProjectsData.TBC_ProjectImgFull};
                 string[] value = UserCommon.GetValueFromJson(json, Fields);
                 ClearAllFields_Details();
                 UserCommon.ReadOnlyControl(txtProjectName, true);
@@ -113,6 +113,7 @@ namespace TMT.License.Web.License
             this.txtProjectDetail.Text = "";
             this.txtProjectImg.Text = "";
             UserCommon.SetValueControl(this.cbbProjectType, "0");
+            this.txtProjectImgFull.Text = "";
         }
         private void ShowDetails_Details(string[] Value)
         {
@@ -121,6 +122,7 @@ namespace TMT.License.Web.License
             this.txtProjectDetail.Text = Value[2];
             UserCommon.SetValueControl(this.cbbProjectType, Value[3]);
             this.txtProjectImg.Text = Value[4];
+            this.txtProjectImg.Text = Value[5];
         }
         private ProjectsEntities GetProject(ref bool Insert, ref string Exception)
         {
@@ -154,6 +156,7 @@ namespace TMT.License.Web.License
             res.ProjectName = txtProjectName.Text.Trim();
             res.ProjectDetail = txtProjectDetail.Text;
             res.ProjectImg = txtProjectImg.Text;
+            res.ProjectImgFull = txtProjectImgFull.Text;
             return res;
         }
         protected void btApprove_Click(object sender, DirectEventArgs e)

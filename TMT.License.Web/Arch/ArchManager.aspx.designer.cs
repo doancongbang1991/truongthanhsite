@@ -175,13 +175,13 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Column colArchName;
         
         /// <summary>
-        /// colArchDetail control.
+        /// colArchTypeName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Column colArchDetail;
+        protected global::Ext.Net.Column colArchTypeName;
         
         /// <summary>
         /// grvPosition control.
@@ -238,13 +238,22 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Window winDetails;
         
         /// <summary>
-        /// FieldSet5 control.
+        /// Fieldcontain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.FieldSet FieldSet5;
+        protected global::Ext.Net.FieldContainer Fieldcontain;
+        
+        /// <summary>
+        /// pnlInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Panel pnlInfo;
         
         /// <summary>
         /// hiID control.
@@ -265,13 +274,49 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.TextField txtArchName;
         
         /// <summary>
-        /// txtArchDetail control.
+        /// txtArchThump control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextArea txtArchDetail;
+        protected global::Ext.Net.TextField txtArchThump;
+        
+        /// <summary>
+        /// cbbArchType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ComboBox cbbArchType;
+        
+        /// <summary>
+        /// stcbbPID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Store stcbbPID;
+        
+        /// <summary>
+        /// Model1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Model Model1;
+        
+        /// <summary>
+        /// edArchDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.HtmlEditor edArchDetail;
         
         /// <summary>
         /// btApprove control.

@@ -19,8 +19,9 @@ namespace TMT.License.Web.License
         {
 
             //LoadSiteName();
-            LoadMap();
+            
             LoadInfo();
+            LoadMap();
         }
         protected void SendMail(object sender, EventArgs e)
         {

@@ -30,6 +30,9 @@ namespace TMT.License.Web
                 case "GetProject":
                     GetProject(context);
                     break;
+                case "GetProjectByID":
+                    GetProjectByID(context);
+                    break;
                 case "GetFur":
                     GetFur(context);
                     break;
@@ -57,8 +60,8 @@ namespace TMT.License.Web
                 case "GetAbout":
                     GetAbout(context);
                     break;
-                case "GetArch":
-                    GetArch(context);
+                case "GetArchType":
+                    GetArchType(context);
                     break;
                 //case "GetFurByType":
                 //    GetFurByType(context);
@@ -84,12 +87,40 @@ namespace TMT.License.Web
                     tmp.ProjectDetail = dt.Rows[r][ProjectsData.TBC_ProjectDetail].ToString();
                     tmp.ProjectImg = dt.Rows[r][ProjectsData.TBC_ProjectImg].ToString();
                     tmp.ProjectTypeID = int.Parse(dt.Rows[r][ProjectsData.TBC_ProjectTypeID].ToString());
-                    
+                    tmp.ProjectImgFull = dt.Rows[r][ProjectsData.TBC_ProjectImgFull].ToString();
+                    tmp.ProjectTypeName = dt.Rows[r][ProjectsData.TBC_ProjectTypeName].ToString();
                     list.Add(tmp);
                 }
             }
             var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             context.Response.Write(response);
+        }
+        public void GetProjectByID(HttpContext context)
+        {
+            context.Response.ContentType = "text/json";
+            var idStr = context.Request["id"];
+            if (!string.IsNullOrEmpty(idStr))
+            {
+                List<ProjectsEntities> list = new List<ProjectsEntities>();
+                DataTable dt = new ProjectsData().GetDataByID(idStr);
+                if (dt.Rows.Count > 0)
+                {
+                    for (int r = 0; r < dt.Rows.Count; r++)
+                    {
+                        ProjectsEntities tmp = new ProjectsEntities();
+                        tmp.ProjectID = int.Parse(dt.Rows[r][ProjectsData.TBC_ProjectID].ToString());
+                        tmp.ProjectName = dt.Rows[r][ProjectsData.TBC_ProjectName].ToString();
+                        tmp.ProjectDetail = dt.Rows[r][ProjectsData.TBC_ProjectDetail].ToString();
+                        tmp.ProjectImg = dt.Rows[r][ProjectsData.TBC_ProjectImg].ToString();
+                        tmp.ProjectTypeID = int.Parse(dt.Rows[r][ProjectsData.TBC_ProjectTypeID].ToString());
+                        tmp.ProjectImgFull = dt.Rows[r][ProjectsData.TBC_ProjectImgFull].ToString();
+                        list.Add(tmp);
+                    }
+                }
+                var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+                context.Response.Write(response);
+            }
+            
         }
         public void GetSite(HttpContext context)
         {
@@ -182,7 +213,7 @@ namespace TMT.License.Web
                     tmp.ConDetail = dt.Rows[r][ConstructionData.TBC_ConDetail].ToString();
                     tmp.ConImg = dt.Rows[r][ConstructionData.TBC_ConImg].ToString();
                     tmp.ConTypeID = int.Parse(dt.Rows[r][ConstructionData.TBC_ConTypeID].ToString());
-
+                    tmp.ConTypeName = dt.Rows[r][ConstructionData.TBC_ConTypeName].ToString();
                     list.Add(tmp);
                 }
             }
@@ -213,7 +244,7 @@ namespace TMT.License.Web
                             tmp1.ConDetail = dt1.Rows[r1][ConstructionData.TBC_ConDetail].ToString();
                             tmp1.ConImg = dt1.Rows[r1][ConstructionData.TBC_ConImg].ToString();
                             tmp1.ConTypeID = int.Parse(dt1.Rows[r1][ConstructionData.TBC_ConTypeID].ToString());
-
+                            tmp1.ConTypeName = dt.Rows[r][ConstructionData.TBC_ConTypeName].ToString();
                             tmp.listcon.Add(tmp1);
                         }
                     }
@@ -317,20 +348,20 @@ namespace TMT.License.Web
             var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             context.Response.Write(response);
         }
-        public void GetArch(HttpContext context)
+        public void GetArchType(HttpContext context)
         {
 
             context.Response.ContentType = "text/json";
-            List<ArchEntities> list = new List<ArchEntities>();
-            DataTable dt = new ArchData().Search(null, "");
+            List<ArchTypeEntities> list = new List<ArchTypeEntities>();
+            DataTable dt = new ArchTypeData().Search(null, "");
             if (dt.Rows.Count > 0)
             {
                 for (int r = 0; r < dt.Rows.Count; r++)
                 {
-                    ArchEntities tmp = new ArchEntities();
-                    tmp.ArchID = int.Parse(dt.Rows[r][ArchData.TBC_ArchID].ToString());
-                    tmp.ArchName = dt.Rows[r][ArchData.TBC_ArchName].ToString();
-                    tmp.ArchDetail = dt.Rows[r][ArchData.TBC_ArchDetail].ToString();
+                    ArchTypeEntities tmp = new ArchTypeEntities();
+                    tmp.ArchTypeID = int.Parse(dt.Rows[r][ArchTypeData.TBC_ArchTypeID].ToString());
+                    tmp.ArchTypeName = dt.Rows[r][ArchTypeData.TBC_ArchTypeName].ToString();
+                    
                     list.Add(tmp);
                 }
             }

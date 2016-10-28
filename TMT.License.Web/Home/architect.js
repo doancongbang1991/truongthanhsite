@@ -40,11 +40,11 @@ app.controller('architectctrlr', function ($scope, $http) {
     var req1 = {
         method: 'GET',
         url: '../ServiceHandler.ashx',
-        params: { method: 'GetArch' }
+        params: { method: 'GetArchType' }
     };
     $http(req1)
     .then(function (response) {
-        $scope.archs = response.data;
+        $scope.archtypes = response.data;
 
     });
     var name = "Arch";

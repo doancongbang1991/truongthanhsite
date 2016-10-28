@@ -67,34 +67,67 @@
 
             <ul id="h-menu">
                 <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#da2911;font-size:16px;">Hotline: 0913246357</a></li>
+                <li><a href="#" style="color: #fb1414; font-size: 16px; text-shadow: 0px 0px 2px #ffffff;">Hotline: 0913246357</a></li>
             </ul>
             <!-- #h-menu -->
-            
+
             <div id="h-content" ng-repeat="sitedetail in sitedetails" style="width: 100%">
-                <h2 style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">{{sitedetail.SiteDetail}}</h2>
+                <h2 style="color: #354ea2; text-shadow: 1px 1px 2px #ffffff;">{{sitedetail.SiteDetail}}</h2>
                 <div id="h-description">
-                    <textarea readonly style="border: none; overflow: hidden; resize: none; width: 100%; font-size: 16px; height: 80px; background: transparent; color:#354ea2;text-shadow: 1px 1px 2px #ffffff;font-weight: bold;">{{sitedetail.SiteDesp}}</textarea>
-                    
+                    <textarea readonly style="border: none; overflow: hidden; resize: none; width: 100%; font-size: 16px; height: 80px; background: transparent; color: #354ea2; text-shadow: 1px 1px 2px #ffffff; font-weight: bold;">{{sitedetail.SiteDesp}}</textarea>
+
                 </div>
                 <!-- #h-description -->
             </div>
             <!-- #h-content -->
-            <ul id="h-menu-g" class="nav nav-tabs">
-                <li ><a data-toggle="tab" href="#archPhongThuy">Xem Phong Thủy</a></li>
+            <!--<ul id="h-menu-g" class="nav nav-tabs">
+                <li><a data-toggle="tab" href="#archPhongThuy">Xem Phong Thủy</a></li>
                 <li ng-repeat="arch in archs"><a data-toggle="tab" href="#arch{{arch.ArchID}}">{{arch.ArchName}}</a></li>
 
-            </ul>
+            </ul>-->
+            <nav class="navbar navbar-default transparent" style="top:270px;background:transparent;border:none;">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        
+                       
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle glyphicon glyphicon-list" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a data-toggle="tab" href="#archPhongThuy">Xem Phong Thủy</a></li>
+                                    <li ng-repeat="archtype in archtypes"><a data-toggle="tab" href="#archtype{{archtype.ArchTypeID}}">{{archtype.ArchTypeName}}</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
         </div>
         <!-- #header -->
+
     </div>
     <!-- #outer-main -->
 
     <div id="content">
         <div class="tab-content">
-            <div id="archPhongThuy" class="tab-pane fade in active" >
-                
-                
+            <div id="archPhongThuy" class="tab-pane fade in active">
+
+
                 <p><strong>Nhập năm sinh, hướng nhà, giới tính để xem Phong Thủy</strong></p>
                 <p>&nbsp;</p>
                 <form action="#" id="Form1" method="get">
@@ -120,11 +153,11 @@
                     <div class="clear"></div>
                 </form>
             </div>
-            <div id="arch{{arch.ArchID}}" class="tab-pane fade" ng-repeat="arch in archs">
-                <textarea readonly style="border: none;resize:none;width:100%;font-size:13px;height:800px" >{{arch.ArchDetail}}</textarea>
-                
-                
-                  
+            <div id="archtype{{archtype.ArchTypeID}}" class="tab-pane fade" ng-repeat="archtype in archtypes">
+                <textarea readonly style="border: none; resize: none; width: 100%; font-size: 13px; height: 800px">{{archtype.ArchTypeName}}</textarea>
+
+
+
             </div>
         </div>
 
@@ -133,12 +166,12 @@
     </div>
     <!-- #content -->
 
-  <div id="outer-foot">
-       
+    <div id="outer-foot">
+
         <div id="outer-foot2">
             <div id="footer">
-                 <iframe id="maps" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0 "></iframe>
-                <div style="float:left" hidden>
+                <iframe id="maps" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0"></iframe>
+                <div style="float: left" hidden>
                     <div class="col-f1">
                         <fieldset>
                             <legend>NHÂN SỰ</legend>
@@ -147,33 +180,35 @@
                                 Nhân viên a<br />
                                 Nhân viên a<br />
                                 Nhân viên a<br />
-                                <span class="clear" style="display:block;height:7px;"></span>
+                                <span class="clear" style="display: block; height: 7px;"></span>
                                 <strong>Kiến trúc sư</strong><br />
                                 Nhân viên a<br />
                                 Nhân viên a<br />
                                 Nhân viên a<br />
-                                <span class="clear" style="display:block;height:7px;"></span>
-                            </p><!-- .desc-f -->
-                            <div class="clear" style="height:10px;"></div>
+                                <span class="clear" style="display: block; height: 7px;"></span>
+                            </p>
+                            <!-- .desc-f -->
+                            <div class="clear" style="height: 10px;"></div>
                             <legend>Liên kết website</legend>
                             <ul class="link-footer">
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
                             </ul>
-                            <div class="clear" style="height:10px;"></div>
+                            <div class="clear" style="height: 10px;"></div>
                             <legend>Liên kết đối tác</legend>
                             <ul class="link-footer">
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
                             </ul>
                         </fieldset>
 
                         <div class="clear"></div>
-                    </div><!-- .col4-f -->
+                    </div>
+                    <!-- .col4-f -->
 
                     <div class="col-f2">
                         <address>
@@ -189,40 +224,49 @@
                             </fieldset>
                         </address>
                         <div class="clear"></div>
-                    </div><!-- .col4-f -->
+                    </div>
+                    <!-- .col4-f -->
                     <div class="clear"></div>
                 </div>
 
-                <div class="col-f3 last" style="position:relative;" hidden>
+                <div class="col-f3 last" style="position: relative;" hidden>
                     <fieldset>
                         <legend>Gửi mail cho chúng tôi</legend>
-                        <div style="top:37px;color:#ED1C24;font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
+                        <div style="top: 37px; color: #ED1C24; font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
                         <form id="ContactDesign" action="http://www.wonder.vn/Home/ContactDesign" method="post" enctype="multipart/form-data">
                             <div id="contact-form">
                                 <div id="ContactOutput"></div>
-                                <label for="Fullname">Họ và tên:</label> <input type="text" name="Fullname" id="Fullname" value="" /><br />
-                                <label for="Birth">Năm sinh:</label> <input type="text" name="Birth" id="Birth" value="" />
-                                <input type="radio" name="Gender" id="nam" value="nam" /> <label for="nam">Nam</label>
-                                <input type="radio" name="Gender" id="nu" value="nu" /> <label for="nu">Nữ</label><br />
+                                <label for="Fullname">Họ và tên:</label>
+                                <input type="text" name="Fullname" id="Fullname" value="" /><br />
+                                <label for="Birth">Năm sinh:</label>
+                                <input type="text" name="Birth" id="Birth" value="" />
+                                <input type="radio" name="Gender" id="nam" value="nam" />
+                                <label for="nam">Nam</label>
+                                <input type="radio" name="Gender" id="nu" value="nu" />
+                                <label for="nu">Nữ</label><br />
                                 <div class="clear"></div>
 
-                                <label for="Email">Email:</label> <input type="text" name="Email" id="Email" value="" /><br />
-                                <label for="Phone">Số điện thoại:</label> <input type="text" name="Phone" id="Phone" value="" />
+                                <label for="Email">Email:</label>
+                                <input type="text" name="Email" id="Email" value="" /><br />
+                                <label for="Phone">Số điện thoại:</label>
+                                <input type="text" name="Phone" id="Phone" value="" />
                                 <div class="clear"></div>
 
-                                <label for="Phone">Nội dung:</label> <textarea rows="5" cols="100"></textarea>
+                                <label for="Phone">Nội dung:</label>
+                                <textarea rows="5" cols="100"></textarea>
                                 <input type="submit" name="submitlienhe" id="submitlienhe" class="btn-xs btn btn-mod" value="Gửi Email" />
                             </div>
                         </form>
                     </fieldset>
 
-                    <div class="clear" style="height:125px;"></div>
-                </div><!-- .col4-f2 -->
+                    <div class="clear" style="height: 125px;"></div>
+                </div>
+                <!-- .col4-f2 -->
 
                 <div class="clear"></div>
 
                 <div id="copyright">
-                    <p><a href="#" style="cursor:text;background:none;padding:0;color:#fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://dsc.vn">dsc.vn</a></a></p>
+                   <p><a href="#" style="cursor:text;background:none;padding:0;color:#fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://nichietsuvn.com/">Nichietsu</a></a></p>
 
                     <p class="hi">
                         <a href="index.html" title="Nhà đẹp">Nhà đẹp</a>
@@ -233,11 +277,14 @@
                 </div>
                 <div class="clear"></div>
 
-            </div><!-- #footer -->
-        </div><!-- #outer-foot2 -->
-    </div><!-- #outer-foot -->
+            </div>
+            <!-- #footer -->
+        </div>
+        <!-- #outer-foot2 -->
+    </div>
+    <!-- #outer-foot -->
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./architect.js"></script>
-   
+
 </body>
 </html>

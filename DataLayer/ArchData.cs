@@ -20,7 +20,9 @@ namespace DataLayer
         public const string TBC_ArchID = "ArchID";
         public const string TBC_ArchName = "ArchName";
         public const string TBC_ArchDetail = "ArchDetail";
-        
+        public const string TBC_ArchTypeID = "ArchTypeID";
+        public const string TBC_ArchTypeName = "ArchTypeName";
+        public const string TBC_ArchThump = "ArchThump";
         public DataTable GetDataBy()
         {
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
@@ -29,12 +31,17 @@ namespace DataLayer
             DataTable dtResult = lib.GetDataBy("*", 0, "AND", Fields, Datas);
             return dtResult;
         }
-
+        public DataTable GetDataByID(string id)
+        {
+            QueryLibrary lib = new QueryLibrary(ViewName, TBC_ArchID);
+            DataTable dtResult = lib.GetAllByID(id);
+            return dtResult;
+        }
         public bool Insert(ref ArchEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_ArchName, TBC_ArchDetail };
-            dDatas = new object[] { obj.ArchName, obj.ArchDetail, };
+            dFields = new string[] { TBC_ArchName, TBC_ArchDetail, TBC_ArchTypeID, TBC_ArchThump };
+            dDatas = new object[] { obj.ArchName, obj.ArchDetail, obj.ArchTypeID, obj.ArchThump };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
             obj.ArchID = lib.Insert(dFields, dDatas);
             bResult = Convert.ToBoolean(obj.ArchID);
@@ -44,8 +51,8 @@ namespace DataLayer
         public bool Update(ArchEntities obj)
         {
             bool bResult = false;
-            dFields = new string[] { TBC_ArchName, TBC_ArchDetail, };
-            dDatas = new object[] { obj.ArchName, obj.ArchDetail, };
+            dFields = new string[] { TBC_ArchName, TBC_ArchDetail, TBC_ArchTypeID, TBC_ArchThump };
+            dDatas = new object[] { obj.ArchName, obj.ArchDetail, obj.ArchTypeID, obj.ArchThump };
             QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
             bResult = Convert.ToBoolean(lib.Update(obj.ArchID, dFields, dDatas));
             return bResult;
@@ -68,7 +75,7 @@ namespace DataLayer
         {
             string[] Fields = null;
             string[] SFields = new string[] { TBC_ArchID, TBC_ArchName, TBC_ArchDetail};
-            QueryLibrary lib = new QueryLibrary(TableName, TBC_ArchID);
+            QueryLibrary lib = new QueryLibrary(ViewName, TBC_ArchID);
             DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_ArchID, "ASC");
             return dtResult;
         }

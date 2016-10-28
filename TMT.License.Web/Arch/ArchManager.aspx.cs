@@ -40,7 +40,7 @@ namespace TMT.License.Web.License
                 this.txtKeyword.Text = sKeyword[0];
             }
             LoadGrid_Position();
-
+            LoadcbbArchType();
         }
         protected void btAdd_Click(object sender, DirectEventArgs e)
         {
@@ -56,7 +56,7 @@ namespace TMT.License.Web.License
             else
             {
                 string json = e.ExtraParams["grPosition_Select_Values"];
-                string[] Fields = new string[] {ArchData.TBC_ArchID, ArchData.TBC_ArchName, ArchData.TBC_ArchDetail };
+                string[] Fields = new string[] { ArchData.TBC_ArchID, ArchData.TBC_ArchName, ArchData.TBC_ArchDetail };
                 string[] value = UserCommon.GetValueFromJson(json, Fields);
                 ClearAllFields_Details();
                 UserCommon.ReadOnlyControl(txtArchName, true);
@@ -110,18 +110,36 @@ namespace TMT.License.Web.License
         {
             this.hiID.Value = "";
             this.txtArchName.Text = "";
-            this.txtArchDetail.Text = "";
+
         }
         private void ShowDetails_Details(string[] Value)
         {
-            this.hiID.Text = Value[0];
-            this.txtArchName.Text = Value[1];
-            this.txtArchDetail.Text = Value[2];
+            string id = Value[0];
+
+
+            DataTable dt = new ArchData().GetDataByID(id);
+            ArchEntities tmp = new ArchEntities();
+            tmp.ArchID = int.Parse(dt.Rows[0][ArchData.TBC_ArchID].ToString());
+            tmp.ArchName = dt.Rows[0][ArchData.TBC_ArchName].ToString();
+            tmp.ArchDetail = dt.Rows[0][ArchData.TBC_ArchDetail].ToString();
+            tmp.ArchTypeName = dt.Rows[0][ArchData.TBC_ArchTypeName].ToString();
+            tmp.ArchThump = dt.Rows[0][ArchData.TBC_ArchThump].ToString();
+            tmp.ArchTypeID = int.Parse(dt.Rows[0][ArchData.TBC_ArchTypeID].ToString());
+            hiID.Text = tmp.ArchID.ToString();
+            txtArchName.Text = tmp.ArchName;
+            edArchDetail.Text = tmp.ArchDetail;
+            UserCommon.SetValueControl(this.cbbArchType, tmp.ArchTypeID.ToString());
             
         }
         private ArchEntities GetArch(ref bool Insert, ref string Exception)
         {
             ArchEntities res = new ArchEntities();
+            if (cbbArchType.SelectedItem.Value == null)
+            {
+                res.ArchTypeID = 1;
+            }
+            else res.ArchTypeID = int.Parse(cbbArchType.SelectedItem.Value);
+        
             int Archid = UserCommon.ToInt(this.hiID.Value);
             Insert = !UserCommon.ToBoolean(Archid);
             if (!UserCommon.HasValue(this.txtArchName))
@@ -139,11 +157,14 @@ namespace TMT.License.Web.License
                     return null;
                 }
             }
-            else {
+            else
+            {
                 res.ArchID = int.Parse(hiID.Text);
             }
             res.ArchName = txtArchName.Text.Trim();
-            res.ArchDetail = txtArchDetail.Text;
+            res.ArchDetail = edArchDetail.Text;
+            res.ArchThump = txtArchThump.Text;
+            
             return res;
         }
         protected void btApprove_Click(object sender, DirectEventArgs e)
@@ -190,6 +211,16 @@ namespace TMT.License.Web.License
         {
             this.winDetails.Hide();
         }
+        private void LoadcbbArchType()
+        {
+            object[] Datas = null;
+            DataTable dt = new ArchTypeData().Search(Datas, "");
+            this.cbbArchType.SelectedItems.Clear();
 
+            Store store = this.cbbArchType.GetStore();
+            store.DataSource = dt;
+            store.DataBind();
+            UserCommon.SetValueControl(cbbArchType, "0");
+        }
     }
 }

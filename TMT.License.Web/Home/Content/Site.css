@@ -3,7 +3,9 @@
  ***************************************************************/
 @import url('css/vm.reset.css');
 @import url('css/vm.form.css');
+/*Custom*/
 
+/*End Custom*/
 html {
     -webkit-text-size-adjust: none; /* Prevent font scaling in landscape */
 }

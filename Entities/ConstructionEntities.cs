@@ -11,7 +11,7 @@ namespace Entities
         public string ConDetail { get; set; }
         public int ConTypeID { get; set; }
         public string ConImg { get; set; }
-
+        public string ConTypeName { get; set; }
         public ConstructionEntities()
         {
 
