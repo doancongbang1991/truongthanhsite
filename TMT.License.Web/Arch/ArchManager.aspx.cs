@@ -110,6 +110,9 @@ namespace TMT.License.Web.License
         {
             this.hiID.Value = "";
             this.txtArchName.Text = "";
+            this.txtArchThump.Text = "";
+            this.txtArchDesp.Text = "";
+            this.edArchDetail.Text = "";
 
         }
         private void ShowDetails_Details(string[] Value)
@@ -125,8 +128,11 @@ namespace TMT.License.Web.License
             tmp.ArchTypeName = dt.Rows[0][ArchData.TBC_ArchTypeName].ToString();
             tmp.ArchThump = dt.Rows[0][ArchData.TBC_ArchThump].ToString();
             tmp.ArchTypeID = int.Parse(dt.Rows[0][ArchData.TBC_ArchTypeID].ToString());
+            tmp.ArchDesp = dt.Rows[0][ArchData.TBC_ArchDesp].ToString();
             hiID.Text = tmp.ArchID.ToString();
             txtArchName.Text = tmp.ArchName;
+            txtArchDesp.Text = tmp.ArchDesp;
+            txtArchThump.Text = tmp.ArchThump;
             edArchDetail.Text = tmp.ArchDetail;
             UserCommon.SetValueControl(this.cbbArchType, tmp.ArchTypeID.ToString());
             
@@ -164,7 +170,7 @@ namespace TMT.License.Web.License
             res.ArchName = txtArchName.Text.Trim();
             res.ArchDetail = edArchDetail.Text;
             res.ArchThump = txtArchThump.Text;
-            
+            res.ArchDesp = txtArchDesp.Text;
             return res;
         }
         protected void btApprove_Click(object sender, DirectEventArgs e)

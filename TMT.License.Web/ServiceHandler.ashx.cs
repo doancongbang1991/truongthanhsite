@@ -381,9 +381,10 @@ namespace TMT.License.Web
             var idStr = context.Request["typeid"];
             List<ArchEntities> list = new List<ArchEntities>();
             DataTable dt = new ArchData().GetDataByType(idStr);
+            
             if (dt.Rows.Count > 0)
             {
-                for (int r = 0; r < dt.Rows.Count; r++)
+                for (int r = dt.Rows.Count-1; r > -1; r--)
                 {
                     ArchEntities tmp = new ArchEntities();
 
@@ -394,6 +395,7 @@ namespace TMT.License.Web
                     tmp.ArchTypeName = dt.Rows[r][ArchData.TBC_ArchTypeName].ToString();
                     tmp.ArchDesp = dt.Rows[r][ArchData.TBC_ArchDesp].ToString();
                     list.Add(tmp);
+                    
                 }
             }
             var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);

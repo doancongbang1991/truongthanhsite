@@ -225,6 +225,7 @@
                                         </ext:Store>
                                     </Store>
                                 </ext:ComboBox>
+                                <ext:TextArea ID="txtArchDesp" runat="server" FieldLabel="Arch Desp" />
                                 <ext:HtmlEditor
                                     ID="edArchDetail"
                                     runat="server"
