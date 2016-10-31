@@ -16,7 +16,7 @@
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="css/style.css"/> <!-- Gem style -->
     <link href="Scripts/video-js/video-js.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
@@ -67,7 +67,7 @@
 
             <ul id="h-menu">
                 <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 2px #ffffff;">Hotline: 0913246357</a></li>
+                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
             </ul>
             <!-- #h-menu -->
            <div id="h-content" ng-repeat="sitedetail in sitedetails" >
@@ -161,7 +161,7 @@
     </div>
     <!-- #content -->
     <!-- #content -->
-
+     <a href="#0" class="cd-top">Top</a>
    <div id="outer-foot">
        
         <div id="outer-foot2">
@@ -267,5 +267,6 @@
     </div><!-- #outer-foot -->
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./furniture.js"></script>
+    <script src="js/main.js"></script> <!-- Gem jQuery -->
 </body>
 </html>

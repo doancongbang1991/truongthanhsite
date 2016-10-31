@@ -170,9 +170,9 @@
                                     Layout="AnchorLayout" DefaultAnchor="100%">
                                     <Items>
                                         <ext:Label ID="Label9" Html="<i>Thiết Kế Trọng Gói</i>" runat="server" />
-                                        <ext:TextField ID="TextField9" runat="server" Text="0" Editable="false" />
+                                        <ext:TextField ID="txtThietKe" runat="server" Text="0" Editable="false" />
                                         <ext:Label ID="Label10" Html="<i>Dự Phòng Phí</i>" runat="server" />
-                                        <ext:TextField ID="TextField5" runat="server" Text="0" Editable="false" />
+                                        <ext:TextField ID="txtDuPhong" runat="server" Text="0" Editable="false" />
 
                                     </Items>
                                 </ext:FieldContainer>
@@ -180,9 +180,9 @@
                                     Layout="AnchorLayout" DefaultAnchor="100%">
                                     <Items>
                                         <ext:Label ID="Label11" Html="<i>Phần Thô</i>" runat="server" />
-                                        <ext:TextField ID="TextField10" runat="server" Text="0" Editable="false" />
+                                        <ext:TextField ID="txtPhanTho" runat="server" Text="0" Editable="false" />
                                         <ext:Label ID="Label12" Html="<i>Tổng Cộng</i>" runat="server" />
-                                        <ext:TextField ID="TextField6" runat="server" Text="0" Editable="false" />
+                                        <ext:TextField ID="txtTongCong" runat="server" Text="0" Editable="false" />
 
                                     </Items>
                                 </ext:FieldContainer>
@@ -190,7 +190,7 @@
                                     Layout="AnchorLayout" DefaultAnchor="100%">
                                     <Items>
                                         <ext:Label ID="Label13" Html="<i>Hoàn Thiện</i>" runat="server" />
-                                        <ext:TextField ID="TextField11" runat="server" Text="0" Editable="false" />
+                                        <ext:TextField ID="txtHoanThien" runat="server" Text="0" Editable="false" />
 
 
                                     </Items>
@@ -199,7 +199,7 @@
                                     Layout="AnchorLayout" DefaultAnchor="100%">
                                     <Items>
                                         <ext:Label ID="Label15" runat="server" Html="<i>Nội Thất</i>" />
-                                        <ext:TextField ID="TextField12" runat="server" Text="0" Editable="false" />
+                                        <ext:TextField ID="txtNoiThat" runat="server" Text="0" Editable="false" />
                                         <ext:Label ID="Label14" runat="server" Text="." />
                                         <ext:Button ID="btncalc" runat="server" Text="Tính Toán">
                                             <DirectEvents>

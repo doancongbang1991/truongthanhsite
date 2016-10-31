@@ -48,6 +48,7 @@ namespace TMT.License.Core
         public static string TT_Contact = "~/Contact/Contact.aspx";
 
         public static string TT_Cost = "~/Cost/Cost.aspx";
+        public static string TT_CostManager = "~/Cost/CostManager.aspx";
 
         public static string TT_FooterManager = "~/Footer/FooterManager.aspx";
 

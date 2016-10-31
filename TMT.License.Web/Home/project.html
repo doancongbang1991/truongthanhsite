@@ -12,7 +12,7 @@
     <meta name="DC.Subject" content="Nhà đẹp" />
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-    
+    <link rel="stylesheet" href="css/style.css"/> <!-- Gem style -->
     <link rel="stylesheet" href="dist/css/lightbox.css"/>
     <title>Dự Án | Trường Thành</title>
 
@@ -67,7 +67,7 @@
 
              <ul id="h-menu">
                 <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 2px #ffffff;">Hotline: 0913246357</a></li>
+                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
             </ul><!-- #h-menu -->
 
             <div id="h-content" ng-repeat="sitedetail in sitedetails" >
@@ -122,7 +122,7 @@
             <div class="clear"></div>
         </div><!-- #content -->
     <!-- #content -->
-
+     <a href="#0" class="cd-top">Top</a>
   <div id="outer-foot">
        
         <div id="outer-foot2">
@@ -229,5 +229,6 @@
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./project.js"></script>
     <script src="dist/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script> <!-- Gem jQuery -->
 </body>
 </html>

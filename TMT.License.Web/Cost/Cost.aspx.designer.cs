@@ -373,13 +373,13 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Label Label9;
         
         /// <summary>
-        /// TextField9 control.
+        /// txtThietKe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField9;
+        protected global::Ext.Net.TextField txtThietKe;
         
         /// <summary>
         /// Label10 control.
@@ -391,13 +391,13 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Label Label10;
         
         /// <summary>
-        /// TextField5 control.
+        /// txtDuPhong control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField5;
+        protected global::Ext.Net.TextField txtDuPhong;
         
         /// <summary>
         /// FieldSet6 control.
@@ -418,13 +418,13 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Label Label11;
         
         /// <summary>
-        /// TextField10 control.
+        /// txtPhanTho control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField10;
+        protected global::Ext.Net.TextField txtPhanTho;
         
         /// <summary>
         /// Label12 control.
@@ -436,13 +436,13 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Label Label12;
         
         /// <summary>
-        /// TextField6 control.
+        /// txtTongCong control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField6;
+        protected global::Ext.Net.TextField txtTongCong;
         
         /// <summary>
         /// FieldSet7 control.
@@ -463,13 +463,13 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Label Label13;
         
         /// <summary>
-        /// TextField11 control.
+        /// txtHoanThien control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField11;
+        protected global::Ext.Net.TextField txtHoanThien;
         
         /// <summary>
         /// FieldSet8 control.
@@ -490,13 +490,13 @@ namespace TMT.License.Web.License {
         protected global::Ext.Net.Label Label15;
         
         /// <summary>
-        /// TextField12 control.
+        /// txtNoiThat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField TextField12;
+        protected global::Ext.Net.TextField txtNoiThat;
         
         /// <summary>
         /// Label14 control.

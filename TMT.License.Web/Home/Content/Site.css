@@ -449,7 +449,7 @@ body.vertical #header {
 }
 
 #h-menu li a {
-    font-size: 14px;
+    font-size: 15px;
     color: #eee;
     white-space: nowrap;
 }
@@ -481,7 +481,7 @@ body.vertical #v-menu {
 
     #v-menu li a {
         /*background:url(images/bg-button.jpg) no-repeat;*/
-        background: rgba(133, 134, 139, 0.7);
+        background: rgba(133, 134, 139, 0.85);
         /*background-color:#85878d;*/
         display: block;
         padding: 0 10px 0 10px;
@@ -490,6 +490,7 @@ body.vertical #v-menu {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
+        font-size:15px;
     }
 
         #v-menu li a.sel, #v-menu li a:hover {

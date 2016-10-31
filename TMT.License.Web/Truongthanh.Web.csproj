@@ -89,6 +89,7 @@
     <Content Include="Arch\ArchManager.aspx" />
     <Content Include="Construction\ConManager.aspx" />
     <Content Include="Contact\Contact.aspx" />
+    <Content Include="Cost\CostManager.aspx" />
     <Content Include="Footer\Footer.aspx" />
     <Content Include="Footer\FooterManager.aspx" />
     <Content Include="Furniture\FurManager.aspx" />
@@ -284,6 +285,8 @@
     <Content Include="Home\architectpost.js" />
     <Content Include="Home\cost.html" />
     <Content Include="Home\cost.js" />
+    <Content Include="Home\css\font-awesome.min.css" />
+    <Content Include="Home\css\style.css" />
     <Content Include="Home\dist\css\lightbox.css" />
     <Content Include="Home\dist\css\lightbox.min.css" />
     <Content Include="Home\dist\images\close.png" />
@@ -294,6 +297,7 @@
     <Content Include="Home\dist\js\lightbox-plus-jquery.min.js" />
     <Content Include="Home\dist\js\lightbox.js" />
     <Content Include="Home\dist\js\lightbox.min.js" />
+    <Content Include="Home\fonts\fontawesome-webfont.svg" />
     <Content Include="Home\furniture.html" />
     <Content Include="Home\furniture.js" />
     <Content Include="Home\images\150x150\images,cua,w0-cua-nhom-kinh-101.jpg" />
@@ -1665,6 +1669,7 @@
     <Content Include="Home\images\bg\03bak.jpg" />
     <Content Include="Home\images\bg\04.jpg" />
     <Content Include="Home\images\Capture.PNG" />
+    <Content Include="Home\images\cd-top-arrow.svg" />
     <Content Include="Home\images\cdn-network-map.png" />
     <Content Include="Home\images\close.png" />
     <Content Include="Home\images\cross.png" />
@@ -1859,6 +1864,7 @@
     <Content Include="Home\images\vegas\_notes\dwsync.xml" />
     <Content Include="Home\images\vertical-logo.png" />
     <Content Include="Home\images\zoom.png" />
+    <Content Include="Home\img\cd-top-arrow.svg" />
     <Content Include="Home\index.html" />
     <Content Include="Home\index.js" />
     <Content Include="Home\javascripts\animations-init.js" />
@@ -1886,12 +1892,15 @@
     <Content Include="Home\javascripts\platform.js" />
     <Content Include="Home\javascripts\portfolio.js" />
     <Content Include="Home\javascripts\retina.js" />
+    <Content Include="Home\javascripts\Scroll.js" />
     <Content Include="Home\javascripts\showcase-video.js" />
     <Content Include="Home\javascripts\smooth-scroll-standard-nav.js" />
     <Content Include="Home\javascripts\smooth-scroll.js" />
     <Content Include="Home\javascripts\standard-nav-action.js" />
     <Content Include="Home\javascripts\waypoints.min.js" />
     <Content Include="Home\javascripts\wow.js" />
+    <Content Include="Home\js\main.js" />
+    <Content Include="Home\js\modernizr.js" />
     <Content Include="Home\less\color-cyan.css">
       <DependentUpon>color-cyan.less</DependentUpon>
     </Content>
@@ -2131,6 +2140,11 @@
     <Content Include="Home\projects\project-youtube.html" />
     <Content Include="Home\Scripts\angular-bootstrap-lightbox.js" />
     <Content Include="Home\Scripts\angular-bootstrap-lightbox.min.js" />
+    <Content Include="Home\Scripts\collapse.js" />
+    <Content Include="Home\Scripts\transition.js" />
+    <Content Include="scripts\angular-datepicker.min.js" />
+    <Content Include="Home\stylesheets\angular-datepicker.min.css" />
+    <Content Include="Home\Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Home\Scripts\captify.tiny.js" />
     <Content Include="Home\Scripts\comment.js" />
     <Content Include="Home\Scripts\function.js" />
@@ -2147,6 +2161,7 @@
     <Content Include="Home\Scripts\lightbox.min.js" />
     <Content Include="Home\Scripts\main.js" />
     <Content Include="Home\Scripts\math-processor.js" />
+    <Content Include="Home\Scripts\moment.js" />
     <Content Include="Home\Scripts\PriceSetting-636020055951818368.html" />
     <Content Include="Home\Scripts\PriceSetting-636020145675646276.html" />
     <Content Include="Home\Scripts\printPrice.js" />
@@ -2170,10 +2185,10 @@
     <Content Include="Home\Scripts\video-js\video.min.js" />
     <Content Include="Home\Scripts\visualize.jQuery.js" />
     <Content Include="Home\architectpost.html" />
-    <Content Include="Home\single-post.html" />
     <Content Include="Home\stylesheets\angular-bootstrap-lightbox.css" />
     <Content Include="Home\stylesheets\angular-bootstrap-lightbox.min.css" />
     <Content Include="Home\stylesheets\animate.css" />
+    <Content Include="Home\stylesheets\bootstrap-datetimepicker.css" />
     <Content Include="Home\stylesheets\drag.png" />
     <Content Include="Home\stylesheets\fancymenu.css" />
     <Content Include="Home\stylesheets\foliohover.css" />
@@ -2380,6 +2395,16 @@
     <Content Include="Home\Content\font-awesome-4.6.3\scss\font-awesome.scss" />
     <Content Include="Home\dist\js\lightbox-plus-jquery.min.map" />
     <Content Include="Home\dist\js\lightbox.min.map" />
+    <Content Include="Home\scss\style.scss" />
+    <Content Include="Home\partials\_layout.scss" />
+    <Content Include="Home\partials\_mixins.scss" />
+    <Content Include="Home\partials\_variables.scss" />
+    <Content Include="Home\js\.DS_Store" />
+    <Content Include="Home\fonts\fontawesome-webfont.eot" />
+    <Content Include="Home\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Home\fonts\fontawesome-webfont.woff" />
+    <Content Include="Home\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Home\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\License.pubxml" />
     <Content Include="scripts\angular.min.js" />
     <Content Include="ServiceHandler.ashx" />
@@ -2451,6 +2476,13 @@
     </Compile>
     <Compile Include="Contact\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cost\CostManager.aspx.cs">
+      <DependentUpon>CostManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cost\CostManager.aspx.designer.cs">
+      <DependentUpon>CostManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Footer\Footer.aspx.cs">
       <DependentUpon>Footer.aspx</DependentUpon>

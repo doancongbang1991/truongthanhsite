@@ -16,11 +16,11 @@
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Gem style -->
     <link href="Scripts/video-js/video-js.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
-
     <script type="text/javascript" src="Scripts/jquery.animate-shadow-min.js"></script>
 
     <script type="text/javascript" src="Scripts/jquery.innerfade.js"></script>
@@ -40,7 +40,12 @@
     <script type="text/javascript" src="Scripts/comment.js"></script>
 
     <script type="text/javascript" src="Scripts/main.js"></script>
+
     <script src="bootstrap/js/bootstrap.js"></script>
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <link type="text/css" href="asseted86.css?id=kwAAAB-LCAAAAAAABABVjkEKgzAURO8y65CaiBWy7TGKixJ_oKiJxK8UJHf3owvpbubNW8yOHu69Y4bDK0WmyFAIJ4vCmEbK30H7NE0par8sMie4qqh_oafwWUe-DVO60il4PqUfP65lk2orY7TVrbECvByon40EOM4rlQOSgqr9kwAAAA%3d%3d" rel="stylesheet" />
 
@@ -67,7 +72,7 @@
 
             <ul id="h-menu">
                 <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li><a href="#" style="color: #fb1414; font-size: 16px; text-shadow: 0px 0px 2px #ffffff;">Hotline: 0913246357</a></li>
+                <li><a href="#" style="color: #fb1414; font-size: 16px; text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
             </ul>
             <!-- #h-menu -->
 
@@ -125,140 +130,34 @@
 
     <div id="content">
         <div class="tab-content">
-            <div id="archPhongThuy" class="tab-pane fade in active">
-
-
-                <p><strong>Nhập năm sinh, hướng nhà, giới tính để xem Phong Thủy</strong></p>
+            
+            <div id="archPhongThuy" class="tab-pane fade in active text-center center-block">
+                <h3>Nhập năm sinh, hướng nhà, giới tính để xem Phong Thủy</h3>
+                
                 <p>&nbsp;</p>
-                <form action="#" id="Form1" method="get">
-                    <label class="pt">Năm sinh:</label>
-                    <input type="text" name="born" value="" style="width: 70px; height: 19px; margin-right: 10px;" />
-                    <select name="male" style="float: left; width: 80px; height: 25px; margin-right: 20px;">
-                        <option value="1" selected>Nam giới</option>
-                        <option value="0">Nữ giới</option>
-                    </select>
-                    <label class="pt">Hướng nhà:</label>
-                    <select name="huongnha" style="float: left; height: 25px;">
-                        <option value="-">-</option>
-                        <option value="0" selected>Nam</option>
-                        <option value="1">Tây Nam</option>
-                        <option value="2">Tây</option>
-                        <option value="3">Tây Bắc</option>
-                        <option value="4">Bắc</option>
-                        <option value="5">Đông Bắc</option>
-                        <option value="6">Đông</option>
-                        <option value="7">Đông Nam</option>
-                    </select>
-                    <input type="submit" name="submitpt" value="OK" style="float: left; margin: 0 0 0 5px; width: 100px; height: 25px; background: linear-gradient(to bottom, rgb(0,100,200) -50px, white 20px); border: 1px solid #ccc;">
-                    <div class="clear"></div>
+               
+
+                <input id="submit" type="submit" name="submitpt" value="OK" style="margin: 0 0 0 5px; width: 100px; height: 25px; background: linear-gradient(to bottom, rgb(0,100,200) -50px, white 20px); border: 1px solid #ccc;">
+                <div class="clear"></div>
                 </form>
             </div>
             <div id="archtype{{archtype.ArchTypeID}}" class="tab-pane fade" ng-repeat="archtype in archtypes">
-               <!-- <textarea readonly style="border: none; resize: none; width: 100%; font-size: 13px; height: 800px">{{archtype.ArchTypeName}}</textarea>-->
+                <!-- <textarea readonly style="border: none; resize: none; width: 100%; font-size: 13px; height: 800px">{{archtype.ArchTypeName}}</textarea>-->
                 <iframe id="Iframe1" ng-src="{{getIframeSrc(archtype.ArchTypeID)}}" width="100%" height="1200" frameborder="0" style="border: 0"></iframe>
             </div>
         </div>
 
 
         <div class="clear"></div>
-   </div>
+    </div>
     <!-- #content -->
-
+    <a href="#0" class="cd-top">Top</a>
     <div id="outer-foot">
 
         <div id="outer-foot2">
             <div id="footer">
                 <iframe id="maps" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0"></iframe>
-                <div style="float: left" hidden>
-                    <div class="col-f1">
-                        <fieldset>
-                            <legend>NHÂN SỰ</legend>
-                            <p class="desc-f">
-                                <strong>Quản lý</strong><br />
-                                Nhân viên a<br />
-                                Nhân viên a<br />
-                                Nhân viên a<br />
-                                <span class="clear" style="display: block; height: 7px;"></span>
-                                <strong>Kiến trúc sư</strong><br />
-                                Nhân viên a<br />
-                                Nhân viên a<br />
-                                Nhân viên a<br />
-                                <span class="clear" style="display: block; height: 7px;"></span>
-                            </p>
-                            <!-- .desc-f -->
-                            <div class="clear" style="height: 10px;"></div>
-                            <legend>Liên kết website</legend>
-                            <ul class="link-footer">
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                            </ul>
-                            <div class="clear" style="height: 10px;"></div>
-                            <legend>Liên kết đối tác</legend>
-                            <ul class="link-footer">
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
-                            </ul>
-                        </fieldset>
 
-                        <div class="clear"></div>
-                    </div>
-                    <!-- .col4-f -->
-
-                    <div class="col-f2">
-                        <address>
-                            <fieldset class="hover_hcm">
-                                <legend>Liên hệ</legend>
-                                <ul class="link-footer">
-                                    <li><i class="fa fa-home" aria-hidden="true"></i>Công ty Xây Dựng Trường Thành</li>
-                                    <li><i class="fa fa-location-arrow" aria-hidden="true"></i>Địa chỉ, đường, quận</li>
-                                    <li><i class="fa fa-phone" aria-hidden="true"></i>Điện thoại: 38.xxx.xxx</li>
-                                    <li><i class="fa fa-phone" aria-hidden="true"></i>Hotline: 0909.xxx.xxx</li>
-                                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i>Email: info@truongthanh.vn</li>
-                                </ul>
-                            </fieldset>
-                        </address>
-                        <div class="clear"></div>
-                    </div>
-                    <!-- .col4-f -->
-                    <div class="clear"></div>
-                </div>
-
-                <div class="col-f3 last" style="position: relative;" hidden>
-                    <fieldset>
-                        <legend>Gửi mail cho chúng tôi</legend>
-                        <div style="top: 37px; color: #ED1C24; font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
-                        <form id="ContactDesign" action="http://www.wonder.vn/Home/ContactDesign" method="post" enctype="multipart/form-data">
-                            <div id="contact-form">
-                                <div id="ContactOutput"></div>
-                                <label for="Fullname">Họ và tên:</label>
-                                <input type="text" name="Fullname" id="Fullname" value="" /><br />
-                                <label for="Birth">Năm sinh:</label>
-                                <input type="text" name="Birth" id="Birth" value="" />
-                                <input type="radio" name="Gender" id="nam" value="nam" />
-                                <label for="nam">Nam</label>
-                                <input type="radio" name="Gender" id="nu" value="nu" />
-                                <label for="nu">Nữ</label><br />
-                                <div class="clear"></div>
-
-                                <label for="Email">Email:</label>
-                                <input type="text" name="Email" id="Email" value="" /><br />
-                                <label for="Phone">Số điện thoại:</label>
-                                <input type="text" name="Phone" id="Phone" value="" />
-                                <div class="clear"></div>
-
-                                <label for="Phone">Nội dung:</label>
-                                <textarea rows="5" cols="100"></textarea>
-                                <input type="submit" name="submitlienhe" id="submitlienhe" class="btn-xs btn btn-mod" value="Gửi Email" />
-                            </div>
-                        </form>
-                    </fieldset>
-
-                    <div class="clear" style="height: 125px;"></div>
-                </div>
                 <!-- .col4-f2 -->
 
                 <div class="clear"></div>
@@ -266,12 +165,7 @@
                 <div id="copyright">
                     <p><a href="#" style="cursor: text; background: none; padding: 0; color: #fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://nichietsuvn.com/">Nichietsu</a></a></p>
 
-                    <p class="hi">
-                        <a href="index.html" title="Nhà đẹp">Nhà đẹp</a>
-                        <a href="NhaDep/NhaPho/index.html" title="Nhà đẹp nhà phố">Nhà đẹp nhà phố</a>
-                        <a href="NhaDep/BietThu/index.html" title="Nhà đẹp biệt thự">Nhà đẹp biệt thự</a>
-                        <a href="NhaDep/GocNhaDep/index.html" title="Góc nhà đẹp">Góc nhà đẹp</a>
-                    </p>
+
                 </div>
                 <div class="clear"></div>
 
@@ -283,6 +177,50 @@
     <!-- #outer-foot -->
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./architect.js"></script>
+    <script src="js/main.js"></script>
 
+    <!-- Gem jQuery -->
+    <script>
+
+
+
+        document.getElementById("submit").onclick = function fun() {
+
+            f1();
+            //validation code to see State field is mandatory.  
+        }
+        function f1() {
+            var data = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/nam/2534.png" border=0 alt="Danh gia phong thuy" style="height: 40px; width: 96px;"></a>';
+            var data1 = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/taynam/2534.png" border=0 alt="Danh gia phong thuy"></a>';
+            var data2 = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/tay/2534.png" border=0 alt="Danh gia phong thuy"></a>';
+            var data3 = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/taybac/2534.png" border=0 alt="Danh gia phong thuy"></a>';
+            var data4 = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/bac/2534.png" border=0 alt="Danh gia phong thuy"></a>';
+            var data5 = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/dongbac/2534.png" border=0 alt="Danh gia phong thuy"></a>';
+            var data6 = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/dong/2534.png" border=0 alt="Danh gia phong thuy"></a>';
+            var data7 = '<a  title="Danh gia phong thuy" href="http://www.xemngay.com/Default.aspx?blog=huongnha"><img src="http://www.xemngay.com/phongthuy.aspx/05041977/nu/dongnam/2534.png" border=0 alt="Danh gia phong thuy"></a>';
+            document.getElementById('archPhongThuy').innerHTML += data;
+            document.getElementById('archPhongThuy').innerHTML += data1;
+            document.getElementById('archPhongThuy').innerHTML += data2;
+            document.getElementById('archPhongThuy').innerHTML += data3;
+            document.getElementById('archPhongThuy').innerHTML += data4;
+            document.getElementById('archPhongThuy').innerHTML += data5;
+            document.getElementById('archPhongThuy').innerHTML += data6;
+            document.getElementById('archPhongThuy').innerHTML += data7;
+
+        }
+    </script>
+    <style>
+        #img1 {
+            height: auto;
+            width: auto;
+            max-width: 300px;
+            max-height: 300px;
+        }
+    </style>
+      <script>
+          $(function () {
+              $("#datepicker").datepicker();
+          });
+  </script>
 </body>
 </html>

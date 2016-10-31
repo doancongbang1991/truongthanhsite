@@ -22,6 +22,7 @@ function OnFail(result) {
 
 $(document).ready(function () {
     //CallHandler();
+   
 });
 
 var app = angular.module('truongthanhApp', []);

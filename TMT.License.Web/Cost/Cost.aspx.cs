@@ -91,12 +91,12 @@ namespace TMT.License.Web.License
             string diadiem = "";
             string congtrinh = "";
             string trangthai = "";
-            string dtsodo = "";
-            string dtxaydung = "";
-            string sotang = "";
-            string sophongngu = "";
-            string sophongvesinh = "";
-
+            float dtsodo = 0;
+            float dtxaydung = 0;
+            int sotang = 0;
+            int sophongngu = 0;
+            int sophongvesinh = 0;
+            int basePrice = 0;
             if (CbbCongTrinh.SelectedItem == null)
             {
                 UserCommon.SetValueControl(CbbCongTrinh, "0");
@@ -112,20 +112,40 @@ namespace TMT.License.Web.License
                 UserCommon.SetValueControl(CbbTrangThai, "0");
 
             }
-            congtrinh = CbbCongTrinh.SelectedItem.Value;
-            diadiem = CbbDiaDiem.SelectedItem.Value;
-            trangthai = CbbTrangThai.SelectedItem.Value;
-            dtxaydung = txtdtxaydung.Text.Trim();
-            sotang = txtsotang.Text.Trim();
-            sophongngu = txtsophongngu.Text.Trim();
-            dtsodo = txtdtsodo.Text.Trim();
-            sophongvesinh = txtsophongvesinh.Text.Trim();
+            try 
+	        {	        
+		         congtrinh = CbbCongTrinh.SelectedItem.Value;
+                    diadiem = CbbDiaDiem.SelectedItem.Value;
+                    trangthai = CbbTrangThai.SelectedItem.Value;
+                    dtxaydung = float.Parse( txtdtxaydung.Text.Trim());
+                    sotang = int.Parse( txtsotang.Text.Trim());
+                    sophongngu = int.Parse (txtsophongngu.Text.Trim());
+                    dtsodo = float.Parse(txtdtsodo.Text.Trim());
+                    sophongvesinh = int.Parse( txtsophongvesinh.Text.Trim());
+	        }
+	        catch (Exception)
+	        {
+		
+		        throw;
+	        }
+           
 
             //use funtion to calculate here
-
-
-
-
+            List<CostConfigEntities> list = new List<CostConfigEntities>();
+            DataTable dt = new CostConfigData().GetDataByType("BasePrice");
+            basePrice = int.Parse(dt.Rows[0][CostConfigData.TBC_CostDetail].ToString());
+            float phantho = basePrice * dtxaydung * sotang;
+            float thietke = phantho * 4 / 100;
+            float duphong = phantho * 10 / 100;
+            float noithat = phantho * 30 / 100;
+            float hoanthien = phantho * 90 / 100;
+            float tongcong = phantho + thietke + duphong + noithat + hoanthien;
+            txtPhanTho.Text = phantho.ToString("n") + " vnđ";
+            txtThietKe.Text = thietke.ToString("n") + " vnđ";
+            txtDuPhong.Text = duphong.ToString("n") + " vnđ";
+            txtNoiThat.Text = noithat.ToString("n") + " vnđ";
+            txtHoanThien.Text = hoanthien.ToString("n") + " vnđ";
+            txtTongCong.Text = tongcong.ToString("n") + " vnđ";
         }
     }
 }
