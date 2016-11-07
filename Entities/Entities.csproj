@@ -39,6 +39,7 @@
     <Compile Include="ConstructionEntities.cs" />
     <Compile Include="ConTypeEntities.cs" />
     <Compile Include="ArchTypeEntities.cs" />
+    <Compile Include="SubMenuEntities.cs" />
     <Compile Include="CostEntities.cs" />
     <Compile Include="MessageEntities.cs" />
     <Compile Include="FooterEntities.cs" />

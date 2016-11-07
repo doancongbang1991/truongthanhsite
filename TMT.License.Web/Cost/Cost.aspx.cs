@@ -39,6 +39,16 @@ namespace TMT.License.Web.License
             }
 
         }
+        protected void Checkdt(object sender, DirectEventArgs e)
+        {
+            float dtsodo = float.Parse(txtdtsodo.Text);
+            float dtxaydung = float.Parse(txtdtxaydung.Text);
+            if (dtxaydung > dtsodo)
+            {
+                UserCommon.MsbShow("Diện Tích Xây Dựng Phải Nhỏ Hơn Diện Tích Sổ Đỏ", UserCommon.ERROR);
+                txtdtxaydung.Text = txtdtsodo.Text;
+            }
+        }
         private void LoadCbbDiaDiem()
         {
             Store store = this.CbbDiaDiem.GetStore();
@@ -47,7 +57,9 @@ namespace TMT.License.Web.License
         {
             new object[] { "TP.HCM", 0},
             new object[] { "Đà Nẵng", 1},
-            new object[] { "Hà Nội", 2}
+            new object[] { "Hà Nội", 2},
+            new object[] { "Khác", 3}
+           
             
         };
 
@@ -63,7 +75,7 @@ namespace TMT.License.Web.License
             new object[] { "Khách sạn, Resort, Karaoke", 0},
             new object[] { "Bar, Cafe, Nhà hàng, Showroom, Shop, Office", 1},
             new object[] { "Biệt thự, nhà từ 2 mặt tiền trở lên", 2},
-            new object[] { "Nhà phố, căn hộ", "Phone",3 }
+            new object[] { "Nhà phố, căn hộ",3 }
             
         };
 
@@ -88,58 +100,64 @@ namespace TMT.License.Web.License
         }
         protected void Calc(object sender, DirectEventArgs e)
         {
-            string diadiem = "";
-            string congtrinh = "";
-            string trangthai = "";
+            List<CostConfigEntities> list = new List<CostConfigEntities>();
+            DataTable dtbaseprice = new CostConfigData().GetDataByType("BasePrice");
+            DataTable dtlocation = new CostConfigData().GetDataByType("Location");
+            DataTable dttype = new CostConfigData().GetDataByType("Type");
+            DataTable dtstatus = new CostConfigData().GetDataByType("Status");
+
+            int diadiem = 0;
+            int congtrinh = 0;
+            int trangthai = 0;
             float dtsodo = 0;
             float dtxaydung = 0;
             int sotang = 0;
             int sophongngu = 0;
             int sophongvesinh = 0;
-            int basePrice = 0;
-            if (CbbCongTrinh.SelectedItem == null)
+            int basePricem2 = int.Parse(dtbaseprice.Rows[0][CostConfigData.TBC_CostDetail].ToString());
+            int basePricePhongngu = int.Parse(dtbaseprice.Rows[1][CostConfigData.TBC_CostDetail].ToString());
+            int basePriceVesinh = int.Parse(dtbaseprice.Rows[2][CostConfigData.TBC_CostDetail].ToString());
+            if (CbbCongTrinh.SelectedItem.Value == null)
             {
                 UserCommon.SetValueControl(CbbCongTrinh, "0");
 
             }
-            if (CbbDiaDiem.SelectedItem == null)
+            if (CbbDiaDiem.SelectedItem.Value == null)
             {
                 UserCommon.SetValueControl(CbbDiaDiem, "0");
 
             }
-            if (CbbTrangThai.SelectedItem == null)
+            if (CbbTrangThai.SelectedItem.Value == null)
             {
                 UserCommon.SetValueControl(CbbTrangThai, "0");
 
             }
-            try 
-	        {	        
-		         congtrinh = CbbCongTrinh.SelectedItem.Value;
-                    diadiem = CbbDiaDiem.SelectedItem.Value;
-                    trangthai = CbbTrangThai.SelectedItem.Value;
-                    dtxaydung = float.Parse( txtdtxaydung.Text.Trim());
-                    sotang = int.Parse( txtsotang.Text.Trim());
-                    sophongngu = int.Parse (txtsophongngu.Text.Trim());
-                    dtsodo = float.Parse(txtdtsodo.Text.Trim());
-                    sophongvesinh = int.Parse( txtsophongvesinh.Text.Trim());
-	        }
-	        catch (Exception)
-	        {
-		
-		        throw;
-	        }
-           
-
+            try
+            {
+                congtrinh = int.Parse(CbbCongTrinh.SelectedItem.Value);
+                diadiem = int.Parse(CbbDiaDiem.SelectedItem.Value);
+                trangthai = int.Parse(CbbTrangThai.SelectedItem.Value);
+                dtxaydung = float.Parse(txtdtxaydung.Text.Trim());
+                sotang = int.Parse(txtsotang.Text.Trim());
+                sophongngu = int.Parse(txtsophongngu.Text.Trim());
+                dtsodo = float.Parse(txtdtsodo.Text.Trim());
+                sophongvesinh = int.Parse(txtsophongvesinh.Text.Trim());
+            }
+            catch (Exception)
+            {
+            }
             //use funtion to calculate here
-            List<CostConfigEntities> list = new List<CostConfigEntities>();
-            DataTable dt = new CostConfigData().GetDataByType("BasePrice");
-            basePrice = int.Parse(dt.Rows[0][CostConfigData.TBC_CostDetail].ToString());
-            float phantho = basePrice * dtxaydung * sotang;
+            float giacongtrinh = int.Parse(dttype.Rows[congtrinh][CostConfigData.TBC_CostDetail].ToString());
+            float giadiadiem = int.Parse(dtlocation.Rows[diadiem][CostConfigData.TBC_CostDetail].ToString());
+            float giatrangthai = int.Parse(dtstatus.Rows[trangthai][CostConfigData.TBC_CostDetail].ToString());
+            float vesinh = sophongvesinh * basePriceVesinh * giacongtrinh/100 * giadiadiem/100 * giatrangthai/100;
+            float phongngu = sophongngu * basePricePhongngu * giacongtrinh / 100 * giadiadiem / 100 * giatrangthai / 100;
+            float phantho = basePricem2 * dtxaydung * sotang * giacongtrinh / 100 * giadiadiem / 100 * giatrangthai / 100;
             float thietke = phantho * 4 / 100;
             float duphong = phantho * 10 / 100;
             float noithat = phantho * 30 / 100;
             float hoanthien = phantho * 90 / 100;
-            float tongcong = phantho + thietke + duphong + noithat + hoanthien;
+            float tongcong = phantho + thietke + duphong + noithat + hoanthien + vesinh + phongngu;
             txtPhanTho.Text = phantho.ToString("n") + " vnđ";
             txtThietKe.Text = thietke.ToString("n") + " vnđ";
             txtDuPhong.Text = duphong.ToString("n") + " vnđ";

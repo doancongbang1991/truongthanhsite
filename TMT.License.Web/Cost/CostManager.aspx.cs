@@ -18,9 +18,9 @@ namespace TMT.License.Web.TSSystem
 
         private static string _Exception;
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!X.IsAjaxRequest)
-                LoadPage();
+        {   LoadPage();
+            
+                
         }
         private void LoadConfig()
         {
@@ -32,27 +32,28 @@ namespace TMT.License.Web.TSSystem
                 {
                     case "Location":
                         {
-                            TextField txt = AddTextField(dt.Rows[r]);
-                            fieldsetLocation.Add(txt);
+                            NumberField txt = AddTextField(dt.Rows[r]);
+                            fieldsetLocation.Items.Add(txt);
                             break;
                         }
                     case "Type":
                         {
-                            TextField txt = AddTextField(dt.Rows[r]);
-                            fieldsetType.Add(txt);
+                            NumberField txt = AddTextField(dt.Rows[r]);
+                            fieldsetType.Items.Add(txt);
                             break;
                             
                         }
                     case "Status":
                         {
-                            TextField txt = AddTextField(dt.Rows[r]);
-                            fieldsetStatus.Add(txt);
+                            NumberField txt = AddTextField(dt.Rows[r]);
+                            fieldsetStatus.Items.Add(txt);
                             break;
                         }
                     case "BasePrice":
                         {
-                            TextField txt = AddTextField(dt.Rows[r]);
-                            fieldsetBasePrice.Add(txt);
+                            NumberField txt = AddTextField(dt.Rows[r]);
+                            txt.Step = 100000;
+                            fieldsetBasePrice.Items.Add(txt);
                             break;
                         }
                     default:
@@ -60,9 +61,9 @@ namespace TMT.License.Web.TSSystem
                 }
             }
         }
-        private TextField AddTextField(DataRow dtrow)
+        private NumberField AddTextField(DataRow dtrow)
         {
-            Ext.Net.TextField txt = new Ext.Net.TextField();
+            Ext.Net.NumberField txt = new Ext.Net.NumberField();
             txt.ID = "Cost" + dtrow[(string)CostConfigData.TBC_CostID].ToString();
             txt.Text = dtrow[(string)CostConfigData.TBC_CostDetail].ToString();
             txt.FieldLabel = dtrow[(string)CostConfigData.TBC_CostName].ToString();
@@ -92,81 +93,35 @@ namespace TMT.License.Web.TSSystem
 
         protected void btSave_Click(object sender, DirectEventArgs e)
         {
-            bool Insert = true;
-            bool bResult = false;
-            UserInfoEntities objUserInfo = new UserInfoEntities();
-            objUserInfo = null; //GetUserInfo(ref Insert, ref _Exception);
-            if (objUserInfo == null)
+
+          
+            List<Ext.Net.FieldSet> list = new List<FieldSet>{fieldsetBasePrice,fieldsetLocation,fieldsetStatus,fieldsetType};
+            for (int i = 0; i < list.Count; i++)
             {
-                UserCommon.MsbShow(_Exception, UserCommon.ERROR);
-                return;
+                InputFieldSet(list[i]);
             }
-            if (Insert)
-            {
-                bResult = new UserInfoData().Insert(ref objUserInfo);
-                if (bResult)
-                    UserCommon.MsbShow("Succeed", UserCommon.INFORMATION);
-                else
-                    UserCommon.MsbShow(Message.MSE_SQLADD, UserCommon.ERROR);
-            }
-            else
-            {
-                bResult = new UserInfoData().Update(objUserInfo);
-                if (bResult)
-                    UserCommon.MsbShow(Message.MSI_WCSave("User"), UserCommon.INFORMATION);
-                else
-                    UserCommon.MsbShow(Message.MSE_SQLEDIT, UserCommon.ERROR);
-            }
+            
+            
+                
+            
         }
+        private void Update(Ext.Net.NumberField nf)
+        {
+            CostConfigEntities objCost = new CostConfigEntities();
+            objCost.CostID = int.Parse(nf.ID.Substring(4,nf.ID.Length-4));
+            objCost.CostName = nf.FieldLabel;
+            objCost.CostDetail = nf.Text;
+            bool bResult = new CostConfigData().Update(objCost);
+        }
+        private void InputFieldSet(Ext.Net.FieldSet fs)
+        {
 
-
-        //private UserInfoEntities GetUserInfo(ref bool Insert, ref string Exception)
-        //{
-        //    UserInfoEntities res = new UserInfoEntities();
-        //    int UID = UserCommon.ToInt(this.hiID.Value);
-        //    Insert = !UserCommon.ToBoolean(UID);
-
-        //    if (!UserCommon.HasValue(this.txtUUsername))
-        //    {
-        //        Exception = Message.MSE_WCFieldRequired("UserName");
-        //        return null;
-        //    }
-        //    if (this.txtUUsername.Text.Trim().Contains(";"))
-        //    {
-        //        Exception = Message.MSE_WCFieldNotVaild("UserName");
-        //        return null;
-        //    }
-        //    if (Insert)
-        //    {
-        //        bool bExist = new UserInfoData().CheckExistUUserName(this.txtUUsername.Text);
-        //        if (bExist)
-        //        {
-        //            Exception = Message.MSE_WCFieldExist("UserName");
-        //            return null;
-        //        }
-        //    }
-
-
-        //    res.UUserName = txtUUsername.Text.Trim();
-        //    if (Insert)
-        //    {
-        //        string DefaultPassword = ConfigurationManager.AppSettings["PASSWORDDEFAULT"].ToString().Trim();
-        //        res.UPassword = UserCommon.Encrypt(DefaultPassword);
-        //    }
-        //    res.UID = UID;
-        //    //res.UFullName = UserCommon.ToUpperFisrtChar(txtUFullName.Text);
-        //    res.UFullName = txtUFullName.Text;
-        //    res.PID = UserCommon.ToInt(this.cbbPID.SelectedItem.Value);
-        //    res.UAddress = txtUAddress.Text;
-        //    res.UPhone = txtUPhone.Text;
-        //    res.UMobilePhone = txtUMobilePhone.Text;
-        //    res.UEmail = txtUEmail.Text;
-        //    res.UNotes = txtUNotes.Text;
-        //    res.UGRPID = UserCommon.ToInt(this.cbbUGRPID.SelectedItem.Value);
-        //    res.UActive = UserCommon.ToInt(chbuActive.Checked);
-        //    return res;
-        //}
-
+            foreach (Object obj in fs.Items) {
+                Ext.Net.NumberField nf = (Ext.Net.NumberField)obj;
+                Update(nf);
+            }        
+        }
+        
         #endregion
 
 

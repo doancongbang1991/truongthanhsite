@@ -69,10 +69,10 @@
                                                 </ext:FieldSet>
                                             </Items>
                                         </ext:Panel>
-                                        <ext:Panel ID="pnlStatus" Width="580" HideMode="Offsets" Border="true" Height="160"
+                                        <ext:Panel ID="pnlStatus" Width="580" HideMode="Offsets" Border="true" Height="190"
                                             Title="Status" runat="server" BodyPadding="5" Layout="BorderLayout">
                                             <Items>
-                                                <ext:FieldSet ID="fieldsetStatus" Width="500" Border="false" Height="160" runat="server"
+                                                <ext:FieldSet ID="fieldsetStatus" Width="500" Border="false" Height="190" runat="server"
                                                     Anchor="100%" Padding="10">
                                                     <Defaults>
                                                         <ext:Parameter Name="LabelWidth" Value="180" />
@@ -101,10 +101,10 @@
                                                 </ext:FieldSet>
                                             </Items>
                                         </ext:Panel>
-                                        <ext:Panel ID="pnlBasePrice" Width="580" HideMode="Offsets" Border="true" Height="160"
+                                        <ext:Panel ID="pnlBasePrice" Width="580" HideMode="Offsets" Border="true" Height="190"
                                             Title="Base Price" runat="server" BodyPadding="5" Layout="BorderLayout">
                                             <Items>
-                                                <ext:FieldSet ID="fieldsetBasePrice" Width="500" Border="false" Height="160" runat="server"
+                                                <ext:FieldSet ID="fieldsetBasePrice" Width="500" Border="false" Height="190" runat="server"
                                                     Anchor="100%" Padding="10">
                                                     <Defaults>
                                                         <ext:Parameter Name="LabelWidth" Value="180" />

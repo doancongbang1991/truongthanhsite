@@ -14,6 +14,7 @@ namespace Entities
         public string SiteLink { get; set; }
         public int SiteOrder { get; set; }
         public bool SiteHidden { get; set; }
+        public List<SubMenuEntities> listsub { get; set; }
         public SiteEntities()
         {
 

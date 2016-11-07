@@ -42,16 +42,7 @@ namespace DataLayer
             DataTable dtResult = lib.GetAllByID(typeid);
             return dtResult;
         }
-        public bool Insert(ref CostConfigEntities obj)
-        {
-            bool bResult = false;
-            dFields = new string[] { TBC_CostName, TBC_CostDetail };
-            dDatas = new object[] { obj.CostName, obj.CostDetail};
-            QueryLibrary lib = new QueryLibrary(TableName, TBC_CostID);
-            obj.CostID = lib.Insert(dFields, dDatas);
-            bResult = Convert.ToBoolean(obj.CostID);
-            return bResult;
-        }
+        
 
         public bool Update(CostConfigEntities obj)
         {
@@ -62,20 +53,7 @@ namespace DataLayer
             bResult = Convert.ToBoolean(lib.Update(obj.CostID, dFields, dDatas));
             return bResult;
         }
-        public bool Delete(string ID)
-        {
-            bool bResult = false;
-            ForeignKeyData FKData = new ForeignKeyData();
-            bool bFK = false;
-            bFK = FKData.ForeignKeyCheck(TBC_CostID, ID, TableName);
-            if (!bFK)
-            {
-                QueryLibrary lib = new QueryLibrary(TableName, TBC_CostID);
-                lib.Delete(ID);
-                bResult = true;
-            }
-            return bResult;
-        }
+       
         public DataTable Search(object[] Datas, string Keyword)
         {
             string[] Fields = null;
@@ -84,13 +62,6 @@ namespace DataLayer
             DataTable dtResult = lib.Search("*", Fields, Datas, SFields, Keyword, TBC_CostID, "ASC");
             return dtResult;
         }
-        public bool CheckExistAbout(string About)
-        {
-            QueryLibrary lib = new QueryLibrary(TableName, TBC_CostID);
-            string[] Field = new string[] { TBC_CostID };
-            object[] Data = new object[] { About };
-            bool bResult = lib.CheckExistDataWithAND(Field, Data);
-            return bResult;
-        }
+        
     }
 }

@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchTypeData.cs" />
+    <Compile Include="SubMenuData.cs" />
     <Compile Include="CostConfigData.cs" />
     <Compile Include="MessageData.cs" />
     <Compile Include="FurnitureTypeData.cs" />

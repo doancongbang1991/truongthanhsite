@@ -58,7 +58,7 @@ body.default #slider {
     right: -1px;
     top: 102px;
     width: 804px;
-    z-index: 1000;
+    z-index: 100;
 }
 
 body.default #sliderImg, body.default #sliderImgDetails {

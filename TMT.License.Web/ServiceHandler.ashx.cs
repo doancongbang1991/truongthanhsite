@@ -149,7 +149,22 @@ namespace TMT.License.Web
                     tmp.SiteLink = dt.Rows[r][SiteData.TBC_SiteLink].ToString();
                     tmp.SiteDesp = dt.Rows[r][SiteData.TBC_SiteDesp].ToString();
                     tmp.SiteOrder = int.Parse(dt.Rows[r][SiteData.TBC_SiteOrder].ToString());
+                    tmp.listsub = new List<SubMenuEntities>();
+                    DataTable dt1 = new SubMenuData().GetDataByParentID(tmp.SiteID.ToString());
+                    if (dt1.Rows.Count > 0)
+                    {
+                        for (int r1 = 0; r1 < dt1.Rows.Count; r1++)
+                        {
+                            SubMenuEntities tmp1 = new SubMenuEntities();
 
+                            tmp1.SubMenuID = int.Parse(dt1.Rows[r1][SubMenuData.TBC_SubMenuID].ToString());
+                            tmp1.SubMenuName = dt1.Rows[r1][SubMenuData.TBC_SubMenuName].ToString();
+                            tmp1.SubMenuParentID = int.Parse(dt1.Rows[r1][SubMenuData.TBC_SubMenuParentID].ToString());
+                            tmp1.SubMenuDetail = dt1.Rows[r1][SubMenuData.TBC_SubMenuDetail].ToString();
+                            tmp1.SubMenuLink = dt1.Rows[r1][SubMenuData.TBC_SubMenuLink].ToString();
+                            tmp.listsub.Add(tmp1);
+                        }
+                    }
                     list.Add(tmp);
                 }
             }
@@ -176,6 +191,32 @@ namespace TMT.License.Web
                     tmp.SiteOrder = int.Parse(dt.Rows[r][SiteData.TBC_SiteOrder].ToString());
 
                     list.Add(tmp);
+                }
+            }
+            var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            context.Response.Write(response);
+        }
+        public void GetSubMenu(HttpContext context)
+        {
+
+            context.Response.ContentType = "text/json";
+            
+            List<SubMenuEntities> list = new List<SubMenuEntities>();
+            DataTable dt = new ArchData().Search(null,"");
+
+            if (dt.Rows.Count > 0)
+            {
+                for (int r = 0; r < dt.Rows.Count; r++)
+                {
+                    SubMenuEntities tmp = new SubMenuEntities();
+
+                    tmp.SubMenuID = int.Parse(dt.Rows[r][SubMenuData.TBC_SubMenuID].ToString());
+                    tmp.SubMenuName = dt.Rows[r][SubMenuData.TBC_SubMenuName].ToString();
+                    tmp.SubMenuParentID = int.Parse(dt.Rows[r][SubMenuData.TBC_SubMenuParentID].ToString());
+                    tmp.SubMenuDetail = dt.Rows[r][SubMenuData.TBC_SubMenuDetail].ToString();
+                    tmp.SubMenuLink = dt.Rows[r][SubMenuData.TBC_SubMenuLink].ToString();
+                    list.Add(tmp);
+
                 }
             }
             var response = Newtonsoft.Json.JsonConvert.SerializeObject(list);

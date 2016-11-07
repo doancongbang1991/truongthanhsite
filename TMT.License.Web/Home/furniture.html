@@ -65,9 +65,13 @@
             <!-- #logo -->
             <div id="gradian"></div>
 
-            <ul id="h-menu">
-                <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
+             <ul id="h-menu">
+                <li ng-repeat="site in sites" class="dropdown" style="height:40px"><a href="{{site.SiteLink}}" ng-class="{'sel': {{site.SiteID}} == 8 }">{{site.SiteNameVi}}</a>
+                    <ul ng-class="{'dropdown-menu': {{site.SiteID}} == 4 }" style="z-index:2000;margin-top:-10px">
+                        <li ng-repeat="submenu in site.listsub"><a href="{{submenu.SubMenuLink}}" style="font-family:fontawesome-webfont;font-size:15px;font-weight:bold;">{{submenu.SubMenuDetail}}</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" style="color: #fb1414; font-size: 16px; text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
             </ul>
             <!-- #h-menu -->
            <div id="h-content" ng-repeat="sitedetail in sitedetails" >
@@ -161,7 +165,16 @@
     </div>
     <!-- #content -->
     <!-- #content -->
+     <a href="#0" class="m-top "></a>
      <a href="#0" class="cd-top">Top</a>
+
+    <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+         <a href="index.html">Home</a>
+  <a ng-repeat="site in sites" href="{{site.SiteLink}}">{{site.SiteNameVi}}</a>
+  
+</div>
+    <span onclick="openNav()"></span>
    <div id="outer-foot">
        
         <div id="outer-foot2">
@@ -268,5 +281,13 @@
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./furniture.js"></script>
     <script src="js/main.js"></script> <!-- Gem jQuery -->
+    <style>
+        .dropdown-menu {
+        background: rgba(133, 134, 139, 0.85);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
 </body>
 </html>

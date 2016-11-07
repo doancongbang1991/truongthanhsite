@@ -15,9 +15,10 @@
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-
+     <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
     <link href="Scripts/video-js/video-js.css" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
 
     <script type="text/javascript" src="Scripts/jquery.animate-shadow-min.js"></script>
@@ -39,7 +40,7 @@
     <script type="text/javascript" src="Scripts/comment.js"></script>
 
     <script type="text/javascript" src="Scripts/main.js"></script>
-
+    <script src="bootstrap/js/bootstrap.js"></script>
     <link type="text/css" href="asseted86.css?id=kwAAAB-LCAAAAAAABABVjkEKgzAURO8y65CaiBWy7TGKixJ_oKiJxK8UJHf3owvpbubNW8yOHu69Y4bDK0WmyFAIJ4vCmEbK30H7NE0par8sMie4qqh_oafwWUe-DVO60il4PqUfP65lk2orY7TVrbECvByon40EOM4rlQOSgqr9kwAAAA%3d%3d" rel="stylesheet" />
 
     <!-- Please call pinit.js only once per page -->
@@ -64,13 +65,17 @@
             <div id="gradian"></div>
 
             <ul id="h-menu">
-                <li ng-repeat="site in sites" ><a href="{{site.SiteLink}}" ng-class="{'sel': {{site.SiteID}} == 2 }">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
-            </ul><!-- #h-menu -->
+                <li ng-repeat="site in sites" class="dropdown" style="height:40px"><a href="{{site.SiteLink}}" ng-class="{'sel': {{site.SiteID}} == 2 }">{{site.SiteNameVi}}</a>
+                    <ul ng-class="{'dropdown-menu': {{site.SiteID}} == 4 }" style="z-index:2000;margin-top:-10px">
+                        <li ng-repeat="submenu in site.listsub"><a href="{{submenu.SubMenuLink}}" style="font-family:fontawesome-webfont;font-size:15px;font-weight:bold;">{{submenu.SubMenuDetail}}</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" style="color: #fb1414; font-size: 16px; text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
+            </ul>
             <div id="h-content" ng-repeat="sitedetail in sitedetails" >
                 <h2 style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">{{sitedetail.SiteDetail}}</h2>
                 <div id="h-description" style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">
-                    <h3>{{sitedetail.SiteDesp}}</h3>
+                    <h4>{{sitedetail.SiteDesp}}</h4>
                 </div> <!-- #h-description -->
             </div> <!-- #h-content -->
         </div><!-- #header -->  
@@ -196,10 +201,28 @@
             </div><!-- #footer -->
         </div><!-- #outer-foot2 -->
     </div><!-- #outer-foot -->
+     <a href="#0" class="m-top "></a>
      <a href="#0" class="cd-top">Top</a>
+
+    <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+         <a href="index.html">Home</a>
+  <a ng-repeat="site in sites" href="{{site.SiteLink}}">{{site.SiteNameVi}}</a>
+  
+</div>
+    <span onclick="openNav()"></span>
+    
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./about.js"></script>
     <script src="js/main.js"></script> <!-- Gem jQuery -->
- 
+  <style>
+       
+        .dropdown-menu {
+        background: rgba(133, 134, 139, 0.85);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
 </body>
 </html>

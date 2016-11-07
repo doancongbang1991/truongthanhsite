@@ -87,26 +87,30 @@
                                                 </ext:Panel>
                                             </Items>
                                         </ext:FieldContainer>
-
+                                        
                                         <ext:FieldContainer ID="FieldSet3" Region="Center" runat="server" Flex="1" Title="" Padding="7"
-                                            Layout="AnchorLayout" DefaultAnchor="100%" AutoScroll="false">
+                                            Layout="AnchorLayout" DefaultAnchor="100%" >
                                             <Items>
-
-                                                <ext:Panel ID="pnlmap" runat="server" Height="350" Region="Center" Title="Bản Đồ" AutoScroll="false">
+                                                
+                                                <ext:Panel ID="pnlmap" runat="server" Height="350" Region="Center" Title="Bản Đồ" >
                                                     
-                                                    <Loader ID="Loader1" runat="server" Url="" Mode="Frame" AutoLoad="false" >
+                                                    <Loader ID="Loader1" runat="server" Url="" Mode="Frame" AutoLoad="true" >
                                                         <LoadMask ShowMask="true" />
                                                     </Loader>
 
                                                 </ext:Panel>
                                             </Items>
+                                            
+                                                
                                         </ext:FieldContainer>
 
                                     </Items>
+                                    
                                 </ext:Container>
 
-
+                                
                             </Items>
+                            
                         </ext:Panel>
 
                     </Items>
@@ -117,7 +121,6 @@
 
             </Items>
         </ext:Viewport>
-
 
     </form>
 </body>

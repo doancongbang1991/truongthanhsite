@@ -71,7 +71,11 @@
 
                                         </ext:ComboBox>
                                         <ext:Label ID="Label2" Html="<i>Diện Tích Xây Dựng (Tầng Trệt)</i>" runat="server" />
-                                        <ext:NumberField runat="server" Text="0" ID="txtdtxaydung" />
+                                        <ext:NumberField runat="server" Text="0" ID="txtdtxaydung" >
+                                            <DirectEvents>
+                                                <Change OnEvent="Checkdt"></Change>
+                                            </DirectEvents>
+                                        </ext:NumberField>
 
                                     </Items>
                                 </ext:FieldContainer>

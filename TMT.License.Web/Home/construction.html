@@ -16,9 +16,10 @@
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="dist/css/lightbox.css"/>
+    <link rel="stylesheet" href="dist/css/lightbox.css" />
     <link href="Scripts/video-js/video-js.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/style.css"/> <!-- Gem style -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Gem style -->
     <script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
 
     <script type="text/javascript" src="Scripts/jquery.animate-shadow-min.js"></script>
@@ -65,25 +66,31 @@
             <!-- #logo -->
             <div id="gradian"></div>
 
-            <ul id="h-menu">
-                <li ng-repeat="site in sites"><a href="{{site.SiteLink}}">{{site.SiteNameVi}}</a></li>
-                <li ><a href="#" style="color:#fb1414;font-size:16px;text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
+             <ul id="h-menu">
+                <li ng-repeat="site in sites" class="dropdown" style="height:40px"><a href="{{site.SiteLink}}" ng-class="{'sel': {{site.SiteID}} == 5 }">{{site.SiteNameVi}}</a>
+                    <ul ng-class="{'dropdown-menu': {{site.SiteID}} == 4 }" style="z-index:2000;margin-top:-10px">
+                        <li ng-repeat="submenu in site.listsub"><a href="{{submenu.SubMenuLink}}" style="font-family:fontawesome-webfont;font-size:15px;font-weight:bold;">{{submenu.SubMenuDetail}}</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" style="color: #fb1414; font-size: 16px; text-shadow: 0px 0px 1px #ffffff;">Hotline: 0913246357</a></li>
             </ul>
             <!-- #h-menu -->
-            <div id="h-content" ng-repeat="sitedetail in sitedetails" >
-                <h2 style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">{{sitedetail.SiteDetail}}</h2>
-                <div id="h-description" style="color:#354ea2;text-shadow: 1px 1px 2px #ffffff;">
+            <div id="h-content" ng-repeat="sitedetail in sitedetails">
+                <h2 style="color: #354ea2; text-shadow: 1px 1px 2px #ffffff;">{{sitedetail.SiteDetail}}</h2>
+                <div id="h-description" style="color: #354ea2; text-shadow: 1px 1px 2px #ffffff;">
                     <h3>{{sitedetail.SiteDesp}}</h3>
-                </div> <!-- #h-description -->
-            </div> <!-- #h-content -->
+                </div>
+                <!-- #h-description -->
+            </div>
+            <!-- #h-content -->
             <!-- #h-content -->
 
-           <!-- <ul id="h-menu-g" class="nav nav-tabs">
+            <!-- <ul id="h-menu-g" class="nav nav-tabs">
                 <li class="active"><a href="#all" data-toggle="tab" >Tất cả</a></li>
                 <li ng-repeat="contype in contypes"><a data-toggle="tab" href="#con{{contype.ConTypeID}}">{{contype.ConTypeName}}</a></li>
 
             </ul>-->
-            <nav class="navbar navbar-default transparent" style="top:270px;background:transparent;border:none;">
+            <nav class="navbar navbar-default transparent" style="top: 270px; background: transparent; border: none;">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -93,19 +100,19 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        
+
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        
-                       
+
+
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle glyphicon glyphicon-list" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle glyphicon glyphicon-list" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li class="active"><a href="#all" data-toggle="tab" >Tất cả</a></li>
-                <li ng-repeat="contype in contypes"><a data-toggle="tab" href="#con{{contype.ConTypeID}}">{{contype.ConTypeName}}</a></li>
+                                    <li class="active"><a href="#all" data-toggle="tab">Tất cả</a></li>
+                                    <li ng-repeat="contype in contypes"><a data-toggle="tab" href="#con{{contype.ConTypeID}}">{{contype.ConTypeName}}</a></li>
                                 </ul>
 
                             </li>
@@ -139,17 +146,18 @@
                 </div>
             </div>
             <div id="con{{conbytype.ConTypeID}}" class="tab-pane fade" ng-repeat="conbytype in conbytypes">
-                <div class="col-md-4" ng-repeat="con in conbytype.listcon">.
+                <div class="col-md-4" ng-repeat="con in conbytype.listcon">
+                    .
                      <a data-lightbox="construction{{con.ConTypeID}}" href="{{con.ConImg}}" title="{{con.ConName}}<br>{{con.ConDetail}}">
-                        <div class="boxshadow" style="height: 172px; width: 302px; border: 1px solid; border-radius: 2px; box-shadow: 0px 0px 15px #888888;">
-                            <div>
-                                <img ng-src="{{con.ConImg}}" />
-                            </div>
-                        </div>
-                        <p class="td text-center" style="color: black;"><strong>{{con.ConName}}</strong></p>
-                        <p class="pInfo text-center" style="color: black;">{{con.ConTypeName}}</p>
-                        <br />
-                    </a>
+                         <div class="boxshadow" style="height: 172px; width: 302px; border: 1px solid; border-radius: 2px; box-shadow: 0px 0px 15px #888888;">
+                             <div>
+                                 <img ng-src="{{con.ConImg}}" />
+                             </div>
+                         </div>
+                         <p class="td text-center" style="color: black;"><strong>{{con.ConName}}</strong></p>
+                         <p class="pInfo text-center" style="color: black;">{{con.ConTypeName}}</p>
+                         <br />
+                     </a>
                     <div class="clear"></div>
                 </div>
             </div>
@@ -161,13 +169,22 @@
     </div>
     <!-- #content -->
     <!-- #content -->
+    <a href="#0" class="m-top "></a>
      <a href="#0" class="cd-top">Top</a>
-   <div id="outer-foot">
-       
+
+    <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+         <a href="index.html">Home</a>
+  <a ng-repeat="site in sites" href="{{site.SiteLink}}">{{site.SiteNameVi}}</a>
+  
+</div>
+    <span onclick="openNav()"></span>
+    <div id="outer-foot">
+
         <div id="outer-foot2">
             <div id="footer">
-                 <iframe id="maps" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0 "></iframe>
-                <div style="float:left" hidden>
+                <iframe id="maps" src="../Footer/Footer.aspx" width="100%" height="500" frameborder="0" style="border: 0"></iframe>
+                <div style="float: left" hidden>
                     <div class="col-f1">
                         <fieldset>
                             <legend>NHÂN SỰ</legend>
@@ -176,33 +193,35 @@
                                 Nhân viên a<br />
                                 Nhân viên a<br />
                                 Nhân viên a<br />
-                                <span class="clear" style="display:block;height:7px;"></span>
+                                <span class="clear" style="display: block; height: 7px;"></span>
                                 <strong>Kiến trúc sư</strong><br />
                                 Nhân viên a<br />
                                 Nhân viên a<br />
                                 Nhân viên a<br />
-                                <span class="clear" style="display:block;height:7px;"></span>
-                            </p><!-- .desc-f -->
-                            <div class="clear" style="height:10px;"></div>
+                                <span class="clear" style="display: block; height: 7px;"></span>
+                            </p>
+                            <!-- .desc-f -->
+                            <div class="clear" style="height: 10px;"></div>
                             <legend>Liên kết website</legend>
                             <ul class="link-footer">
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
                             </ul>
-                            <div class="clear" style="height:10px;"></div>
+                            <div class="clear" style="height: 10px;"></div>
                             <legend>Liên kết đối tác</legend>
                             <ul class="link-footer">
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
-                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i> Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
+                                <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Công ty TNHH Trường Thành</a></li>
                             </ul>
                         </fieldset>
 
                         <div class="clear"></div>
-                    </div><!-- .col4-f -->
+                    </div>
+                    <!-- .col4-f -->
 
                     <div class="col-f2">
                         <address>
@@ -218,40 +237,49 @@
                             </fieldset>
                         </address>
                         <div class="clear"></div>
-                    </div><!-- .col4-f -->
+                    </div>
+                    <!-- .col4-f -->
                     <div class="clear"></div>
                 </div>
 
-                <div class="col-f3 last" style="position:relative;" hidden>
+                <div class="col-f3 last" style="position: relative;" hidden>
                     <fieldset>
                         <legend>Gửi mail cho chúng tôi</legend>
-                        <div style="top:37px;color:#ED1C24;font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
+                        <div style="top: 37px; color: #ED1C24; font-size: 12px;">Quý khách điền đầy đủ thông tin cho chúng tôi</div>
                         <form id="ContactDesign" action="http://www.wonder.vn/Home/ContactDesign" method="post" enctype="multipart/form-data">
                             <div id="contact-form">
                                 <div id="ContactOutput"></div>
-                                <label for="Fullname">Họ và tên:</label> <input type="text" name="Fullname" id="Fullname" value="" /><br />
-                                <label for="Birth">Năm sinh:</label> <input type="text" name="Birth" id="Birth" value="" />
-                                <input type="radio" name="Gender" id="nam" value="nam" /> <label for="nam">Nam</label>
-                                <input type="radio" name="Gender" id="nu" value="nu" /> <label for="nu">Nữ</label><br />
+                                <label for="Fullname">Họ và tên:</label>
+                                <input type="text" name="Fullname" id="Fullname" value="" /><br />
+                                <label for="Birth">Năm sinh:</label>
+                                <input type="text" name="Birth" id="Birth" value="" />
+                                <input type="radio" name="Gender" id="nam" value="nam" />
+                                <label for="nam">Nam</label>
+                                <input type="radio" name="Gender" id="nu" value="nu" />
+                                <label for="nu">Nữ</label><br />
                                 <div class="clear"></div>
 
-                                <label for="Email">Email:</label> <input type="text" name="Email" id="Email" value="" /><br />
-                                <label for="Phone">Số điện thoại:</label> <input type="text" name="Phone" id="Phone" value="" />
+                                <label for="Email">Email:</label>
+                                <input type="text" name="Email" id="Email" value="" /><br />
+                                <label for="Phone">Số điện thoại:</label>
+                                <input type="text" name="Phone" id="Phone" value="" />
                                 <div class="clear"></div>
 
-                                <label for="Phone">Nội dung:</label> <textarea rows="5" cols="100"></textarea>
+                                <label for="Phone">Nội dung:</label>
+                                <textarea rows="5" cols="100"></textarea>
                                 <input type="submit" name="submitlienhe" id="submitlienhe" class="btn-xs btn btn-mod" value="Gửi Email" />
                             </div>
                         </form>
                     </fieldset>
 
-                    <div class="clear" style="height:125px;"></div>
-                </div><!-- .col4-f2 -->
+                    <div class="clear" style="height: 125px;"></div>
+                </div>
+                <!-- .col4-f2 -->
 
                 <div class="clear"></div>
 
                 <div id="copyright">
-                    <p><a href="#" style="cursor:text;background:none;padding:0;color:#fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://nichietsuvn.com/">Nichietsu</a></a></p>
+                    <p><a href="#" style="cursor: text; background: none; padding: 0; color: #fff;">© 2016 - Công ty Xây Dựng Trường Thành - Powered by <a href="http://nichietsuvn.com/">Nichietsu</a></a></p>
 
                     <p class="hi">
                         <a href="index.html" title="Nhà đẹp">Nhà đẹp</a>
@@ -262,9 +290,12 @@
                 </div>
                 <div class="clear"></div>
 
-            </div><!-- #footer -->
-        </div><!-- #outer-foot2 -->
-    </div><!-- #outer-foot -->
+            </div>
+            <!-- #footer -->
+        </div>
+        <!-- #outer-foot2 -->
+    </div>
+    <!-- #outer-foot -->
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
     <script src="./construction.js"></script>
     <script src="dist/js/lightbox.min.js"></script>
@@ -272,16 +303,21 @@
         var param1var = getQueryVariable();
         console.log(param1var);
         function getQueryVariable() {
-            
-                var sPageURL = window.location.href;
-                var sURLVariables = sPageURL.split('#');
-                return sURLVariables[1];
-            
+            var sPageURL = window.location.href;
+            var sURLVariables = sPageURL.split('#');
+            return sURLVariables[1];
         }
-       
-        
-        
-</script>
-    <script src="js/main.js"></script> <!-- Gem jQuery -->
+    </script>
+    <script src="js/main.js"></script>
+    <!-- Gem jQuery -->
+            
+    <style>
+        .dropdown-menu {
+        background: rgba(133, 134, 139, 0.85);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
 </body>
 </html>

@@ -87,6 +87,7 @@
     <Content Include="About\About.aspx" />
     <Content Include="Arch\Arch.aspx" />
     <Content Include="Arch\ArchManager.aspx" />
+    <Content Include="Arch\ArchPhongThuy.aspx" />
     <Content Include="Construction\ConManager.aspx" />
     <Content Include="Contact\Contact.aspx" />
     <Content Include="Cost\CostManager.aspx" />
@@ -283,6 +284,9 @@
     <Content Include="Home\Content\Site.css" />
     <Content Include="Home\construction.html" />
     <Content Include="Home\architectpost.js" />
+    <Content Include="Home\architecttuvan.html" />
+    <Content Include="Home\architectphongthuy.html" />
+    <Content Include="Home\architectbaogia.html" />
     <Content Include="Home\cost.html" />
     <Content Include="Home\cost.js" />
     <Content Include="Home\css\font-awesome.min.css" />
@@ -1865,6 +1869,7 @@
     <Content Include="Home\images\vertical-logo.png" />
     <Content Include="Home\images\zoom.png" />
     <Content Include="Home\img\cd-top-arrow.svg" />
+    <Content Include="Home\img\white.svg" />
     <Content Include="Home\index.html" />
     <Content Include="Home\index.js" />
     <Content Include="Home\javascripts\animations-init.js" />
@@ -2142,6 +2147,7 @@
     <Content Include="Home\Scripts\angular-bootstrap-lightbox.min.js" />
     <Content Include="Home\Scripts\collapse.js" />
     <Content Include="Home\Scripts\transition.js" />
+    <Content Include="images\album.gif" />
     <Content Include="scripts\angular-datepicker.min.js" />
     <Content Include="Home\stylesheets\angular-datepicker.min.css" />
     <Content Include="Home\Scripts\bootstrap-datetimepicker.min.js" />
@@ -2399,7 +2405,6 @@
     <Content Include="Home\partials\_layout.scss" />
     <Content Include="Home\partials\_mixins.scss" />
     <Content Include="Home\partials\_variables.scss" />
-    <Content Include="Home\js\.DS_Store" />
     <Content Include="Home\fonts\fontawesome-webfont.eot" />
     <Content Include="Home\fonts\fontawesome-webfont.ttf" />
     <Content Include="Home\fonts\fontawesome-webfont.woff" />
@@ -2432,6 +2437,7 @@
     <Content Include="scripts\date.js" />
     <Content Include="scripts\jquery.js" />
     <Content Include="Site\SiteManager.aspx" />
+    <Content Include="styles\organizer.css" />
     <Content Include="styles\StyleCustomize.css" />
     <Content Include="System\UserGroupDetails.aspx" />
     <Content Include="System\UserGroupManager.aspx" />
@@ -2462,6 +2468,13 @@
     </Compile>
     <Compile Include="Arch\ArchManager.aspx.designer.cs">
       <DependentUpon>ArchManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Arch\ArchPhongThuy.aspx.cs">
+      <DependentUpon>ArchPhongThuy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Arch\ArchPhongThuy.aspx.designer.cs">
+      <DependentUpon>ArchPhongThuy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Construction\ConManager.aspx.cs">
       <DependentUpon>ConManager.aspx</DependentUpon>

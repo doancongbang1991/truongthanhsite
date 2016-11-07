@@ -126,10 +126,11 @@ namespace TMT.License.Web.License
         {
             ComponentLoader cn = new ComponentLoader();
             cn.Url = @"~\Home\map\index.html";
-            cn.Mode = LoadMode.Frame;
+            cn.Mode = LoadMode.Component;
 
-            cn.DisableCaching = true;
+
             this.pnlmap.LoadContent(cn);
+           
         }
         private void LoadInfo() {
             DataTable dt = new FooterData().GetDataByType("4");
