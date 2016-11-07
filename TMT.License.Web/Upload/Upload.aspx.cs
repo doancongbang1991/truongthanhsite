@@ -70,7 +70,7 @@ namespace TMT.License.Web
                 {
                     index = id,
                     name = fi.Name,
-                    url = "../images/Content/" + fi.Name,
+                    url =  @"http://" +  Request.Url.Authority + @"/images/Content/" + fi.Name,
                     link = path.Replace(@"\", @"/") + fi.Name
                 });
                 id++;
@@ -120,14 +120,16 @@ namespace TMT.License.Web
             string path = "";
             string tempurl = "";
             string templink = "";
+
+            
             if (name[1] == "Root"){
                 path = Server.MapPath("../images/Content/");
-                tempurl = "../images/Content/" ;
+                tempurl = @"http://" + Request.Url.Authority + "/images/Content/";
                 templink = path.Replace(@"\", @"/");
             }
             else{
                 path = Server.MapPath("../images/Content/"+name[1]);
-                tempurl = "../images/Content/" + name[1] + @"/";
+                tempurl = @"http://" +  Request.Url.Authority + "/images/Content/" + name[1] + @"/";
                 templink = path.Replace(@"\", @"/") + "/";
             }
             

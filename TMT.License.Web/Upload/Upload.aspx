@@ -188,7 +188,7 @@
                                             </div>
                                             <span><b>Tên File:</b> {name}</span>
                                             <br></br>
-                                            <span><b>Đường dẫn:</b> {link}</span>
+                                            <span><b>Đường dẫn:</b> {url}</span>
                                             <br></br>
                                         </div>
                                     </tpl>
