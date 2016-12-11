@@ -21,7 +21,7 @@ namespace TMT.License.Web.License
             //LoadSiteName();
             
             LoadInfo();
-            LoadMap();
+            
         }
         protected void SendMail(object sender, EventArgs e)
         {
@@ -122,16 +122,7 @@ namespace TMT.License.Web.License
             }
 
         }
-        private void LoadMap()
-        {
-            ComponentLoader cn = new ComponentLoader();
-            cn.Url = @"~\Home\map\index.html";
-            cn.Mode = LoadMode.Component;
-
-
-            this.pnlmap.LoadContent(cn);
-           
-        }
+        
         private void LoadInfo() {
             DataTable dt = new FooterData().GetDataByType("4");
                 if (dt.Rows.Count > 0)
